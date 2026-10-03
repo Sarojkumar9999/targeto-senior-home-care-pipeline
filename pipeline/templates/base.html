@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Targeto Pipeline</title>
+  <style>
+    :root { --bg:#0f1420; --card:#171e2e; --line:#26304a; --text:#e8ecf6; --mut:#8b96b5; --acc:#4f8cff; --green:#2ecc71; --red:#ff5d5d; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); }
+    a { color:var(--acc); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width:1180px; margin:0 auto; padding:24px 20px 60px; }
+    h1 { font-size:22px; margin:0 0 4px; }
+    h2 { font-size:17px; margin:26px 0 10px; }
+    .muted { color:var(--mut); font-size:13px; }
+    .stats { display:flex; gap:12px; flex-wrap:wrap; margin:16px 0; }
+    .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 18px; min-width:140px; }
+    .stat .n { font-size:22px; font-weight:700; }
+    .stat .l { font-size:12px; color:var(--mut); }
+    .filterbar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0; }
+    .filterbar select, .filterbar input { background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:13px; }
+    .filterbar input { width:110px; }
+    .filterbar .q { width:230px; }
+    .btn { background:var(--acc); border:none; color:#fff; border-radius:8px; padding:8px 14px; font-size:13px; cursor:pointer; }
+    .btn.secondary { background:var(--line); }
+    table { width:100%; border-collapse:collapse; background:var(--card); border-radius:10px; overflow:hidden; }
+    th, td { padding:9px 10px; text-align:left; font-size:13px; border-bottom:1px solid var(--line); }
+    th { color:var(--mut); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+    tr:hover td { background:#1c2540; }
+    .num { text-align:right; font-variant-numeric:tabular-nums; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; }
+    .pill.new { background:#243049; color:#aebadc; }
+    .pill.won { background:#123b26; color:#7ee2a8; }
+    .pill.lost, .pill.not { background:#3b1a1a; color:#ff9c9c; }
+    .pill.progress { background:#33290f; color:#ffd479; }
+    .copybtn { cursor:copy; }
+    .copybtn:hover { color:#7ab8ff; }
+    select.status { background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:6px; font-size:12px; padding:4px; }
+    .tabs { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+    .tab { padding:7px 14px; border-radius:8px; border:1px solid var(--line); font-size:13px; color:var(--mut); background:var(--card); }
+    .tab.active { color:#fff; background:var(--acc); border-color:var(--acc); }
+    .pager { display:flex; gap:8px; align-items:center; margin:14px 0; font-size:13px; }
+    .note { font-size:12px; color:var(--mut); }
+    .flag { color:#ffd479; font-size:14px; }
+    code { background:var(--line); padding:1px 5px; border-radius:4px; font-size:12px; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media (max-width:800px){ .grid2{grid-template-columns:1fr;} }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
+    .kv { margin:3px 0; font-size:13px; }
+    .kv b { color:var(--mut); font-weight:600; display:inline-block; width:130px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tabs" style="margin-top:0">
+    <a class="tab" href="/">🏙 Cities</a>
+    <a class="tab" href="/leads">📋 Leads</a>
+    <a class="tab" href="/followups">☎ Follow-ups{% if followups_due %} <span style="background:var(--red);color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;font-weight:700">{{ followups_due }}</span>{% endif %}</a>
+    <a class="tab" href="/templates">✉ Templates</a>
+    <a class="tab" href="/import">🚀 Apollo</a>
+    <a class="tab" href="/contacts">👤 Contacts</a>
+    <a class="tab" href="/progress">📡 Progress</a>
+    <a class="tab" href="/emails">✉ Email indexing</a>
+    {% if current_user() %}
+      {% if current_user().is_admin %}<a class="tab" href="/team">📊 Team</a>{% endif %}
+      {% if current_user().is_admin %}<a class="tab" href="/backup" title="Download a full database backup (.sql)">🛡 Backup</a>{% endif %}
+      <span class="tab" style="border:none;color:var(--mut)">{{ current_user().username }}</span>
+      <a class="tab" href="/logout">Log out</a>
+    {% endif %}
+  </div>
+  {% block content %}{% endblock %}
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

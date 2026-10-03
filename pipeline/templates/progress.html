@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📡 Live Progress — Static DB Build</h1>
+<div class="muted">FB page discovery over the whole agency database · auto-refreshes every 10s</div>
+
+{% set pct = (overall.checked * 100 / overall.total) | round(1) if overall.total else 0 %}
+<div class="stats" style="margin-top:18px">
+  <div class="stat"><div class="n">{{ overall.total }}</div><div class="l">total businesses</div></div>
+  <div class="stat"><div class="n">{{ overall.checked }} <span class="note">({{ pct }}%)</span></div><div class="l">FB search done</div></div>
+  <div class="stat"><div class="n">{{ overall.found }}</div><div class="l">FB page found</div></div>
+  <div class="stat"><div class="n">{{ overall.total - overall.found }}</div><div class="l">no FB page (call targets)</div></div>
+  <div class="stat"><div class="n">{{ remaining }}</div><div class="l">left to search</div></div>
+  <div class="stat"><div class="n">~{{ per_hour }}/hr</div><div class="l">current speed</div></div>
+  <div class="stat">
+    <div class="n">{% if eta_min is none %}—{% elif eta_min >= 60 %}{{ (eta_min // 60) }}h {{ eta_min % 60 }}m{% else %}{{ eta_min }}m{% endif %}</div>
+    <div class="l">estimated time left</div>
+  </div>
+</div>
+
+<div class="card">
+  <b>Overall</b> — {{ pct }}% searched
+  <div style="background:var(--line);border-radius:8px;height:22px;margin-top:8px;overflow:hidden">
+    <div style="background:var(--acc);height:100%;width:{{ pct }}%;float:left"></div>
+  </div>
+  <div class="note" style="margin-top:6px">blue = searched · grey = waiting. Speed/ETA are live from the last 15 minutes of work.</div>
+</div>
+
+<h2>By state</h2>
+<table>
+  <tr><th>State</th><th>Total</th><th>Searched</th><th>FB found</th><th>No FB (calls)</th><th>Coverage</th><th style="width:34%">Progress</th></tr>
+  {% for s in per_state %}
+  {% set spct = (s.checked * 100 / s.total) | round(1) if s.total else 0 %}
+  {% set fpct = (s.found * 100 / s.checked) | round(1) if s.checked else 0 %}
+  <tr>
+    <td><b>{{ s.state }}</b></td>
+    <td class="num">{{ s.total }}</td>
+    <td class="num">{{ s.checked }} ({{ spct }}%)</td>
+    <td class="num">{{ s.found }} <span class="note">({{ fpct }}% of searched)</span></td>
+    <td class="num">{{ s.checked - s.found }}</td>
+    <td>
+      <div style="background:var(--line);border-radius:6px;height:14px;overflow:hidden;min-width:110px">
+        <div style="background:var(--acc);height:100%;width:{{ spct }}%;float:left"></div>
+      </div>
+    </td>
+    <td class="note">{% if spct >= 100 %}✅ done{% elif spct > 0 %}⚙️ running…{% else %}⏳ queued{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="card" style="margin-top:18px">
+  <b>How this works</b>
+  <div class="note" style="margin-top:6px">
+    4 worker processes search inside the dashboard container, each claiming rows from the DB queue —
+    nothing runs at click time, everything lands in your static DB.
+    Found FB pages get 🔍 exact-page Ad Library links; rows with no page found are your best cold-call targets.
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>setTimeout(() => location.reload(), 10000);</script>
+{% endblock %}

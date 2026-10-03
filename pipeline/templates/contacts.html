@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>👤 Contacts</h1>
+<div class="muted">Manually added people (Apollo, LinkedIn, website research) — repeat-call history lives here.</div>
+
+<div class="tabs" style="margin-top:12px">
+  <a class="tab {{ 'active' if not sel.get('status') }}" href="/contacts">All ({{ cstat_map.values() | sum }})</a>
+  {% for s in statuses %}{% if cstat_map.get(s) %}
+    <a class="tab {{ 'active' if sel.get('status')==s }}" href="/contacts?status={{ s | urlencode }}">{{ s }} ({{ cstat_map[s] }})</a>
+  {% endif %}{% endfor %}
+</div>
+
+<div class="card">
+  <b>➕ Add contact</b>
+  {% if sel.get('prefill') %}<span class="pill progress">for {{ sel.get('company_name','') }} (agency #{{ sel.get('agency_id','') }})</span>{% endif %}
+  <form method="post" action="/contacts" class="filterbar" style="margin-top:8px">
+    <input type="hidden" name="agency_id" value="{{ sel.get('agency_id','') }}">
+    <input name="first_name" placeholder="First name *" required style="width:120px">
+    <input name="last_name" placeholder="Last name" style="width:120px">
+    <input name="role" placeholder="Role (free text: CEO, CMO, handler…)" style="width:200px">
+    <input name="company_name" value="{{ sel.get('company_name','') }}" placeholder="Company" style="width:150px"
+           {% if sel.get('agency_id') %}readonly title="Locked to this business"{% endif %}>
+    <input name="phone" placeholder="Their mobile (+1…)" style="width:130px">
+    <input name="email" placeholder="Email" style="width:150px">
+    <input name="linkedin_url" placeholder="LinkedIn URL" style="width:160px">
+    <input name="notes" placeholder="Notes" style="width:140px">
+    <button class="btn" type="submit">Add</button>
+  </form>
+</div>
+
+<form method="get" action="/contacts" class="filterbar">
+  <input name="q" placeholder="Search name / company / role / email" value="{{ sel.get('q','') }}" style="width:260px">
+  <button class="btn secondary" type="submit">Search</button>
+  {% if sel.get('q') or sel.get('status') %}<a class="btn secondary" href="/contacts">Reset</a>{% endif %}
+</form>
+
+<table>
+  <tr><th>Name</th><th>Role</th><th>Company</th><th>Phone / Email</th><th>Status</th><th>Notes</th><th></th></tr>
+  {% for c in rows %}
+  <tr id="crow-{{ c.id }}">
+    <td><b>{{ c.first_name }} {{ c.last_name or '' }}</b>
+      {% if c.agency_id %}<div class="note"><a href="/agency/{{ c.agency_id }}">→ {{ c.agency_name }}</a></div>{% endif %}
+      {% if c.linkedin_url %}<a class="note" target="_blank" href="{{ c.linkedin_url }}">LinkedIn ↗</a>{% endif %}
+    </td>
+    <td>{{ c.role or '—' }}</td>
+    <td>{{ c.company_name or (c.agency_name or '—') }}
+      <div class="note">{{ c.source }}</div></td>
+    <td>
+      {% if c.phone %}<span class="copybtn" data-copy="{{ c.phone }}" title="Copy for dialing">{{ c.phone }} 📋</span>{% else %}—{% endif %}
+      {% if c.email %}<div class="note copybtn" data-copy="{{ c.email }}" title="Copy email">{{ c.email }} 📋</div>{% endif %}
+    </td>
+    <td>
+      <select class="cstatus" data-id="{{ c.id }}">
+        {% for s in statuses %}<option {{ 'selected' if c.outreach_status == s }} value="{{ s }}">{{ s }}</option>{% endfor %}
+      </select>
+    </td>
+    <td><input class="cnotes" data-id="{{ c.id }}" style="width:140px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:6px;font-size:12px;padding:4px"
+               value="{{ (c.notes or '')[:60] }}" placeholder="add note…"></td>
+    <td><button class="btn secondary cdel" data-id="{{ c.id }}" title="Delete contact">✕</button></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" class="note">No contacts yet — add your Apollo finds above so they never vanish.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.copybtn').forEach(el => {
+  el.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(el.dataset.copy); } catch(e) {}
+    const old = el.textContent;
+    el.textContent = '✓ copied';
+    setTimeout(() => { el.textContent = old; }, 1200);
+  });
+});
+async function api(url, body) {
+  const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  return r.json();
+}
+document.querySelectorAll('select.cstatus').forEach(el => {
+  el.addEventListener('change', async () => { await api(`/api/contact/${el.dataset.id}/status`, {status: el.value}); });
+});
+document.querySelectorAll('input.cnotes').forEach(el => {
+  el.addEventListener('change', async () => { await api(`/api/contact/${el.dataset.id}/notes`, {notes: el.value}); });
+});
+document.querySelectorAll('button.cdel').forEach(el => {
+  el.addEventListener('click', async () => {
+    if (!confirm('Delete this contact?')) return;
+    await api(`/api/contact/${el.dataset.id}/delete`, {});
+    document.getElementById(`crow-${el.dataset.id}`).remove();
+  });
+});
+</script>
+{% endblock %}

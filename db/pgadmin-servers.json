@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Targeto Postgres (local)",
+      "Group": "Targeto",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "targeto",
+      "Username": "targeto",
+      "SSLMode": "prefer"
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🚀 Apollo Hub — fast emails & positions</h1>
+<div class="muted">Honest workflow: the free harvester is slow, <b>Apollo's browser extension is fast</b> (credits spent only where it matters).
+This page = the bridge: prioritized worklist out → paste the results back → every email/title lands on the right agency, never lost.</div>
+
+{% if msg %}<div class="card" style="border-color:var(--green)"><span style="color:var(--green)">{{ msg }}</span></div>{% endif %}
+
+<div class="stats">
+  <div class="stat"><div class="n">{{ overall.emailed }}</div><div class="l">emails on file</div></div>
+  <div class="stat"><div class="n" style="color:var(--acc)">{{ overall.apollo }}</div><div class="l">via Apollo</div></div>
+  <div class="stat"><div class="n">{{ overall.with_title }}</div><div class="l">with position</div></div>
+</div>
+
+<div class="card" style="border-color:#7a5a1f">
+  <b>🔑 API tokens</b>
+  {% if tokens %}
+    <span class="note">{{ tokens.n }} active · pool capacity ≈ {{ tokens.cap }} emails/mo · used {{ tokens.used }} this cycle.</span>
+  {% else %}
+    <span class="note">No tokens yet — add free-plan keys below to let the machine spend credits automatically.</span>
+  {% endif %}
+  {% if current_user() and current_user().is_admin %}
+  <form method="post" action="/import/tokens" class="filterbar" style="margin-top:8px">
+    <input name="label" placeholder="Label (e.g. apollo-acc-1)" style="width:150px">
+    <input name="token" placeholder="Paste API token(s), comma-separated" required style="flex:1;min-width:220px">
+    <input name="cap" placeholder="cap/mo" value="60" style="width:70px" title="Monthly email-credit cap per token">
+    <button class="btn" type="submit">+ Add token(s)</button>
+  </form>
+  <div class="note" style="margin-top:6px">Apollo.io → Settings → API → Create key. Free plan ≈ 50–75 email credits/month per account — stack multiple accounts here; the syncer rotates automatically. Tokens are stored, never shown.</div>
+  {% endif %}
+</div>
+
+<div class="grid2" style="margin-top:16px">
+  <div>
+    <h2 style="margin-top:0">Step 2 — Paste Apollo results back</h2>
+    <div class="card">
+      <form method="post" action="/import">
+        <div class="note" style="margin-bottom:6px">
+          In the Apollo extension: save your found people to a list → <b>Export CSV</b> → open it,
+          select-all, copy → paste here. Needs <b>NPI</b> + <b>Email</b> columns; <b>Title</b>/<b>Name</b> optional.
+          Manual emails are never overwritten. Unmatched rows are counted, nothing vanishes.
+        </div>
+        <textarea name="csv" rows="7" placeholder="NPI,Name,Title,Email
+1234567890,John Smith,Owner,john@acme.com
+…" style="width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font-family:inherit"></textarea>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button class="btn" type="submit">⬆ Import emails</button>
+        </div>
+      </form>
+      <form method="post" action="/import" style="margin-top:10px" onsubmit="return confirm('Undo the last Apollo import (last 10 minutes)?')">
+        <input type="hidden" name="act" value="clear">
+        <button class="btn secondary" type="submit">↩ Undo last import</button>
+      </form>
+    </div>
+
+    <h2>Step 3 — Work the results</h2>
+    <div class="card">
+      <div class="note">
+        • Leads → filter <a href="/leads?tab=all&has=email">✉ Has email</a> → ✉ buttons send via your templates<br>
+        • Follow-ups queue picks them up automatically (Email Sent → 3 days)<br>
+        • Team leaderboard counts every email under the right caller
+      </div>
+    </div>
+
+    <h2>🤖 Auto-sync (token machine)</h2>
+    <div class="card">
+      <div class="note">With tokens added, run the syncer (or ask Buffy) — it walks the worklist gold-list-first, calls Apollo's enrichment API per agency, spends 1 credit <b>only when an email is found</b>, rotates tokens when a cap is hit, and writes everything straight into the DB.</div>
+      <div class="note" style="margin-top:6px">Command inside the container: <code>python -m pipeline.apollo_sync --limit 50</code> · <code>--dry-run</code> previews without spending.</div>
+      {% if recent %}
+      <div class="note" style="margin-top:10px"><b>Latest sync results</b></div>
+      <table style="margin-top:4px">
+        <tr><th>Agency</th><th>Email found</th><th>Title</th><th>Token</th><th>When</th></tr>
+        {% for s in recent %}
+        <tr>
+          <td>{% if s.agency_id %}<a href="/agency/{{ s.agency_id }}">{{ s.org_name[:28] }}</a>{% else %}—{% endif %}</td>
+          <td>{% if s.email_found %}<span class="pill won">✓ found</span>{% else %}<span class="pill not">miss</span>{% endif %}</td>
+          <td class="note">{{ s.title or '—' }}</td>
+          <td class="note">{{ s.label or '?' }}</td>
+          <td class="note">{{ s.created_at.strftime('%d %b %H:%M') }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+  <div>
+    <h2 style="margin-top:0">Step 1 — Get the worklist</h2>
+    <div class="card">
+      <a class="btn" href="/import.csv">⬇ Download worklist CSV</a>
+      <span class="note" style="margin-left:8px">{{ rows|length }} agencies need an email (owner + phone known, not DNC)</span>
+      <div class="note" style="margin-top:8px">
+        Sorted best-first. Columns: <b>#</b>, NPI, Company, City, State, Owner, Title, Website.
+        In Chrome: open the CSV → for each row, search the company in Apollo's extension → save to list.
+        Then export that list and paste it back on the left.
+      </div>
+    </div>
+    <h2>Worklist preview (first 12)</h2>
+    <table>
+      <tr><th>#</th><th>Company</th><th>Owner</th><th>Title</th><th>City</th></tr>
+      {% for r in rows[:12] %}
+      <tr>
+        <td>{{ r.rn }}</td>
+        <td><a href="/agency/{{ r.id }}">{{ r.org_name[:30] }}</a><div class="note">{{ r.state or '' }}</div></td>
+        <td>{{ r.owner_name }}</td>
+        <td class="note">{{ r.owner_title or '—' }}</td>
+        <td>{{ r.city or '' }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% if rows|length > 12 %}<div class="note">…and {{ rows|length - 12 }} more in the CSV.</div>{% endif %}
+  </div>
+</div>
+{% endblock %}

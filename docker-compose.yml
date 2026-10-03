@@ -1,0 +1,55 @@
+name: targeto-pipeline
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: targeto-postgres
+    environment:
+      POSTGRES_USER: targeto
+      POSTGRES_PASSWORD: targeto_local
+      POSTGRES_DB: targeto
+    ports:
+      - "5434:5432"
+    volumes:
+      - targeto_pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U targeto -d targeto"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  dashboard:
+    build: .
+    container_name: targeto-dashboard
+    environment:
+      TARGETO_PGHOST: postgres
+      TARGETO_PGPORT: "5432"
+      TARGETO_DASH_HOST: 0.0.0.0
+    ports:
+      - "8010:8010"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: targeto-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: saroj@teamtargeto.com
+      PGADMIN_DEFAULT_PASSWORD: targeto_local
+    ports:
+      - "5050:80"
+    volumes:
+      - targeto_pgadmin:/var/lib/pgadmin
+      - ./db/pgadmin-servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  targeto_pgdata:
+  targeto_pgadmin:

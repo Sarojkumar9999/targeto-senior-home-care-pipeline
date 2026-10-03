@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🎯 Targeto Lead Pipeline</h1>
+<div class="muted">
+  {% if sel_state %}State: <b>{{ sel_state }}</b> (<a href="/">show all states</a>){% else %}All states{% endif %}
+  · <a href="{{ url_for('leads') }}">Go to lead list →</a>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">{{ totals.total }}</div><div class="l">Total agencies</div></div>
+  <div class="stat"><div class="n" style="color:var(--red)">{{ totals.not_running }}</div><div class="l">Not running ads (call list)</div></div>
+  <div class="stat"><div class="n" style="color:var(--green)">{{ totals.running }}</div><div class="l">Running ads (competitors)</div></div>
+  <div class="stat"><div class="n">{{ totals.unresolved }}</div><div class="l">Ad status unresolved</div></div>
+</div>
+
+<h2>States</h2>
+<div class="filterbar">
+  {% for st, n in states[:18] %}
+    <a class="tab {{ 'active' if sel_state == st }}" href="/?state={{ st }}">{{ st }} · {{ n }}</a>
+  {% endfor %}
+</div>
+
+<h2>Cities {% if sel_state %}in {{ sel_state }}{% endif %}</h2>
+<table>
+  <tr><th>City</th><th>State</th><th class="num">Total</th><th class="num">🔴 Not running</th><th class="num">🟢 Running</th><th class="num">❓ Unresolved</th><th class="num">Untouched</th><th></th></tr>
+  {% for c in cities %}
+  <tr>
+    <td><b>{{ c.city }}</b></td>
+    <td>{{ c.state }}</td>
+    <td class="num">{{ c.total }}</td>
+    <td class="num" style="color:var(--red)">{{ c.not_running }}</td>
+    <td class="num" style="color:var(--green)">{{ c.running }}</td>
+    <td class="num">{{ c.unresolved }}</td>
+    <td class="num">{{ c.untouched }}</td>
+    <td>
+      <a class="btn" href="{{ url_for('leads', state=c.state, city=c.city, tab='all') }}">Call list</a>
+      <a class="btn secondary" href="{{ url_for('leads', state=c.state, city=c.city, tab='running') }}">Competitors</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

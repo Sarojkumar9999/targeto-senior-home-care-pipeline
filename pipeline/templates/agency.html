@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ a.org_name }}</h1>
+<div class="muted"><a href="/leads?state={{ a.state }}&city={{ a.city|lower }}">← Back to list</a></div>
+
+<div class="grid2" style="margin-top:16px">
+  <div>
+    <div class="card">
+      <h2 style="margin-top:0">Contact</h2>
+      <div class="kv"><b>NPI</b> {{ a.npi }}
+        <a target="_blank" href="https://npiregistry.cms.hhs.gov/provider-view/{{ a.npi }}" style="color:#7ab8ff">NPI Registry ↗</a>
+      </div>
+      <div class="kv"><b>Address</b> {{ a.address_1 or '' }} {{ a.address_2 or '' }}, {{ a.city }}, {{ a.state }} {{ a.postal_code or '' }}</div>
+      <div class="kv"><b>Phone</b> {{ a.phone or '—' }}</div>
+      <div class="kv"><b>Owner</b> {{ a.owner_first_name or '' }} {{ a.owner_last_name or '' }} <span class="note">{{ a.owner_title or '' }}</span>
+        {% if owner_urls %}<a target="_blank" style="color:#7ab8ff;font-size:12px" title="Open LinkedIn people-search for this owner — grab their personal email from the profile / Apollo extension" href="{{ owner_urls.linkedin }}">🔎 LinkedIn ↗</a>{% endif %}
+      </div>
+      <div class="kv"><b>Owner phone</b> {{ a.owner_phone or '—' }}</div>
+      <div class="kv"><b>Email</b>
+        <input id="emailfld" value="{{ a.email or '' }}" placeholder="owner@agency.com" style="background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:13px;width:210px">
+        <button class="btn secondary" style="padding:3px 10px" onclick="saveEmail()">Save</button>
+        {% if a.email %}{% if generic_email %}<span title="Company inbox (info@/sales@…) — likely will NOT convert">🏢</span>{% else %}<span title="{{ 'Owner’s own address' if personal_email else 'Name-matched — looks personal' }}">👤</span>{% endif %}{% endif %}
+        {% if a.email %}<a class="btn {{ '' if not generic_email else 'secondary' }}" style="padding:3px 10px" href="#" onclick="openEmail();return false" title="Open Gmail compose with the default template">✉ Email</a>{% endif %}
+      </div>
+      {% if generic_email %}
+      <div class="kv" style="color:#ffd479">⚠️ This looks like a <b>company inbox</b>, not {{ a.owner_first_name or 'the owner' }}'s personal address.
+        {% if owner_urls %}<a target="_blank" style="color:#7ab8ff" href="{{ owner_urls.linkedin }}">🔎 Find {{ (a.owner_first_name or '') ~ ' ' ~ (a.owner_last_name or '') }} on LinkedIn</a>{% endif %}
+        {% if owner_urls %} · <a target="_blank" style="color:#7ab8ff" href="{{ owner_urls.google }}">🔎 Google “name + email”</a>{% endif %}
+      </div>
+      {% endif %}
+      {% if guesses %}
+      <div class="kv" style="display:block;margin-top:6px">
+        <b style="color:#7ab8ff">🕵️ Likely personal addresses</b> <span class="note">(pattern guesses — MX verified, NOT confirmed. ✅ = save as THE email · ❌ = wrong)</span>
+        <table style="margin-top:6px;width:100%">
+          {% for g in guesses %}
+          <tr id="guess-{{ loop.index }}">
+            <td class="note">#{{ g.rank }} {{ g.pattern }}</td>
+            <td><span class="copybtn" data-copy="{{ g.email }}">{{ g.email }} 📋</span></td>
+            <td style="white-space:nowrap">
+              <a class="btn" style="padding:2px 8px" href="#" onclick="guessAct({{ loop.index }}, 'confirm', '{{ g.email | escape }}');return false" title="Yes — this is their address. Saves it as the agency email.">✅</a>
+              <a class="btn secondary" style="padding:2px 8px" href="#" onclick="guessAct({{ loop.index }}, 'reject', '{{ g.email | escape }}');return false" title="Wrong — hide this guess">❌</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      {% endif %}
+      <div class="kv"><b>Website</b> {% if a.website %}<a href="{{ a.website }}" target="_blank">{{ a.website }}</a>{% else %}<span class="note">not found yet (Phase 3)</span>{% endif %}</div>
+      <div class="kv"><b>FB page</b> {{ a.fb_page or '—' }}</div>
+      <div class="kv"><b>Ad status</b> <span class="pill {{ {'RUNNING':'progress','NO_ADS':'not'}[a.ad_status] if a.ad_status in ('RUNNING','NO_ADS') else 'new' }}">{{ a.ad_status }}</span></div>
+      <div class="kv"><b>Enumerated</b> {{ a.enumeration_date or '—' }}</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Taxonomies</h2>
+      {% for t in taxonomies %}
+        <div class="kv">{{ '★' if t.is_primary else '·' }} {{ t.description }} <span class="note">{{ t.code }}</span></div>
+      {% else %}<span class="note">none</span>{% endfor %}
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Notes</h2>
+      <form method="post">
+        <textarea name="note" rows="3" style="width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px">{{ a.notes or '' }}</textarea>
+        <button class="btn" type="submit" style="margin-top:8px">Save notes</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2 style="margin-top:0">Outreach</h2>
+      <div class="kv"><b>Current status</b>
+        <select class="status" data-id="{{ a.id }}" id="statussel">
+          {% for s in statuses %}<option {{ 'selected' if a.outreach_status == s }} value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+      </div>
+      <h2>Log an attempt</h2>
+      <div class="filterbar">
+        <select id="chan">
+          <option value="call">Call</option><option value="email">Email</option>
+          <option value="whatsapp">WhatsApp</option><option value="linkedin">LinkedIn</option>
+          <option value="other">Other</option>
+        </select>
+        <input id="outcome" placeholder="Outcome (picked up / no answer…)" style="flex:1">
+        <button class="btn" onclick="addAttempt()">Log</button>
+      </div>
+      <table style="margin-top:10px">
+        <tr><th>When</th><th>Channel</th><th>Outcome</th><th>Note</th></tr>
+        {% for at in attempts %}
+        <tr><td>{{ at.attempted_at.strftime('%Y-%m-%d %H:%M') }}</td><td>{{ at.channel }}</td><td>{{ at.outcome or '' }}</td><td>{{ at.note or '' }}</td></tr>
+        {% else %}<tr><td colspan="4" class="note">No attempts logged yet.</td></tr>{% endfor %}
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Ad checks (Phase 3 data)</h2>
+      {% for c in checks %}
+        <div class="kv">{{ c.checked_at.strftime('%Y-%m-%d') }} · {{ c.result }} · active {{ c.ads_active or 0 }} / archived {{ c.ads_archived or 0 }}</div>
+      {% else %}<span class="note">No Ad Library checks yet — needs Meta token (Phase 3).</span>{% endfor %}
+      {% for cr in creatives %}
+        <div class="kv" style="margin-top:8px">📢 {{ (cr.body or '')[:140] }} <span class="note">CTA: {{ cr.cta or '—' }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('statussel').addEventListener('change', async e => {
+  await fetch(`/api/agency/{{ a.id }}/status`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({status: e.target.value})});
+});
+async function addAttempt() {
+  await fetch(`/api/agency/{{ a.id }}/attempt`, {method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({channel: document.getElementById('chan').value, outcome: document.getElementById('outcome').value})});
+  location.reload();
+}
+async function guessAct(row, action, email) {
+  const r = await (await fetch(`/api/agency/{{ a.id }}/guess`, {method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({action, email})})).json();
+  if (!r.ok) { alert(r.error || 'Failed'); return; }
+  if (action === 'confirm') {
+    document.getElementById('emailfld').value = email;
+    alert('Saved ✅ — ' + email + ' is now the agency email (permanent).');
+  }
+  const tr = document.getElementById('guess-' + row);
+  if (tr) tr.remove();
+}
+async function saveEmail() {
+  const v = document.getElementById('emailfld').value.trim();
+  if (v && !v.includes('@')) { alert('That does not look like an email address'); return; }
+  const r = await (await fetch(`/api/agency/{{ a.id }}/email`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: v})})).json();
+  if (r.ok) location.reload(); else alert(r.error || 'failed');
+}
+async function openEmail() {
+  const d = await (await fetch(`/api/email/{{ a.id }}`)).json();
+  if (!d.ok) { alert(d.error); return; }
+  window.open(d.mailto, '_blank');
+  await fetch(`/api/agency/{{ a.id }}/email_log`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({})});
+  setTimeout(() => location.reload(), 400);
+}
+</script>
+{% endblock %}

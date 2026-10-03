@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block content %}
+<meta http-equiv="refresh" content="15">
+<h1>✉ Email Indexing</h1>
+<div class="muted">Chain: <b>website resolution</b> (fleet of workers guessing each agency's domain) → <b>email harvest</b> (crawl contact pages, rank, store). This page live-updates every 15s.</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">{{ overall.total }}</div><div class="l">total agencies</div></div>
+  <div class="stat"><div class="n" style="color:var(--acc)">{{ overall.sites }}</div><div class="l">websites found ({{ (overall.sites * 100 / overall.total) | round(1) }}%)</div></div>
+  <div class="stat"><div class="n" style="color:var(--green)">{{ overall.emailed }}</div><div class="l">emails on file ({{ (overall.emailed * 100 / overall.total) | round(1) }}%)</div></div>
+  <div class="stat"><div class="n" style="color:var(--green)">{{ n_personal }}</div><div class="l">👤 personal (owner's own)</div></div>
+  <div class="stat"><div class="n">{{ overall.emailed - n_personal }}</div><div class="l">🏢 company/guessed</div></div>
+  <div class="stat"><div class="n">{{ overall.src_website }}</div><div class="l">↳ harvested from site</div></div>
+  <div class="stat"><div class="n">{{ overall.src_manual }}</div><div class="l">↳ saved manually</div></div>
+  <div class="stat"><div class="n">{{ guess_stats.cands }}</div><div class="l">🕵️ {{ guess_stats.agencies }} agencies w/ guesses</div></div>
+</div>
+
+<div class="card" style="margin-top:14px;border-color:#ffd479">
+  <b>👤 Personal-only policy</b> — <span class="note">the harvester stores an email ONLY when it carries the owner's own name (deserie@, dbradley@…). info@/sales@/hello@ are NEVER saved — company inboxes don't convert. For the rest: 🕵️ pattern guesses sit on each agency page (✅ confirm / ❌ reject), 🔎 LinkedIn on any lead row (owner name pre-filled), or the 🚀 Apollo sync (queries by owner first+last → returns the person's address).</span>
+</div>
+
+<div class="card" style="margin-top:14px">
+  {% if fleet_alive %}
+    <b style="color:var(--green)">🟢 Fleet is alive</b> — <span class="note">{{ sites_15m }} websites resolved in the last 15 min (~{{ sites_per_hour }}/h). Remaining: {{ remaining }} → ETA ≈ {{ eta_h }}h.</span>
+  {% elif remaining > 0 %}
+    <b style="color:#ffd479">🟡 Fleet idle / not detected</b> — <span class="note">no new websites in the last 15 min. If a run should be going, ask Buffy to relaunch the 6-shard resolver fleet (workers die when the container restarts).</span>
+  {% else %}
+    <b style="color:var(--green)">✅ Website resolution complete</b> — <span class="note">every agency processed. Harvested emails appear below as the harvester works through them.</span>
+  {% endif %}
+  <div class="note" style="margin-top:6px">Emails added in the last 15 min: <b>{{ emails_15m }}</b> {% if emails_15m == 0 and overall.sites > 3 %}· harvester may not be running — it auto-starts after the fleet finishes{% endif %}</div>
+</div>
+
+<h2>Progress by state</h2>
+<table>
+  <tr><th>State</th><th class="num">Agencies</th><th class="num">Websites</th><th class="num">Coverage</th><th class="num">Emails</th><th class="num">Email rate</th></tr>
+  {% for s in per_state %}
+  <tr>
+    <td><b>{{ s.state }}</b></td>
+    <td class="num">{{ s.total }}</td>
+    <td class="num">{{ s.sites }}</td>
+    <td class="num">
+      <div style="background:var(--line);border-radius:6px;height:14px;width:120px;display:inline-block;vertical-align:middle">
+        <div style="background:var(--acc);border-radius:6px;height:14px;width:{{ (s.sites * 100 / s.total) | round(0) }}%"></div>
+      </div>
+      {{ (s.sites * 100 / s.total) | round(1) }}%
+    </td>
+    <td class="num">{{ s.emails }}</td>
+    <td class="num">{{ (s.emails * 100 / s.total) | round(1) }}%</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="grid2" style="margin-top:20px">
+  <div>
+    <h2>Latest emails found</h2>
+    <table>
+      <tr><th>Agency</th><th>Email</th><th>Type</th><th>Source</th></tr>
+      {% for r in recent %}
+      <tr>
+        <td><a href="/agency/{{ r.id }}">{{ r.org_name[:34] }}</a>
+          <div class="note">{{ r.city or '' }}, {{ r.state or '' }}</div></td>
+        <td><span class="copybtn" data-copy="{{ r.email }}">{{ r.email }} 📋</span></td>
+        <td>{{ '👤 personal' if personal_map.get(r.id) else '🏢 company?' }}</td>
+        <td><span class="pill {{ 'won' if r.email_source == 'website' else 'new' }}">{{ r.email_source or 'manual' }}</span></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="note">No emails found yet — the funnel above shows why (websites first).</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div>
+    <h2>How to read this</h2>
+    <div class="card">
+      <div class="kv"><b>1. Websites</b> Workers guess domains from business names and verify them (phone number match on the site = gold standard). No external APIs.</div>
+      <div class="kv"><b>2. Emails</b> Once a site exists, the harvester crawls its contact/about/team pages — but stores ONLY addresses that carry the owner's name (👤). info@/sales@/hello@ are rejected — those are company inboxes that never convert.</div>
+      <div class="kv"><b>3. Never overwritten</b> An email you save by hand is permanent; the harvester only fills blanks.</div>
+      <div class="kv"><b>Want more coverage?</b> Google Custom Search keys (100 free queries/day) let the resolver find sites that domain-guessing misses — ask Buffy to wire it up.</div>
+    </div>
+    <div class="card">
+      <b>Working with emails</b>
+      <div class="note" style="margin-top:6px">
+        • Filter leads: <a href="/leads?tab=all&has=email">✉ Has email</a> · <a href="/leads?tab=all&has=personal">👤 Personal only</a> · <a href="/leads?tab=all&has=company">🏢 Company inboxes</a> · <a href="/leads?tab=all&has=noemail">✉ Missing email</a><br>
+        • Send: ✉ button on any row opens Gmail with your templates<br>
+        • Need the person, not the company? 🔎 LinkedIn button on every owner → search is pre-filled with name + company<br>
+        • Manage wording: <a href="/templates">✉ Templates</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.copybtn').forEach(el => {
+  el.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(el.dataset.copy); } catch(e) {}
+    const old = el.textContent;
+    el.textContent = '✓ copied';
+    setTimeout(() => { el.textContent = old; }, 1200);
+  });
+});
+</script>
+{% endblock %}

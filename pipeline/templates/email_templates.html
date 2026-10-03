@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>✉ Email Templates</h1>
+<div class="muted">You write the words once — every lead's ✉ button fills in the details and opens Gmail compose in a new tab.
+Placeholders you can use anywhere in subject or body:
+<code>{{ '{{owner_name}}' }}</code> <code>{{ '{{company}}' }}</code> <code>{{ '{{city}}' }}</code> <code>{{ '{{state}}' }}</code> <code>{{ '{{targeto_user}}' }}</code>
+(your logged-in username, added at the end automatically if you leave it in).</div>
+
+{% if msg %}<div class="card" style="border-color:var(--green)"><span style="color:var(--green)">{{ msg }}</span></div>{% endif %}
+
+<div class="grid2" style="margin-top:16px">
+  <div>
+    <h2 style="margin-top:0" id="formtitle">New template</h2>
+    <div class="card">
+      <form method="post" action="/templates">
+        <input type="hidden" name="id" id="fid" value="">
+        <div class="filterbar" style="margin:0 0 8px">
+          <input name="name" id="fname" placeholder="Template name (e.g. 'Follow-up after voicemail')" required style="flex:1;min-width:200px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px">
+          <select name="kind" id="fkind" style="background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px">
+            {% for k, label in kinds.items() %}<option value="{{ k }}">{{ label }}</option>{% endfor %}
+          </select>
+        </div>
+        <input name="subject" id="fsubject" placeholder="Subject line — e.g. Quick question about {{ '{{company}}' }}, {{ '{{owner_name}}' }}" required style="width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px">
+        <textarea name="body" id="fbody" rows="10" required placeholder="Hi {{ '{{owner_name}}' }},
+
+Body… you can drop {{ '{{company}}' }} and {{ '{{city}}' }} anywhere.
+
+{{ '{{targeto_user}}' }}" style="width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font-family:inherit"></textarea>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button class="btn" type="submit">💾 Save template</button>
+          <button class="btn secondary" type="button" onclick="resetForm()">New blank</button>
+        </div>
+      </form>
+    </div>
+    <div class="note" style="margin-top:8px">
+      Tip: make one template per situation — <b>Didn't pick up</b> (short, 2 lines), <b>Picked the call</b> (recap what you discussed),
+      <b>Interested</b> (next step: a quick call slot). The ✉ button on each lead row lets you pick which one to open.
+    </div>
+  </div>
+
+  <div>
+    <h2 style="margin-top:0">Your templates ({{ rows|length }})</h2>
+    {% for t in rows %}
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <div>
+          <b>{{ t.name }}</b>
+          {% if t.is_default %}<span class="pill won">default ✉</span>{% endif %}
+          <span class="pill new">{{ kinds.get(t.kind, t.kind) }}</span>
+        </div>
+        <div style="white-space:nowrap">
+          {% if not t.is_default %}<form method="post" action="/templates" style="display:inline"><input type="hidden" name="act" value="default"><input type="hidden" name="id" value="{{ t.id }}"><button class="btn secondary" style="padding:3px 10px" title="✉ buttons use this template by default">★ make default</button></form>{% endif %}
+          <button class="btn secondary" style="padding:3px 10px" onclick='editTpl({{ t.id }}, {{ t.name|tojson }}, {{ t.kind|tojson }}, {{ t.subject|tojson }}, {{ t.body|tojson }})'>✎ edit</button>
+          <form method="post" action="/templates" style="display:inline" onsubmit="return confirm('Delete template {{ t.name|tojson }}?')"><input type="hidden" name="act" value="delete"><input type="hidden" name="id" value="{{ t.id }}"><button class="btn secondary" style="padding:3px 10px">🗑</button></form>
+        </div>
+      </div>
+      <div class="note" style="margin-top:6px"><b>Subject:</b> {{ t.subject }}</div>
+      <div class="note" style="margin-top:4px;white-space:pre-wrap;max-height:110px;overflow:auto;border-left:3px solid var(--line);padding-left:8px">{{ t.body }}</div>
+      <div class="note" style="margin-top:4px">updated {{ t.updated_at.strftime('%d %b %Y') }}</div>
+    </div>
+    {% else %}
+    <div class="card"><b>No templates yet.</b> <span class="note">Write your first one on the left — the ✉ buttons on Leads stay off until at least one template exists.</span></div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function editTpl(id, name, kind, subject, body) {
+  document.getElementById('fid').value = id;
+  document.getElementById('fname').value = name;
+  document.getElementById('fkind').value = kind;
+  document.getElementById('fsubject').value = subject;
+  document.getElementById('fbody').value = body;
+  document.getElementById('formtitle').textContent = 'Edit template #' + id;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function resetForm() {
+  document.getElementById('fid').value = '';
+  document.getElementById('fname').value = '';
+  document.getElementById('fsubject').value = '';
+  document.getElementById('fbody').value = '';
+  document.getElementById('formtitle').textContent = 'New template';
+}
+</script>
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Leads</h1>
+<div class="muted"><a href="/">← City browser</a> · {{ total }} agencies match</div>
+
+<div class="tabs" style="margin-bottom:8px">
+  <span class="note" style="align-self:center;margin-right:4px">FB page:</span>
+  <a class="tab {{ 'active' if sel.get('has') not in ('fb','nofb') }}"
+     href="/leads?tab={{ tab }}{% if fb_query %}&{{ fb_query }}{% endif %}">All ({{ fb_counts.total }})</a>
+  <a class="tab {{ 'active' if sel.get('has')=='fb' }}"
+     href="/leads?tab={{ tab }}&has=fb{% if fb_query %}&{{ fb_query }}{% endif %}">✅ Has FB ({{ fb_counts.has_fb }})</a>
+  <a class="tab {{ 'active' if sel.get('has')=='nofb' }}"
+     href="/leads?tab={{ tab }}&has=nofb{% if fb_query %}&{{ fb_query }}{% endif %}">📞 No FB ({{ fb_counts.no_fb }})</a>
+</div>
+
+<div class="tabs">
+  {% for key, (st, label) in ad_tabs.items() %}
+    <a class="tab {{ 'active' if tab == key }}" href="/leads?tab={{ key }}{% if base_query %}&{{ base_query }}{% endif %}">
+      {{ label }}{% if key in cmap %} <span class="note">({{ cmap[key] }})</span>{% elif key == 'no-ads' %} <span class="note">({{ cmap.get('NO_ADS', 0) }})</span>{% endif %}
+    </a>
+  {% endfor %}
+</div>
+
+<form method="get" action="/leads" class="filterbar">
+  <input type="hidden" name="tab" value="{{ tab }}">
+  <input class="q" name="q" placeholder="Search name / owner / phone" value="{{ sel.get('q','') }}">
+  <select name="state"><option value="">State</option>
+    {% for st in ['FL','TX','AZ','CA','NY','GA','NC','PA','OH','IL'] %}<option {{ 'selected' if sel.get('state')==st }} value="{{ st }}">{{ st }}</option>{% endfor %}
+  </select>
+  <input name="city" placeholder="City" value="{{ sel.get('city','') }}" style="width:130px">
+  <input name="zip" placeholder="ZIP / prefix" value="{{ sel.get('zip','') }}" style="width:100px">
+  <input name="radius_zip" placeholder="ZIP" value="{{ sel.get('radius_zip','') }}" style="width:70px" title="Radius center ZIP">
+  <input name="radius_mi" placeholder="mi" value="{{ sel.get('radius_mi','') }}" style="width:55px" title="Radius in miles">
+  <select name="outreach"><option value="">Any status</option>
+    {% for s in statuses %}<option {{ 'selected' if sel.get('outreach')==s }} value="{{ s }}">{{ s }}</option>{% endfor %}
+  </select>
+  <select name="tplsel" id="tplsel" title="Which email template the ✉ button opens">
+    <option value="">✉ template: default</option>
+    {% for t in tpl_list %}<option {{ 'selected' if sel.get('tplsel')|string == t.id|string }} value="{{ t.id }}">{{ t.name }}{% if t.is_default %} ★{% endif %}</option>{% endfor %}
+  </select>
+  <select name="has"><option value="">Has…</option>
+    <option {{ 'selected' if sel.get('has')=='phone' }} value="phone">Has phone</option>
+    <option {{ 'selected' if sel.get('has')=='owner' }} value="owner">Has owner name</option>
+    <option {{ 'selected' if sel.get('has')=='website' }} value="website">Has website</option>
+    <option {{ 'selected' if sel.get('has')=='fb' }} value="fb">Has FB page</option>
+    <option {{ 'selected' if sel.get('has')=='nofb' }} value="nofb">No FB page</option>
+  </select>
+  <input name="title" placeholder="Owner title" value="{{ sel.get('title','') }}" style="width:110px">
+  <input name="tax" placeholder="Taxonomy" value="{{ sel.get('tax','') }}" style="width:110px">
+  <select name="sort">
+    {% for key, label in [('org','Sort: Name'), ('city','Sort: City'), ('status','Sort: Status'), ('enum','Sort: Newest')] %}
+      <option {{ 'selected' if sel.get('sort')==key }} value="{{ key }}">{{ label }}</option>
+    {% endfor %}
+  </select>
+  <select name="dnc">
+    <option value="">Exclude DNC</option>
+    <option {{ 'selected' if sel.get('dnc')=='only' }} value="only">Show DNC only</option>
+  </select>
+  <select name="per">
+    {% for p in page_sizes %}<option {{ 'selected' if per == p }} value="{{ p }}">{{ p }} / page</option>{% endfor %}
+  </select>
+  <button class="btn" type="submit">Apply</button>
+  <a class="btn secondary" href="/leads?tab={{ tab }}">Reset</a>
+  <a class="btn secondary" href="/export.csv?{{ request.query_string.decode() }}">⬇ Export CSV</a>
+</form>
+
+<div class="filterbar">
+  <a class="btn secondary" href="/leads?tab=all&has=email">✉ Has email</a>
+  <a class="btn secondary" href="/leads?tab=all&has=personal">👤 Personal email</a>
+  <a class="btn secondary" href="/leads?tab=all&has=company">🏢 Company inbox only</a>
+  <a class="btn secondary" href="/leads?tab=all&has=noemail">✉ Missing email</a>
+  <span class="note" style="align-self:center">{{ email_counts.personal }} personal · {{ email_counts.with_email }} total of {{ email_counts.total }} leads — 👤 = owner's own address, 🏢 = info@/sales@ type (won't convert)</span>
+</div>
+
+<div class="filterbar">
+  <select id="viewsel"><option value="">— Saved views —</option>
+    {% for v in saved_views %}<option value="{{ v.name }}">{{ v.name }}</option>{% endfor %}
+  </select>
+  <button class="btn secondary" onclick="loadView()">Load</button>
+  <button class="btn secondary" onclick="saveView()">Save current filters as…</button>
+</div>
+
+{% if total == 0 and tab in ('no-ads', 'running', 'ran-before', 'no-page') and cmap.get('UNRESOLVED', 0) > 0 %}
+<div class="card" style="border-color:#5a4a1f">
+  <b>⏳ This tab fills up as you classify agencies.</b>
+  <div class="note" style="margin-top:6px">
+    All {{ cmap.get('UNRESOLVED', 0) }} agencies under this filter are still <b>UNRESOLVED</b>.
+    Open the <b>All</b> tab, use the 🔍 check links to peek at each agency's ads (~3 sec each),
+    and set the second dropdown (NO_ADS / RUNNING / …). Agencies you mark NO_ADS appear in this tab instantly.
+  </div>
+</div>
+{% endif %}
+
+<table>
+  <tr>
+    <th>Agency</th><th>Owner</th><th>Phone</th><th>City</th>
+    <th>Ads</th><th>Status</th><th>Notes</th><th></th>
+  </tr>
+  {% for r in rows %}
+  <tr id="row-{{ r.id }}" {{ 'style="opacity:.55"' if r.dnc }}>
+    <td>
+      <a href="/agency/{{ r.id }}"><b>{{ r.org_name }}</b></a>
+      {% if r.dnc %}<span class="pill not" title="DO NOT CALL — hidden from all lists & exports">🚫 DNC</span>{% endif %}
+      {% if r.review_needed %}<span class="flag" title="Needs review">⚑</span>{% endif %}
+      {% if r.follow_up_at %}<a class="pill progress" style="text-decoration:none" title="Follow-up scheduled — see Follow-ups page" href="/followups">⏰ {% if r.follow_up_at <= now %}DUE{% else %}{{ r.follow_up_at.strftime('%d %b') }}{% endif %}</a>{% endif %}
+      <div class="note">{{ r.npi }} · {{ r.state }} {{ r.postal_code or '' }}
+        <a target="_blank" title="Official NPI Registry record (owner + taxonomy)"
+           href="https://npiregistry.cms.hhs.gov/provider-view/{{ r.npi }}" style="color:#7ab8ff">NPI ↗</a>
+        {% if r.website %}<a target="_blank" title="Agency website" href="{{ r.website }}" style="color:#7ab8ff">Site ↗</a>{% endif %}
+      </div>
+    </td>
+    <td>
+      {% if r.owner_last_name %}{{ r.owner_first_name }} {{ r.owner_last_name }}
+        <div class="note">{{ r.owner_title or '' }}</div>
+        {% if owner_urls[r.id] %}<a class="note" style="color:#7ab8ff" target="_blank" title="Find {{ r.owner_first_name }} on LinkedIn — get the PERSONAL email (Apollo extension / contact info)" href="{{ owner_urls[r.id].linkedin }}">🔎 LinkedIn ↗</a>{% endif %}
+      {% else %}<span class="note">—</span>{% endif %}
+    </td>
+    <td>
+      {% if phone_e164[r.id] %}
+        <span class="copybtn" data-copy="{{ phone_e164[r.id] }}" title="Copy {{ phone_e164[r.id] }} for dialing">{{ phone_e164[r.id] }} 📋</span>
+      {% else %}{{ r.phone or r.owner_phone or '—' }}{% endif %}
+    </td>
+    <td>{{ r.city or '' }}{% if local_time.get(r.state) %}
+      <span class="pill new" style="margin-top:3px;display:inline-block" title="Live {{ local_time[r.state][1] }} time at page load — sweet calling window for India: 6:30pm–12am IST">🕒 {{ local_time[r.state][0] }}</span>
+    {% endif %}</td>
+    <td>
+      <span class="pill {{ {'RUNNING':'progress','NO_ADS':'not','RAN_BEFORE':'new','NO_FB_PAGE':'new','UNRESOLVED':'new'}[r.ad_status] }}">{{ r.ad_status }}</span>
+      {% if r.ad_status in ('UNRESOLVED', 'PENDING') %}
+        <a class="note" style="display:block;margin-top:2px" target="_blank" title="Open Ad Library on this exact FB page"
+           href="{{ adlib_urls[r.id] }}">🔍 ads</a>
+        {% if r.fb_page_url %}
+          <a class="note" style="display:block" target="_blank" href="{{ r.fb_page_url }}">FB page</a>
+        {% endif %}
+      {% endif %}
+      {% if r.fb_page_url %}
+        <span class="pill won" title="FB page discovered — {{ r.fb_page }}">FB ✓</span>
+      {% else %}
+        <span class="pill not" title="Searched — no FB page found (cold-call target)">no FB</span>
+      {% endif %}
+    </td>
+    <td>
+      <select class="status" data-id="{{ r.id }}">
+        {% for s in statuses %}<option {{ 'selected' if r.outreach_status == s }} value="{{ s }}">{{ s }}</option>{% endfor %}
+      </select>
+      <select class="adstat" data-id="{{ r.id }}" style="margin-top:3px;display:block;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:6px;font-size:11px;padding:3px">
+        {% for s in ['UNRESOLVED','RUNNING','RAN_BEFORE','NO_ADS','NO_FB_PAGE'] %}
+          <option {{ 'selected' if r.ad_status == s }} value="{{ s }}">{{ s }}</option>
+        {% endfor %}
+      </select>
+    </td>
+    <td>
+      <input class="notes" data-id="{{ r.id }}" style="width:150px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:6px;font-size:12px;padding:4px"
+             value="{{ (r.notes or '')[:60] }}" placeholder="add note…">
+    </td>
+    <td style="white-space:nowrap">
+      <a class="btn secondary" href="/agency/{{ r.id }}">Open</a>
+      <a class="btn secondary" href="/contacts?agency_id={{ r.id }}&company_name={{ r.org_name | urlencode }}{% if phone_e164[r.id] %}&phone={{ phone_e164[r.id] | urlencode }}{% endif %}"
+         title="Add another contact for this business">+👤</a>
+      <a class="btn secondary" href="#" onclick="scheduleFu({{ r.id }});return false" title="Schedule follow-up (e.g. 'call back Thursday')">⏰</a>
+      {% if r.email %}
+        <span title="{{ 'Owner’s own address — good to go' if r.id in personal_ids else ('Role inbox (info@/sales@) — will NOT convert. Use 🔎 LinkedIn to find the person.' if r.id in generic_ids else ('Saved manually — double-check it is the person' if r.email_source == 'manual' else 'Name-style but does NOT match the owner’s DB name — verify before sending')) }}">{{ '👤' if r.id in personal_ids else '🏢' }}</span>
+        <a class="btn {{ '' if r.id in personal_ids else 'secondary' }}" href="#" onclick="sendEmail({{ r.id }}, event);return false" title="Open Gmail compose with the selected template">✉</a>
+      {% else %}
+        <a class="btn secondary" href="/agency/{{ r.id }}" title="No email on file — open the agency page to save one">✉</a>
+      {% endif %}
+      {% if r.dnc %}
+        <a class="btn secondary" href="#" onclick="setDnc({{ r.id }}, false);return false" title="Remove Do-Not-Call flag">↩ undnc</a>
+      {% else %}
+        <a class="btn secondary" href="#" onclick="setDnc({{ r.id }}, true);return false" title="Do-NOT-call — hides from all lists & exports">🚫</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="pager">
+  Page {{ page }} / {{ pages }}
+  {% if page > 1 %}<a class="btn secondary" href="{{ url_for('leads', page=page-1, **sel) }}">← Prev</a>{% endif %}
+  {% if page < pages %}<a class="btn secondary" href="{{ url_for('leads', page=page+1, **sel) }}">Next →</a>{% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const CSRF = '';
+document.querySelectorAll('.copybtn').forEach(el => {
+  el.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(el.dataset.copy); } catch(e) {}
+    const old = el.textContent;
+    el.textContent = '✓ copied';
+    setTimeout(() => { el.textContent = old; }, 1200);
+  });
+});
+async function api(url, body) {
+  const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  return r.json();
+}
+document.querySelectorAll('select.adstat').forEach(el => {
+  el.addEventListener('change', async () => {
+    await api(`/api/agency/${el.dataset.id}/ad_status`, {ad_status: el.value});
+  });
+});
+document.querySelectorAll('select.status').forEach(el => {
+  el.addEventListener('change', async () => {
+    const id = el.dataset.id;
+    await api(`/api/agency/${id}/status`, {status: el.value});
+    if (el.value === 'Call Tried') await api(`/api/agency/${id}/attempt`, {channel:'call', outcome:'tried', status: el.value});
+    if (el.value === 'Email Sent') await api(`/api/agency/${id}/attempt`, {channel:'email', outcome:'sent', status: el.value});
+  });
+});
+let notesTimer = {};
+document.querySelectorAll('input.notes').forEach(el => {
+  el.addEventListener('input', () => {
+    clearTimeout(notesTimer[el.dataset.id]);
+    notesTimer[el.dataset.id] = setTimeout(async () => {
+      await api(`/api/agency/${el.dataset.id}/notes`, {notes: el.value});
+    }, 600);
+  });
+});
+async function setDnc(id, flag) {
+  if (flag && !confirm('Mark DO-NOT-CALL? Lead disappears from all lists and exports (recoverable via Show DNC only filter).')) return;
+  await api(`/api/agency/${id}/dnc`, {dnc: flag});
+  location.reload();
+}
+async function scheduleFu(id) {
+  const d = prompt('Follow-up date (YYYY-MM-DD), or a number of days from today:');
+  if (!d) return;
+  let body;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d.trim())) body = {date: d.trim()};
+  else if (/^\d+/.test(d.trim()) && /^\d+$/.test(d.trim())) body = {days: parseInt(d.trim(), 10)};
+  else { alert('Use YYYY-MM-DD or a number of days'); return; }
+  const r = await api(`/api/agency/${id}/followup`, body);
+  if (r.ok) location.reload(); else alert(r.error || 'failed');
+}
+const TPLS = {{ tpl_json | safe }};
+let chosenTpl = document.getElementById('tplsel') ? document.getElementById('tplsel').value : '';
+if (document.getElementById('tplsel')) {
+  document.getElementById('tplsel').addEventListener('change', e => { chosenTpl = e.target.value; });
+}
+async function sendEmail(id, ev) {
+  const qs = chosenTpl ? ('?tpl=' + chosenTpl) : '';
+  const d = await (await fetch(`/api/email/${id}${qs}`)).json();
+  if (!d.ok) { alert(d.error); return; }
+  window.open(d.mailto, '_blank');   // opens Gmail compose when browser is logged into one Google account
+  await api(`/api/agency/${id}/email_log`, {});
+  const row = document.getElementById('row-' + id);
+  if (row) row.style.opacity = '.55';
+  if (ev && ev.target) { ev.target.textContent = '✓'; setTimeout(() => { location.reload(); }, 700); }
+}
+async function loadView() {
+  const name = document.getElementById('viewsel').value;
+  if (!name) return;
+  const filters = await (await fetch(`/api/view/${encodeURIComponent(name)}`)).json();
+  filters.tab = filters.tab || 'no-ads';
+  const p = new URLSearchParams(filters).toString();
+  location.href = '/leads?' + p;
+}
+function saveView() {
+  const name = prompt('Name this view:');
+  if (!name) return;
+  fetch(`/api/views`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name, ...Object.fromEntries(new URLSearchParams(location.search))})})
+    .then(() => location.reload());
+}
+</script>
+{% endblock %}

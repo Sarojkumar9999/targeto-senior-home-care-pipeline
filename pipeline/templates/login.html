@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width:380px;margin:60px auto 0">
+  <h1 style="text-align:center">🎯 Targeto Pipeline</h1>
+  <div class="card" style="margin-top:18px">
+    {% if error %}<div style="color:var(--red);margin-bottom:10px;font-size:13px">{{ error }}</div>{% endif %}
+    <form method="post" action="/login">
+      <input type="hidden" name="next" value="{{ next or '/leads' }}">
+      <input name="username" placeholder="Username" required autofocus
+             style="width:100%;padding:10px;margin-bottom:10px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px">
+      <input name="password" type="password" placeholder="Password" required
+             style="width:100%;padding:10px;margin-bottom:14px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px">
+      <button class="btn" type="submit" style="width:100%">Log in</button>
+    </form>
+  </div>
+  <div class="note" style="text-align:center;margin-top:10px">Ask Saroj for an account</div>
+</div>
+{% endblock %}

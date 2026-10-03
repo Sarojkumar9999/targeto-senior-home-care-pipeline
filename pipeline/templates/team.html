@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📊 Team Dashboard</h1>
+<div class="card" style="border-color:#7a5a1f">
+  <b>🛡 Database backup</b> <span class="note">— your whole business in one file: agencies, contacts, attempts, activity, users.</span>
+  <div style="margin-top:8px">
+    <a class="btn" href="/backup" onclick="this.textContent='⏳ dumping…'">⬇ Download full backup (.sql)</a>
+    <span class="note" style="margin-left:10px">Restore anywhere: <code>docker exec -i targeto-postgres psql -U targeto -d targeto &lt; file.sql</code> (into an empty DB) — do this after any big day of calls.</span>
+  </div>
+</div>
+<div class="muted">
+  Who did what — last
+  {% if period=='today' %}24 hours{% elif period=='week' %}7 days{% elif period=='month' %}30 days{% else %}90 days{% endif %}
+  ·
+  <a href="/team?period=today">24h</a> · <a href="/team?period=week">7d</a> ·
+  <a href="/team?period=month">30d</a> · <a href="/team?period=quarter">90d</a>
+</div>
+
+<h2 style="margin-top:18px">Leaderboard</h2>
+<table>
+  <tr>
+    <th>User</th><th class="num">Businesses contacted</th><th class="num">Calls</th>
+    <th class="num">Emails</th><th class="num">Classified (ads)</th>
+    <th class="num">Contacts added</th><th class="num">Interested 🎉</th>
+  </tr>
+  {% for u in leaderboard %}
+  <tr>
+    <td><b>{{ u.username }}</b>{% if u.is_admin %} <span class="note">(admin)</span>{% endif %}</td>
+    <td class="num">{{ u.contacted }}</td>
+    <td class="num">{{ u.calls }}</td>
+    <td class="num">{{ u.emails }}</td>
+    <td class="num">{{ u.classified }}</td>
+    <td class="num">{{ u.contacts_added }}</td>
+    <td class="num">{{ u.interested }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" class="note">No activity in this period yet.</td></tr>
+  {% endfor %}
+</table>
+
+<div class="grid2" style="margin-top:20px">
+  <div>
+    <h2>Add team member</h2>
+    <div class="card">
+      {% if msg %}<div class="note" style="color:var(--green)">{{ msg }}</div>{% endif %}
+      <form method="post" action="/team" class="filterbar">
+        <input name="username" placeholder="username" required style="width:130px">
+        <input name="password" placeholder="password" required style="width:130px">
+        <label class="note" style="align-self:center"><input type="checkbox" name="is_admin" value="1"> admin</label>
+        <button class="btn" type="submit">Create user</button>
+      </form>
+      <div class="note" style="margin-top:8px">Share these credentials with your teammate. They log in at the same dashboard URL.</div>
+    </div>
+    <h2>Users</h2>
+    <table>
+      <tr><th>User</th><th>Role</th><th>Joined</th><th></th></tr>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.username }}</td>
+        <td>{{ 'admin' if u.is_admin else 'caller' }}</td>
+        <td class="note">{{ u.created_at.strftime('%d %b %Y') }}</td>
+        <td>
+          {% if u.username != me %}
+          <form method="post" action="/team" style="display:inline">
+            <input type="hidden" name="toggle_user" value="{{ u.id }}">
+            <button class="btn secondary" type="submit">{{ 'Disable' if u.active else 'Enable' }}</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div>
+    <h2>Live activity feed</h2>
+    <div class="card" style="max-height:520px;overflow:auto">
+      {% for a in feed %}
+      <div style="padding:6px 0;border-bottom:1px solid var(--line);font-size:13px">
+        <b>{{ a.username }}</b>
+        {% if a.action == 'contacted' %} contacted <a href="/agency/{{ a.agency_id }}">{{ a.org_name or ('agency #' ~ a.agency_id) }}</a>
+        {% elif a.action == 'call' %} logged a call with <a href="/agency/{{ a.agency_id }}">{{ a.org_name or ('agency #' ~ a.agency_id) }}</a>
+        {% elif a.action == 'email' %} emailed <a href="/agency/{{ a.agency_id }}">{{ a.org_name or ('agency #' ~ a.agency_id) }}</a>
+        {% elif a.action == 'classified' %} marked <a href="/agency/{{ a.agency_id }}">{{ a.org_name or ('agency #' ~ a.agency_id) }}</a> → {{ a.detail }}
+        {% elif a.action == 'contact_added' %} added contact {{ a.detail }}
+        {% else %} {{ a.action }} {{ a.detail or '' }}{% endif %}
+        <span class="note"> · {{ a.created_at.strftime('%d %b %H:%M') }}</span>
+      </div>
+      {% else %}
+      <div class="note">Nothing yet.</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

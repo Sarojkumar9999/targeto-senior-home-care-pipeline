@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>☎ Today's Follow-ups</h1>
+<div class="muted">Every non-DNC lead whose follow-up date has come due — work top to bottom, then start fresh calls in <a href="/leads?tab=all&has=nofb">Leads</a>.</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">{{ rows|length }}</div><div class="l">due right now</div></div>
+  <div class="stat"><div class="n">{{ upcoming }}</div><div class="l">scheduled later</div></div>
+  {% for s in soon %}
+  <div class="stat"><div class="n">{{ s.n }}</div><div class="l">{{ s.day.strftime('%a %d %b') }}</div></div>
+  {% endfor %}
+</div>
+
+{% if not rows %}
+<div class="card"><b>🎉 Queue empty.</b> <span class="note">Every follow-up is handled. Change a lead's status in Leads (No Pickup, Voicemail, Interested…) and it automatically lands back here on its rule day.</span></div>
+{% endif %}
+
+<table>
+  <tr>
+    <th>Agency</th><th>Owner</th><th>Phone</th><th>Status</th>
+    <th>Due</th><th>Notes</th><th></th>
+  </tr>
+  {% for r in rows %}
+  <tr id="row-{{ r.id }}">
+    <td>
+      <a href="/agency/{{ r.id }}"><b>{{ r.org_name }}</b></a>
+      {% if r.follow_up_at and r.follow_up_at.date() < now_utc.date() %}<span class="pill not">overdue</span>{% endif %}
+      <div class="note">{{ r.city or '' }}, {{ r.state or '' }}
+        {% if r.website %}<a target="_blank" href="{{ r.website }}">Site ↗</a>{% endif %}
+        <a target="_blank" title="Ad Library" href="{{ adlib_urls[r.id] }}">🔍 ads</a>
+      </div>
+    </td>
+    <td>{% if r.owner_last_name %}{{ r.owner_first_name }} {{ r.owner_last_name }}
+      <div class="note">{{ r.owner_title or '' }}{% if owner_urls[r.id] %} · <a style="color:#7ab8ff" target="_blank" title="Find this person on LinkedIn — get their PERSONAL email" href="{{ owner_urls[r.id].linkedin }}">🔎 LinkedIn ↗</a>{% endif %}</div>{% else %}<span class="note">—</span>{% endif %}</td>
+    <td>{% if phone_e164[r.id] %}
+      <span class="copybtn" data-copy="{{ phone_e164[r.id] }}" title="Copy {{ phone_e164[r.id] }}">{{ phone_e164[r.id] }} 📋</span>
+      <a class="btn secondary" style="padding:2px 8px;margin-left:4px" href="tel:{{ phone_e164[r.id] }}" title="Dial now (CloudTalk handles tel: links)">📞</a>
+      {% else %}{{ r.phone or r.owner_phone or '—' }}{% endif %}</td>
+    <td><select class="status" data-id="{{ r.id }}">
+      {% for s in statuses %}<option {{ 'selected' if r.outreach_status == s }} value="{{ s }}">{{ s }}</option>{% endfor %}
+    </select></td>
+    <td class="note">{{ r.follow_up_at.strftime('%d %b %H:%M') if r.follow_up_at }}</td>
+    <td><span class="note">{{ (r.notes or '')[:80] or '—' }}</span></td>
+    <td style="white-space:nowrap">
+      <a class="btn secondary" href="#" onclick="fu({{ r.id }}, {clear:true}, 'Mark done? It leaves the queue.');return false" title="Handled — remove from queue">👍 done</a>
+      {% if r.email %}{{ '👤' if r.id in personal_ids else '🏢' }}<a class="btn {{ '' if r.id in personal_ids else 'secondary' }}" href="#" onclick="sendEmail({{ r.id }}, event);return false" title="Open Gmail compose with the default template">✉</a>{% endif %}
+      <a class="btn secondary" href="#" onclick="fu({{ r.id }}, {days:1});return false" title="Push 1 day out">+1d</a>
+      <a class="btn secondary" href="#" onclick="fuDate({{ r.id }});return false" title="Pick an exact date">⏰</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if rows %}
+<div class="note" style="margin-top:10px">
+  How rules work: No Pickup → 2d · Voicemail → 3d · Call Tried → 2d · Email Sent → 3d ·
+  Interested → 1d · Call Back Later → your exact date (⏰). Not Interested / Won / Lost leave the queue.
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.copybtn').forEach(el => {
+  el.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(el.dataset.copy); } catch(e) {}
+    const old = el.textContent;
+    el.textContent = '✓ copied';
+    setTimeout(() => { el.textContent = old; }, 1200);
+  });
+});
+async function api(url, body) {
+  const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  return r.json();
+}
+async function fu(id, body, confirmMsg) {
+  if (confirmMsg && !confirm(confirmMsg)) return;
+  await api(`/api/agency/${id}/followup`, body);
+  location.reload();
+}
+function fuDate(id) {
+  const d = prompt('Follow-up date (YYYY-MM-DD):');
+  if (!d) return;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d.trim())) { alert('Use YYYY-MM-DD'); return; }
+  fu(id, {date: d.trim()});
+}
+async function sendEmail(id, ev) {
+  const d = await (await fetch(`/api/email/${id}`)).json();
+  if (!d.ok) { alert(d.error); return; }
+  window.open(d.mailto, '_blank');
+  await api(`/api/agency/${id}/email_log`, {});
+  if (ev && ev.target) { ev.target.textContent = '✓'; setTimeout(() => { location.reload(); }, 700); }
+}
+document.querySelectorAll('select.status').forEach(el => {
+  el.addEventListener('change', async () => {
+    const id = el.dataset.id;
+    await api(`/api/agency/${id}/status`, {status: el.value});
+    location.reload();
+  });
+});
+</script>
+{% endblock %}

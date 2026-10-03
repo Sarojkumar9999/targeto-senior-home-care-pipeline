@@ -1,0 +1,38 @@
+name: targeto
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: targeto-postgres
+    environment:
+      POSTGRES_USER: targeto
+      POSTGRES_PASSWORD: targeto_local
+      POSTGRES_DB: targeto
+    volumes:
+      - targeto_pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U targeto -d targeto"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: targeto-dashboard
+    environment:
+      TARGETO_PGHOST: postgres
+      TARGETO_PGPORT: "5432"
+      TARGETO_DASH_HOST: 0.0.0.0
+      TARGETO_SECRET_KEY: da38d96d42a71a3e410c9a6618526ced4be9c10d350e257a3871643e535fd45d
+    ports:
+      - "8010:8010"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  targeto_pgdata:
