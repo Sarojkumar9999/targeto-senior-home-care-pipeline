@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 120,
+ "disagreements": 123,
  "error_rate": 0.0,
- "last_commit": "56a4484fb148959bb780063aa22751b2474ecfc4",
+ "last_commit": "dc5bd29a27680773057332ae6f8c0c259309bffa",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 2/6 workers active. 644 total verified (tier 1: 452/452; tier 2: 192/2181). 120 page mismatches, 6 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 11 running: 1/6 workers active. 656 total verified (tier 1: 452/452; tier 2: 204/2181). 123 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b4",
+   "finished_at": "2026-10-04T10:38:35Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "tier-2: 3 rejections (Macon GA, dead URL, family page); NEW live advertiser: CareBridge Houston (3 active client-acquisition ads since 2026-09-25)"
+  },
   {
    "id": "wave11-b5",
    "finished_at": "2026-10-04T10:35:10Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 1,
    "note": "tier-2: 1 stale URL (removed page); 5 high-confidence matches with resolved page IDs"
-  },
-  {
-   "id": "wave10-b4",
-   "finished_at": "2026-10-04T10:22:08Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 9,
-   "note": "tier-2 rough batch: 9 wrong-business/cross-state rejections; 2 confirmed matches"
   }
  ],
  "scaling_log": [
@@ -163,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 192,
+   "done": 204,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:35:16Z",
+ "updated_at": "2026-10-04T10:38:43Z",
  "verified_target": 4144,
- "verified_total": 644,
- "workers_active": 2,
+ "verified_total": 656,
+ "workers_active": 1,
  "workers_target": 6,
- "running_ads": 6
+ "running_ads": 7
 }
