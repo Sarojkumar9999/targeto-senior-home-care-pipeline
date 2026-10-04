@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 62,
+ "disagreements": 69,
  "error_rate": 0.0,
- "last_commit": "5285c1de5f28c6c4282b8be53306b80a89ff0b4f",
+ "last_commit": "1928f528498dcf8ae090557e394f70797bcec9e8",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 9 running: 4/6 workers active. 476 total verified (tier 1 complete 452/452; tier 2: 24/2181). 62 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 9 running: 3/6 workers active. 488 total verified (tier 1 complete 452/452; tier 2: 36/2181). 69 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b3",
+   "finished_at": "2026-10-04T10:11:54Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 7,
+   "note": "tier-2: 7 wrong-business/cross-state rejections; 1 strong match (Alivia Care, Jacksonville FL)"
+  },
   {
    "id": "wave9-b6",
    "finished_at": "2026-10-04T10:11:15Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 1,
    "note": "PA cross-state lookalike rejected; 3 UNRESOLVED identity cases"
-  },
-  {
-   "id": "wave7-b5",
-   "finished_at": "2026-10-04T09:53:16Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3,
-   "note": "3 cross-state lookalikes rejected (NJ, IL, CA)"
   }
  ],
  "scaling_log": [
@@ -151,7 +151,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 24,
+   "done": 36,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:11:22Z",
+ "updated_at": "2026-10-04T10:11:59Z",
  "verified_target": 4144,
- "verified_total": 476,
- "workers_active": 4,
+ "verified_total": 488,
+ "workers_active": 3,
  "workers_target": 6,
  "running_ads": 3
 }
