@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 74,
+ "disagreements": 75,
  "error_rate": 0.0,
- "last_commit": "e77898b3f38b1014129a913cfcf41307b4a4894f",
+ "last_commit": "9728e975555c5d7c25b0dbd3f8dc1c86bfa097b3",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 9 running: 1/6 workers active. 512 total verified (tier 1 complete 452/452; tier 2: 60/2181). 74 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Wave 9 (tier 2) complete: 524 total verified (tier 1: 452/452; tier 2: 72/2181). 75 page mismatches, 4 RUNNING ads, 0 blocks. Generating wave 10.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b1",
+   "finished_at": "2026-10-04T10:16:04Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 1,
+   "note": "4TH RUNNING AD: Adoration Home Health (Dallas TX), 2 active caregiver-recruitment campaigns"
+  },
   {
    "id": "wave9-b4",
    "finished_at": "2026-10-04T10:15:19Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 1,
    "note": "Columbus OH cross-state lookalike rejected"
-  },
-  {
-   "id": "wave7-b6",
-   "finished_at": "2026-10-04T09:55:49Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0,
-   "note": "all unofficial pages, 0 ads; 1 high-confidence Houston match"
   }
  ],
  "scaling_log": [
@@ -138,6 +138,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 7 complete at 6 workers (72/72, 0% errors). Holding at 6 for final tier-1 wave 8 (21 agencies)."
+  },
+  {
+   "at": "2026-10-04T10:16:11Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 9 (tier 2) complete at 6 workers (72/72, 0% errors, 4th RUNNING ad found). Tier-2 quality good; holding at 6 for wave 10."
   }
  ],
  "status": "running",
@@ -151,7 +157,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 60,
+   "done": 72,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +169,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:15:26Z",
+ "updated_at": "2026-10-04T10:16:11Z",
  "verified_target": 4144,
- "verified_total": 512,
- "workers_active": 1,
+ "verified_total": 524,
+ "workers_active": 0,
  "workers_target": 6,
- "running_ads": 3
+ "running_ads": 4
 }
