@@ -2,13 +2,21 @@
  "desired_workers": 6,
  "disagreements": 43,
  "error_rate": 0.0,
- "last_commit": "f83029b7e5ccef33ad42457fe72207effddf540e",
+ "last_commit": "373d871c726829ad3028b175a2705e539af00ea6",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 7 running: 4/6 workers active. 383/452 tier-1 verified (85%), 43 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 7 running: 3/6 workers active. 395/452 tier-1 verified (87%), 43 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave7-b3",
+   "finished_at": "2026-10-04T09:55:47Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0,
+   "note": "1 confirmed real page (Great Thinkers, Mesa AZ); 10 unofficial pages reclassified NO_FB_PAGE->NO_ADS per rubric consistency; 2 UNRESOLVED"
+  },
   {
    "id": "wave7-b2",
    "finished_at": "2026-10-04T09:54:42Z",
@@ -77,14 +85,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 1
-  },
-  {
-   "id": "wave5-b2",
-   "finished_at": "2026-10-04T09:05:02Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0,
-   "note": "FIRST RUNNING AD FOUND: 1417525312 (Ms Phyllis Homecare LLC, Montverde FL)"
   }
  ],
  "scaling_log": [
@@ -138,7 +138,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 383,
+   "done": 395,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -154,10 +154,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:54:51Z",
+ "updated_at": "2026-10-04T09:55:59Z",
  "verified_target": 4144,
- "verified_total": 383,
- "workers_active": 4,
+ "verified_total": 395,
+ "workers_active": 3,
  "workers_target": 6,
  "running_ads": 1
 }
