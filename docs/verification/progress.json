@@ -2,7 +2,7 @@
  "desired_workers": 15,
  "disagreements": 495,
  "error_rate": 0.0,
- "last_commit": "b09e7568317344090fe4c28353811cfff3bcad36",
+ "last_commit": "ed1224923f1d48eea241590dbb8e21c4ef7e3bc0",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Wave 24: 15 workers x 12 agencies (777 total, 65 batches), started 2026-10-04T16:54:04Z. Running to full tier-2 completion.",
@@ -276,13 +276,13 @@
    "total": 192
   },
   "tier4_no_fb": {
-   "done": 38,
+   "done": 50,
    "total": 1319
   }
  },
  "updated_at": "2026-10-04T15:12:54Z",
  "verified_target": 4144,
- "verified_total": 2863,
+ "verified_total": 2875,
  "workers_active": 15,
  "workers_target": 15,
  "running_ads": 53,
