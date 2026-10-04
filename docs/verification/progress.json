@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 42,
+ "disagreements": 43,
  "error_rate": 0.0,
- "last_commit": "bd255bf3d963823464163b94533d6769b726349c",
+ "last_commit": "f83029b7e5ccef33ad42457fe72207effddf540e",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 7 running: 5/6 workers active. 371/452 tier-1 verified (82%), 42 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 7 running: 4/6 workers active. 383/452 tier-1 verified (85%), 43 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave7-b2",
+   "finished_at": "2026-10-04T09:54:42Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 1,
+   "note": "PA cross-state lookalike rejected; 3 UNRESOLVED identity cases"
+  },
   {
    "id": "wave7-b5",
    "finished_at": "2026-10-04T09:53:16Z",
@@ -77,14 +85,6 @@
    "verified": 12,
    "disagreements": 0,
    "note": "FIRST RUNNING AD FOUND: 1417525312 (Ms Phyllis Homecare LLC, Montverde FL)"
-  },
-  {
-   "id": "wave5-b6",
-   "finished_at": "2026-10-04T09:02:00Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "6 UNRESOLVED (uncertain matches), 2 wrong-business rejections"
   }
  ],
  "scaling_log": [
@@ -138,7 +138,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 371,
+   "done": 383,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -154,10 +154,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:53:23Z",
+ "updated_at": "2026-10-04T09:54:51Z",
  "verified_target": 4144,
- "verified_total": 371,
- "workers_active": 5,
+ "verified_total": 383,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 1
 }
