@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 2,
  "error_rate": 0.0,
- "last_commit": "2112b09cf302e2f0768afc2d7ddb5b1bb8cbdf67",
+ "last_commit": "2ba284a2471daa3488f7024f577d34c205904a4a",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Pilot complete: 24/24 verified, 0 blocks. 2 pipeline page mismatches caught (IL lookalike, PH business). Scaling to 4 workers.",
+ "note": "Wave 2 running: 4 workers x 12 agencies (tier 1). Pilot: 24/24 clean, 2 page mismatches caught.",
  "per_minute": 5.0,
  "per_worker_per_minute": 2.5,
  "recent_batches": [
@@ -60,9 +60,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:24:43Z",
+ "updated_at": "2026-10-04T08:26:59Z",
  "verified_target": 4144,
  "verified_total": 24,
- "workers_active": 0,
+ "workers_active": 4,
  "workers_target": 4
 }
