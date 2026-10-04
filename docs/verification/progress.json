@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 147,
+ "disagreements": 155,
  "error_rate": 0.0,
- "last_commit": "fba2fa976228f8ea1e3c45b5d0628097f1c8c1cd",
+ "last_commit": "a279892e883ddb930e771f7901ea9f60e7684c87",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 12 running: 3/6 workers active. 704 total verified (tier 1: 452/452; tier 2: 252/2181). 147 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 12 running: 2/6 workers active. 716 total verified (tier 1: 452/452; tier 2: 264/2181). 155 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave12-b3",
+   "finished_at": "2026-10-04T12:25:38Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 8,
+   "note": "tier-2: 8 rejections (IL, NJ, IA, CA, OR x2, insurance, UK); only 1 confirmed page (Scottsdale AZ, NO_ADS)"
+  },
   {
    "id": "wave12-b2",
    "finished_at": "2026-10-04T12:25:21Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 6,
    "note": "tier-2: 6 rejections; NEW live advertiser: Absolute Health Professionals (South Daytona FL, client-acquisition ad since 2026-09-24)"
-  },
-  {
-   "id": "wave10-b3",
-   "finished_at": "2026-10-04T10:25:50Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 8,
-   "note": "tier-2 rough batch: 8 rejections (Toronto, hospitality group, PA, carpet, personal profiles)"
   }
  ],
  "scaling_log": [
@@ -169,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 252,
+   "done": 264,
    "total": 2181
   },
   "tier3_name_only": {
@@ -181,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:25:30Z",
+ "updated_at": "2026-10-04T12:25:45Z",
  "verified_target": 4144,
- "verified_total": 704,
- "workers_active": 3,
+ "verified_total": 716,
+ "workers_active": 2,
  "workers_target": 6,
  "running_ads": 7
 }
