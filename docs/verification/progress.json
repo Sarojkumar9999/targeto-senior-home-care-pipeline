@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 75,
+ "disagreements": 84,
  "error_rate": 0.0,
- "last_commit": "764274d6b58e55f32f0da7d8d83e7d9bc63d0223",
+ "last_commit": "0e9e407422af4915b1520477672b2454d6dcb61d",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 10 running: 6 workers x 12 agencies. Wave 9 complete: 524 total verified (tier 1: 452/452; tier 2: 72/2181). 75 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 10 running: 5/6 workers active. 536 total verified (tier 1: 452/452; tier 2: 84/2181). 84 page mismatches, 4 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave10-b4",
+   "finished_at": "2026-10-04T10:22:08Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 9,
+   "note": "tier-2 rough batch: 9 wrong-business/cross-state rejections; 2 confirmed matches"
+  },
   {
    "id": "wave9-b1",
    "finished_at": "2026-10-04T10:16:04Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "2 MORE RUNNING ADS: Butterfly Effects ABA (4 active), Apria Healthcare (2 active ad groups)"
-  },
-  {
-   "id": "wave7-b4",
-   "finished_at": "2026-10-04T09:58:43Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "Columbus OH cross-state lookalike rejected"
   }
  ],
  "scaling_log": [
@@ -157,7 +157,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 72,
+   "done": 84,
    "total": 2181
   },
   "tier3_name_only": {
@@ -169,10 +169,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:16:30Z",
+ "updated_at": "2026-10-04T10:22:14Z",
  "verified_target": 4144,
- "verified_total": 524,
- "workers_active": 6,
+ "verified_total": 536,
+ "workers_active": 5,
  "workers_target": 6,
  "running_ads": 4
 }
