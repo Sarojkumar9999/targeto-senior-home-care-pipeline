@@ -1,11 +1,11 @@
 {
- "desired_workers": 6,
+ "desired_workers": 15,
  "disagreements": 193,
  "error_rate": 0.0,
  "last_commit": "e0d5470747d35e32795535741f7a05275df44fb3",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 22 RUNNING: 15 workers x 12 agencies (180 total), started 2026-10-04T15:12:54Z. Dashboard totals now auto-recalculated from CSV on every commit.",
+ "note": "Wave 24: 15 workers x 12 agencies (777 total, 65 batches), started 2026-10-04T16:54:04Z. Running to full tier-2 completion.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -246,6 +246,12 @@
    "from": 20,
    "to": 0,
    "reason": "Wave 23 truly closed at 20 workers (240/240, 5.96/min full-window). Slower than 15 workers (7.55/min); login wall hit mid-wave, resolved via Saroj's FB login."
+  },
+  {
+   "at": "2026-10-04T16:54:04Z",
+   "from": 0,
+   "to": 15,
+   "reason": "Wave 24 launch: final 777 tier-2 agencies (65 batches of 12/9) at 15 workers \u2014 the measured sweet spot (7.55/min vs 5.96 at 20). Campaign runs to full tier-2 completion."
   }
  ],
  "status": "running",
@@ -277,7 +283,7 @@
  "updated_at": "2026-10-04T15:12:54Z",
  "verified_target": 4144,
  "verified_total": 1856,
- "workers_active": 0,
+ "workers_active": 15,
  "workers_target": 15,
  "running_ads": 19,
  "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch).",
