@@ -1,6 +1,6 @@
 {
  "desired_workers": 15,
- "disagreements": 193,
+ "disagreements": 495,
  "error_rate": 0.0,
  "last_commit": "c39f3e1ea6af4190c7c783ddfa40a66aea834fad",
  "last_commit_at": null,
