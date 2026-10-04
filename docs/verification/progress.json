@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "773ee02fae7b1724c0e26f8afa32279ca87db9df",
+ "last_commit": "5b0014e1b57058bf3f172e937c0ffa7f6ced968e",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Tier 2 wave 19 running: 6 workers x 12 agencies. Wave 18 complete: 1172 total verified (tier 1: 452/452; tier 2: 720/2181). 11 RUNNING ads incl. Angels Instead (4 client-acquisition ads, Spring TX). 0 blocks.",
