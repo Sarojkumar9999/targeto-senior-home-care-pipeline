@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 180,
+ "disagreements": 185,
  "error_rate": 0.0,
- "last_commit": "36c3a09d71b3846955ab396a703bd31548a26f06",
+ "last_commit": "97aaa622976eeacf15fba0dc146c190b39cf9fde",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 4/6 workers active (batch 2 relaunched after worker timeout). 776 total verified (tier 1: 452/452; tier 2: 324/2181). 180 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 13 running: 3/6 workers active (batch 2 relaunched after worker timeout). 788 total verified (tier 1: 452/452; tier 2: 336/2181). 185 page mismatches, 9 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave13-b4",
+   "finished_at": "2026-10-04T12:44:44Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2: 5 rejections; Adoration FL shares Dallas corporate campaigns (same prospect); CPLC parent nonprofit running community-program ads"
+  },
   {
    "id": "wave13-b3",
    "finished_at": "2026-10-04T12:44:08Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 5,
    "note": "tier-2: 5 wrong-business rejections (FL business vs Orlando, Vermont, software co, medical society, SW-FL concierge); 6 unverifiable personal profiles"
-  },
-  {
-   "id": "wave11-b2",
-   "finished_at": "2026-10-04T12:19:36Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 4,
-   "note": "tier-2: 4 rejections (dead URL, LA, Belmont MA, Houston TX); 9 matched pages all NO_ADS"
   }
  ],
  "scaling_log": [
@@ -175,7 +175,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 324,
+   "done": 336,
    "total": 2181
   },
   "tier3_name_only": {
@@ -187,10 +187,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:44:13Z",
+ "updated_at": "2026-10-04T12:44:58Z",
  "verified_target": 4144,
- "verified_total": 776,
- "workers_active": 4,
+ "verified_total": 788,
+ "workers_active": 3,
  "workers_target": 6,
- "running_ads": 7
+ "running_ads": 9
 }
