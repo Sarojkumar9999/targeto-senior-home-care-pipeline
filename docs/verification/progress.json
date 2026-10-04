@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "9680712fced15e88d2139daf9485dded387a92d1",
+ "last_commit": "73e5ce075e12ab66a144eec4edb4cde6ae6f3bb3",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Wave 22 RUNNING: 15 workers x 12 agencies (180 total), started 2026-10-04T15:12:54Z. Dashboard totals now auto-recalculated from CSV on every commit.",
@@ -237,7 +237,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 1044,
+   "done": 1056,
    "total": 2181
   },
   "tier3_name_only": {
@@ -251,7 +251,7 @@
  },
  "updated_at": "2026-10-04T15:12:54Z",
  "verified_target": 4144,
- "verified_total": 1496,
+ "verified_total": 1508,
  "workers_active": 15,
  "workers_target": 15,
  "running_ads": 15,
