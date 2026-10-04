@@ -2836,3 +2836,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1902553852,,,,medium,NO_FB_PAGE,No Facebook page found via Facebook page search (Google search blocked by CAPTCHA for this one).
 1902015191,,,,medium,NO_FB_PAGE,No Facebook page found via Facebook page search (Google search blocked by CAPTCHA for this one).
 1215822135,,,,medium,NO_FB_PAGE,No Facebook page found via Facebook page search; 20 results surfaced with none matching 'A&S Home Health Care' in Lauderhill FL (Google search blocked by CAPTCHA for this one).
+1255191607,,,,medium,NO_FB_PAGE,"Only NPI directory listings found (npiregistry, npidata). No official website and no attributable Facebook page."
+1295424885,,,,medium,NO_FB_PAGE,Only NPI directory listings found. No official website and no attributable Facebook page.
+1063371524,,,,medium,NO_FB_PAGE,"Very small LLC (AZ entity filed Jan 20, 2026), no website. No attributable Facebook page."
+1669787412,,,,medium,NO_FB_PAGE,Only NPI directory listings found. No attributable Facebook page.
+1366247835,ReddiMed Home Health,100089739176893,https://www.facebook.com/profile.php?id=100089739176893,high,NO_ADS,"Page linked from official website reddimedhomehealth.com; page address 1314 E Las Olas Blvd Suite 7034, Fort Lauderdale FL 33301 and phone (754) 233-0868 match the site. Ad Library (US, all ads incl. inactive, searched by page ID) returned no ads — this advertiser is not running ads."
+1487461539,,,,medium,NO_FB_PAGE,Only NPI directory listings found. No official website and no attributable Facebook page.
+1841106804,,,,medium,NO_FB_PAGE,Only NPI directory listings found. No official website and no attributable Facebook page.
+1194277483,,,,medium,NO_FB_PAGE,"Facebook page search returned only unrelated results (Dan Quayle, lawn care, etc.). No attributable Facebook page."
+1427998434,,,,medium,NO_FB_PAGE,No attributable Facebook page for this Mount Dora FL business.
+1669826673,,,,medium,NO_FB_PAGE,"No web presence at all found for this business. A similar-name 'Arizona Home Health LLC' (Phoenix AZ) was found but is a different business/city and cannot be attributed — rejected, not guessed."
+1508797218,,,,medium,NO_FB_PAGE,Facebook page search returned only unrelated results. No attributable Facebook page.
+1518679406,,,,medium,NO_FB_PAGE,Facebook search for '20151720 LLC home care' returned 'We didn't find any results'. No attributable Facebook page.
