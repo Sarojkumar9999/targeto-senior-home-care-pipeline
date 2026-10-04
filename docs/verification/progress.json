@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 123,
+ "disagreements": 127,
  "error_rate": 0.0,
- "last_commit": "dc5bd29a27680773057332ae6f8c0c259309bffa",
+ "last_commit": "83c0ac75bf4d8211ba86bdb446ceff74b0eeea63",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 1/6 workers active. 656 total verified (tier 1: 452/452; tier 2: 204/2181). 123 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Wave 11 (tier 2) complete: 668 total verified (tier 1: 452/452; tier 2: 216/2181). 127 page mismatches, 7 RUNNING ads, 0 blocks. Generating wave 12.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b2",
+   "finished_at": "2026-10-04T12:19:36Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 4,
+   "note": "tier-2: 4 rejections (dead URL, LA, Belmont MA, Houston TX); 9 matched pages all NO_ADS"
+  },
   {
    "id": "wave11-b4",
    "finished_at": "2026-10-04T10:38:35Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 5,
    "note": "tier-2: 5 wrong-business rejections (GA, NYC, band, podcast, personal profile)"
-  },
-  {
-   "id": "wave10-b5",
-   "finished_at": "2026-10-04T10:22:31Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "tier-2: 1 stale URL (removed page); 5 high-confidence matches with resolved page IDs"
   }
  ],
  "scaling_log": [
@@ -150,6 +150,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 10 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 11."
+  },
+  {
+   "at": "2026-10-04T12:19:47Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 11 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 12."
   }
  ],
  "status": "running",
@@ -163,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 204,
+   "done": 216,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:38:43Z",
+ "updated_at": "2026-10-04T12:19:47Z",
  "verified_target": 4144,
- "verified_total": 656,
- "workers_active": 1,
+ "verified_total": 668,
+ "workers_active": 0,
  "workers_target": 6,
  "running_ads": 7
 }
