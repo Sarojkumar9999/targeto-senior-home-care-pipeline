@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 85,
+ "disagreements": 90,
  "error_rate": 0.0,
- "last_commit": "6a8d17e51097c6b6fd18983a911c6a32da8ca3cd",
+ "last_commit": "fdf7899b784f1803845f9be426cdc6dd814027c8",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 10 running: 4/6 workers active. 548 total verified (tier 1: 452/452; tier 2: 96/2181). 85 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 10 running: 3/6 workers active. 560 total verified (tier 1: 452/452; tier 2: 108/2181). 90 page mismatches, 4 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave10-b6",
+   "finished_at": "2026-10-04T10:24:21Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2: 5 wrong-business rejections (GA, NYC, band, podcast, personal profile)"
+  },
   {
    "id": "wave10-b5",
    "finished_at": "2026-10-04T10:22:31Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "TIER 1 COMPLETE 452/452; Kamkade real page found (Harmony HRC, Flowood MS)"
-  },
-  {
-   "id": "wave8-b2",
-   "finished_at": "2026-10-04T10:06:43Z",
-   "agencies": 9,
-   "verified": 9,
-   "disagreements": 1,
-   "note": "Malaysia cross-country lookalike rejected"
   }
  ],
  "scaling_log": [
@@ -157,7 +157,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 96,
+   "done": 108,
    "total": 2181
   },
   "tier3_name_only": {
@@ -169,10 +169,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:22:37Z",
+ "updated_at": "2026-10-04T10:24:27Z",
  "verified_target": 4144,
- "verified_total": 548,
- "workers_active": 4,
+ "verified_total": 560,
+ "workers_active": 3,
  "workers_target": 6,
  "running_ads": 4
 }
