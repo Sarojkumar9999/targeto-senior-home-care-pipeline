@@ -5,7 +5,7 @@
  "last_commit": "41b59922c910ee5468eb5409f2f1a5992a35d0b7",
  "last_commit_at": null,
  "mode": "auto",
- "note": "EXPERIMENT: 10 workers x 12 agencies (wave 21), started 2026-10-04T14:44:45Z. Wave 20 nearly complete: 1304 verified (tier1 452/452; tier2 852/2181). 0 blocks.",
+ "note": "Wave 21 (10-worker experiment) CLOSED: 120 agencies, 1,436 verified total (tier1 452/452; tier2 984/2181). 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -210,6 +210,12 @@
    "from": 6,
    "to": 10,
    "reason": "Saroj requested 10-worker speed experiment for wave 21 (120 agencies)."
+  },
+  {
+   "at": "2026-10-04T15:09:53Z",
+   "from": 10,
+   "to": 0,
+   "reason": "Wave 21 closed: 120/120 agencies verified. Verdict: ~2.4x landing throughput vs 6-worker wave 20, 0 blocks/CAPTCHAs, worker quality unchanged."
   }
  ],
  "status": "running",
@@ -235,10 +241,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T14:44:45Z",
+ "updated_at": "2026-10-04T15:09:53Z",
  "verified_target": 4144,
  "verified_total": 1280,
- "workers_active": 10,
+ "workers_active": 0,
  "workers_target": 10,
  "running_ads": 9
 }
