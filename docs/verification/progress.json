@@ -2,19 +2,36 @@
  "desired_workers": 6,
  "disagreements": 0,
  "error_rate": 0.0,
- "last_commit": "5ae5aeb6fd0842b2b540a4b4605ac57a51f70ace",
+ "last_commit": "a1bce8763fb326ec37cc2ab3511d804c62121e2b",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Pilot running: 2x12 tier-1 agencies, calibrating pace and Meta tolerance.",
- "per_minute": 0.0,
- "per_worker_per_minute": 0.0,
- "recent_batches": [],
- "scaling_log": [],
+ "note": "Pilot: batch 2/2 done (12 verified, all NO_ADS, zero blocks). Batch 1/2 still running.",
+ "per_minute": 3.2,
+ "per_worker_per_minute": 3.2,
+ "recent_batches": [
+  {
+   "id": "pilot-b2",
+   "finished_at": "2026-10-04T08:21:28Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0
+  }
+ ],
+ "scaling_log": [
+  {
+   "at": "2026-10-04T08:21:56Z",
+   "from": 0,
+   "to": 2,
+   "reason": "Pilot launch: 2 workers, 12-agency micro-batches"
+  }
+ ],
  "status": "running",
- "throughput_by_workers": {},
+ "throughput_by_workers": {
+  "2": 3.2
+ },
  "tiers": {
   "tier1_exact_id": {
-   "done": 0,
+   "done": 12,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -30,9 +47,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:17:46Z",
+ "updated_at": "2026-10-04T08:21:56Z",
  "verified_target": 4144,
- "verified_total": 0,
- "workers_active": 2,
+ "verified_total": 12,
+ "workers_active": 1,
  "workers_target": 2
 }
