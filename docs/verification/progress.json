@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 108,
+ "disagreements": 113,
  "error_rate": 0.0,
- "last_commit": "3724972d1df204ee1b6b1b7d6734aafa4d5bdc6b",
+ "last_commit": "1eab317f923b372067e1f0f591bd23d1f6d8d66f",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 5/6 workers active. 608 total verified (tier 1: 452/452; tier 2: 156/2181). 108 page mismatches, 5 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 11 running: 4/6 workers active. 620 total verified (tier 1: 452/452; tier 2: 168/2181). 113 page mismatches, 5 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b6",
+   "finished_at": "2026-10-04T10:34:04Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2: 5 wrong-business rejections (wrestling federation, concessions, consulting agency, baby goods, feminine care)"
+  },
   {
    "id": "wave11-b3",
    "finished_at": "2026-10-04T10:30:33Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 3,
    "note": "tier-2: Norton/Advocate/Altercare lookalikes rejected; Indeed ads correctly not attributed"
-  },
-  {
-   "id": "wave9-b2",
-   "finished_at": "2026-10-04T10:12:37Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "tier-2: Bangalore (India) + Winston-Salem NC lookalikes rejected"
   }
  ],
  "scaling_log": [
@@ -163,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 156,
+   "done": 168,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:30:42Z",
+ "updated_at": "2026-10-04T10:34:15Z",
  "verified_target": 4144,
- "verified_total": 608,
- "workers_active": 5,
+ "verified_total": 620,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 5
 }
