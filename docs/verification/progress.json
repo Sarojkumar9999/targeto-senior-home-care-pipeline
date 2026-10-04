@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "8b323528fb20defbf01ef3636f2da47904100293",
+ "last_commit": "cf7d2bead3860e104576f4878961f2737fe9f48a",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. Wave 19 complete: 1244 total verified (tier 1: 452/452; tier 2: 792/2181). RUNNING advertisers incl. Home Helpers (~10 ads, franchisor page) and CenterWell Careers (~170 recruitment ads). 0 blocks.",
