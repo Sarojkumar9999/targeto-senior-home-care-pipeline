@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 172,
+ "disagreements": 178,
  "error_rate": 0.0,
- "last_commit": "79cdbfac6bfed4d1d0121c036db56101896a01a6",
+ "last_commit": "bfdd39c8d83b8cb5521d00e6c0f57f42fdd0472a",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 5/6 workers active. 752 total verified (tier 1: 452/452; tier 2: 300/2181). 172 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 13 running: 5/6 workers active (batch 2 relaunched after worker timeout). 764 total verified (tier 1: 452/452; tier 2: 312/2181). 178 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave13-b6",
+   "finished_at": "2026-10-04T12:43:05Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 6,
+   "note": "tier-2: 6 rejections (franchise, Australian NDIS, wrong-name LLC, separate MI company, 2 personal profiles)"
+  },
   {
    "id": "wave13-b1",
    "finished_at": "2026-10-04T12:38:14Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 3,
    "note": "tier-2: 3 rejections (Macon GA, dead URL, family page); NEW live advertiser: CareBridge Houston (3 active client-acquisition ads since 2026-09-25)"
-  },
-  {
-   "id": "wave11-b5",
-   "finished_at": "2026-10-04T10:35:10Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3,
-   "note": "tier-2: 3 rejections (real-estate, furniture, wrong-city page); NEW live advertiser: ACME Home Care LLC (client-acquisition ad since 2026-01-01)"
   }
  ],
  "scaling_log": [
@@ -175,7 +175,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 300,
+   "done": 312,
    "total": 2181
   },
   "tier3_name_only": {
@@ -187,9 +187,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:41:18Z",
+ "updated_at": "2026-10-04T12:43:12Z",
  "verified_target": 4144,
- "verified_total": 752,
+ "verified_total": 764,
  "workers_active": 5,
  "workers_target": 6,
  "running_ads": 7
