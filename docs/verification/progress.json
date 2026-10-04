@@ -10,84 +10,84 @@
  "per_worker_per_minute": 2.8,
  "recent_batches": [
   {
-   "id": "wave13-b5",
-   "finished_at": "2026-10-04T12:49:49Z",
+   "id": "wave22-b13",
+   "finished_at": "2026-10-04T15:36:44Z",
    "agencies": 12,
    "verified": 12,
-   "disagreements": 3,
-   "note": "tier-2: 3 rejections (wealth mgmt, MN, personal profile); 1 RAN_BEFORE (Aidaly, 1 past ad Nov 2024)"
+   "disagreements": 10,
+   "note": "browser crashed mid-batch; retried clean. 10 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
   },
   {
-   "id": "wave13-b2r",
-   "finished_at": "2026-10-04T12:47:04Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 5,
-   "note": "tier-2 relaunched batch: 5 rejections (PA, clothing brand, Lakewood Ranch, travel, personal profile); all page IDs resolved via meta tags"
-  },
-  {
-   "id": "wave13-b4",
-   "finished_at": "2026-10-04T12:44:44Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 5,
-   "note": "tier-2: 5 rejections; Adoration FL shares Dallas corporate campaigns (same prospect); CPLC parent nonprofit running community-program ads"
-  },
-  {
-   "id": "wave13-b3",
-   "finished_at": "2026-10-04T12:44:08Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "tier-2: 2 rejections (dead URL, construction business); 10 NO_ADS by page ID"
-  },
-  {
-   "id": "wave13-b6",
-   "finished_at": "2026-10-04T12:43:05Z",
+   "id": "wave22-b14",
+   "finished_at": "2026-10-04T15:36:13Z",
    "agencies": 12,
    "verified": 12,
    "disagreements": 6,
-   "note": "tier-2: 6 rejections (franchise, Australian NDIS, wrong-name LLC, separate MI company, 2 personal profiles)"
+   "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
   },
   {
-   "id": "wave13-b1",
-   "finished_at": "2026-10-04T12:38:14Z",
+   "id": "wave22-b15",
+   "finished_at": "2026-10-04T15:35:37Z",
    "agencies": 12,
    "verified": 12,
-   "disagreements": 11,
-   "note": "tier-2: 11 rejections (TX, MO, LA x2, OH, CO, CA, real-estate, 3 personal profiles) - worst data-quality batch yet"
+   "disagreements": 1,
+   "note": "1 false RUNNING->NO_ADS; Hospice of East Texas RUNNING (5 active client-acq ads)"
   },
   {
-   "id": "wave12-b5",
-   "finished_at": "2026-10-04T12:34:33Z",
+   "id": "wave22-b11",
+   "finished_at": "2026-10-04T15:33:15Z",
    "agencies": 12,
    "verified": 12,
-   "disagreements": 2,
-   "note": "tier-2: 2 rejections (hijacked URL, TN lookalike); 9 NO_ADS incl. exact city match"
+   "disagreements": 6,
+   "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
   },
   {
-   "id": "wave12-b1",
-   "finished_at": "2026-10-04T12:27:31Z",
+   "id": "wave22-b4",
+   "finished_at": "2026-10-04T15:30:16Z",
    "agencies": 12,
    "verified": 12,
    "disagreements": 4,
-   "note": "tier-2: 4 rejections (Missouri company x2, 2 construction companies)"
+   "note": "4 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
   },
   {
-   "id": "wave12-b3",
-   "finished_at": "2026-10-04T12:25:38Z",
+   "id": "wave22-b7",
+   "finished_at": "2026-10-04T15:28:25Z",
    "agencies": 12,
    "verified": 12,
-   "disagreements": 8,
-   "note": "tier-2: 8 rejections (IL, NJ, IA, CA, OR x2, insurance, UK); only 1 confirmed page (Scottsdale AZ, NO_ADS)"
+   "disagreements": 0,
+   "note": "clean; 1 UNRESOLVED (similar-name advertiser w/ 2 active ads, unattributable)"
   },
   {
-   "id": "wave12-b2",
-   "finished_at": "2026-10-04T12:25:21Z",
+   "id": "wave22-b2",
+   "finished_at": "2026-10-04T15:27:54Z",
    "agencies": 12,
    "verified": 12,
-   "disagreements": 8,
-   "note": "tier-2 roughest batch yet: 8 rejections (TN, CO, OH, Canada, NJ, MS, ID, FL wrong businesses); only 1 confirmed page"
+   "disagreements": 2,
+   "note": "2 worker UNRESOLVED->NO_FB_PAGE reclasses (cross-state/personal)"
+  },
+  {
+   "id": "wave22-b1",
+   "finished_at": "2026-10-04T15:27:41Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 11,
+   "note": "11 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
+  },
+  {
+   "id": "wave22-b9",
+   "finished_at": "2026-10-04T15:27:08Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "2 worker NO_ADS->UNRESOLVED (page identity uncertain)"
+  },
+  {
+   "id": "wave22-b10",
+   "finished_at": "2026-10-04T15:25:56Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0,
+   "note": "clean; 11 login-walled URLs -> UNRESOLVED"
   }
  ],
  "scaling_log": [
