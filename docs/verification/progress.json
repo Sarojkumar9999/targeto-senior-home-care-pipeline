@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "5c0401ba0ffc7df26eb3f2b166d92b031242c8a1",
+ "last_commit": "d93aa6e0beb030d4e935db741d02f8ca1c80ff8e",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 1/6 workers active. 812 total verified (tier 1: 452/452; tier 2: 360/2181). 193 page mismatches, 9 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 14 running: 6 workers x 12 agencies. Wave 13 complete: 812 total verified (tier 1: 452/452; tier 2: 360/2181). 193 page mismatches, 9 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -162,6 +162,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 12 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 13."
+  },
+  {
+   "at": "2026-10-04T13:10:09Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 13 (tier 2) complete at 6 workers (72/72 incl. 1 relaunched batch, 0% errors). Holding at 6 for wave 14."
   }
  ],
  "status": "running",
@@ -187,10 +193,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:49:56Z",
+ "updated_at": "2026-10-04T13:10:09Z",
  "verified_target": 4144,
  "verified_total": 812,
- "workers_active": 1,
+ "workers_active": 6,
  "workers_target": 6,
  "running_ads": 9
 }
