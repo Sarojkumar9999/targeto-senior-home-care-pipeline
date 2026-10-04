@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 23,
+ "disagreements": 29,
  "error_rate": 0.0,
- "last_commit": "20ffb66e83e76c3acb26878944dc35630d87dea8",
+ "last_commit": "0357a457240d03e787f84239ca98bd11c7c09be3",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 6 running: 5/6 workers active. 299/452 tier-1 verified, 23 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 6 running: 4/6 workers active. 311/452 tier-1 verified, 29 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave6-b4",
+   "finished_at": "2026-10-04T09:09:35Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 6,
+   "note": "rough batch: 6 wrong/cross-state mappings rejected"
+  },
   {
    "id": "wave6-b1",
    "finished_at": "2026-10-04T09:09:06Z",
@@ -76,13 +84,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "1376757203: pipeline page was SC lookalike, correct AZ page found"
-  },
-  {
-   "id": "wave4-b4",
-   "finished_at": "2026-10-04T08:52:16Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3
   }
  ],
  "scaling_log": [
@@ -130,7 +131,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 299,
+   "done": 311,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -146,10 +147,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:09:12Z",
+ "updated_at": "2026-10-04T09:09:40Z",
  "verified_target": 4144,
- "verified_total": 299,
- "workers_active": 5,
+ "verified_total": 311,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 1
 }
