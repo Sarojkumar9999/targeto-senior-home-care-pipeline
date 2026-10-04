@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 84,
+ "disagreements": 85,
  "error_rate": 0.0,
- "last_commit": "0e9e407422af4915b1520477672b2454d6dcb61d",
+ "last_commit": "6a8d17e51097c6b6fd18983a911c6a32da8ca3cd",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 10 running: 5/6 workers active. 536 total verified (tier 1: 452/452; tier 2: 84/2181). 84 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 10 running: 4/6 workers active. 548 total verified (tier 1: 452/452; tier 2: 96/2181). 85 page mismatches, 4 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave10-b5",
+   "finished_at": "2026-10-04T10:22:31Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 1,
+   "note": "tier-2: 1 stale URL (removed page); 5 high-confidence matches with resolved page IDs"
+  },
   {
    "id": "wave10-b4",
    "finished_at": "2026-10-04T10:22:08Z",
@@ -80,14 +88,6 @@
    "verified": 9,
    "disagreements": 1,
    "note": "Malaysia cross-country lookalike rejected"
-  },
-  {
-   "id": "wave7-b1",
-   "finished_at": "2026-10-04T09:59:28Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "2 MORE RUNNING ADS: Butterfly Effects ABA (4 active), Apria Healthcare (2 active ad groups)"
   }
  ],
  "scaling_log": [
@@ -157,7 +157,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 84,
+   "done": 96,
    "total": 2181
   },
   "tier3_name_only": {
@@ -169,10 +169,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:22:14Z",
+ "updated_at": "2026-10-04T10:22:37Z",
  "verified_target": 4144,
- "verified_total": 536,
- "workers_active": 5,
+ "verified_total": 548,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 4
 }
