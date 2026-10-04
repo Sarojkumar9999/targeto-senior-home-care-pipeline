@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 32,
+ "disagreements": 34,
  "error_rate": 0.0,
- "last_commit": "1e90e300a977ab22638fd6f2d318682a2aa53108",
+ "last_commit": "2be22354bbf9f08f8c9efcff254c71153b56a1cc",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 6 running: 3/6 workers active. 323/452 tier-1 verified (71%), 32 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 6 running: 2/6 workers active. 335/452 tier-1 verified (74%), 34 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave6-b6",
+   "finished_at": "2026-10-04T09:10:35Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "found correct Mesa-market BrightStar page; 2 wrong-business rejections"
+  },
   {
    "id": "wave6-b3",
    "finished_at": "2026-10-04T09:10:12Z",
@@ -76,13 +84,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 0
-  },
-  {
-   "id": "wave4-b1",
-   "finished_at": "2026-10-04T08:55:06Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0
   }
  ],
  "scaling_log": [
@@ -130,7 +131,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 323,
+   "done": 335,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -146,10 +147,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:10:17Z",
+ "updated_at": "2026-10-04T09:10:40Z",
  "verified_target": 4144,
- "verified_total": 323,
- "workers_active": 3,
+ "verified_total": 335,
+ "workers_active": 2,
  "workers_target": 6,
  "running_ads": 1
 }
