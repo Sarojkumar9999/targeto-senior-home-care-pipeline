@@ -6,5 +6,6 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && rm -rf /var/lib/apt/lists/*
 COPY pipeline ./pipeline
 COPY db ./db
+COPY data ./data
 EXPOSE 8010
 CMD ["python", "-m", "pipeline.app"]
