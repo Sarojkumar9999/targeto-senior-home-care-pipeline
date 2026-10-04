@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 92,
+ "disagreements": 94,
  "error_rate": 0.0,
- "last_commit": "1d875f7ffa5c29920a03e533d921fe60f70836c8",
+ "last_commit": "b4a9176dadc6e956e28315bb52dbeb3f28ad46d1",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 10 running: 2/6 workers active. 572 total verified (tier 1: 452/452; tier 2: 120/2181). 92 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 10 running: 1/6 workers active. 584 total verified (tier 1: 452/452; tier 2: 132/2181). 94 page mismatches, 4 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave10-b2",
+   "finished_at": "2026-10-04T10:25:28Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "tier-2: beauty business + UK care company rejections; 5 high-confidence matches"
+  },
   {
    "id": "wave10-b1",
    "finished_at": "2026-10-04T10:24:31Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 8,
    "note": "tier-2: 8 wrong-business/cross-state rejections; 2 confirmed matches (Aker Kasten, Advanced Nursing Concepts)"
-  },
-  {
-   "id": "wave9-b5",
-   "finished_at": "2026-10-04T10:10:59Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 5,
-   "note": "tier-2: 5 wrong-business/stale URL rejections (kids party, Aetna x2, embroidery, dead page)"
   }
  ],
  "scaling_log": [
@@ -157,7 +157,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 120,
+   "done": 132,
    "total": 2181
   },
   "tier3_name_only": {
@@ -169,10 +169,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:24:42Z",
+ "updated_at": "2026-10-04T10:25:38Z",
  "verified_target": 4144,
- "verified_total": 572,
- "workers_active": 2,
+ "verified_total": 584,
+ "workers_active": 1,
  "workers_target": 6,
  "running_ads": 4
 }
