@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 190,
+ "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "582c6bb34230c3281a438efaf4698553f855cfb9",
+ "last_commit": "5c0401ba0ffc7df26eb3f2b166d92b031242c8a1",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 2/6 workers active. 800 total verified (tier 1: 452/452; tier 2: 348/2181). 190 page mismatches, 9 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 13 running: 1/6 workers active. 812 total verified (tier 1: 452/452; tier 2: 360/2181). 193 page mismatches, 9 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave13-b5",
+   "finished_at": "2026-10-04T12:49:49Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "tier-2: 3 rejections (wealth mgmt, MN, personal profile); 1 RAN_BEFORE (Aidaly, 1 past ad Nov 2024)"
+  },
   {
    "id": "wave13-b2r",
    "finished_at": "2026-10-04T12:47:04Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 8,
    "note": "tier-2 roughest batch yet: 8 rejections (TN, CO, OH, Canada, NJ, MS, ID, FL wrong businesses); only 1 confirmed page"
-  },
-  {
-   "id": "wave12-b4",
-   "finished_at": "2026-10-04T12:24:22Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 7,
-   "note": "tier-2 rough batch: 7 rejections (Oregon, Iowa, PA, GA, TX, dental shop, auto parts)"
   }
  ],
  "scaling_log": [
@@ -175,7 +175,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 348,
+   "done": 360,
    "total": 2181
   },
   "tier3_name_only": {
@@ -187,10 +187,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:47:12Z",
+ "updated_at": "2026-10-04T12:49:56Z",
  "verified_target": 4144,
- "verified_total": 800,
- "workers_active": 2,
+ "verified_total": 812,
+ "workers_active": 1,
  "workers_target": 6,
  "running_ads": 9
 }
