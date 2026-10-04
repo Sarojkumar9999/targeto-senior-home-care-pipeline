@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 139,
+ "disagreements": 147,
  "error_rate": 0.0,
- "last_commit": "60618f9aea625c7dfa39ca059283e0618f1d7349",
+ "last_commit": "fba2fa976228f8ea1e3c45b5d0628097f1c8c1cd",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 12 running: 4/6 workers active. 692 total verified (tier 1: 452/452; tier 2: 240/2181). 139 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 12 running: 3/6 workers active. 704 total verified (tier 1: 452/452; tier 2: 252/2181). 147 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave12-b2",
+   "finished_at": "2026-10-04T12:25:21Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 8,
+   "note": "tier-2 roughest batch yet: 8 rejections (TN, CO, OH, Canada, NJ, MS, ID, FL wrong businesses); only 1 confirmed page"
+  },
   {
    "id": "wave12-b4",
    "finished_at": "2026-10-04T12:24:22Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 8,
    "note": "tier-2 rough batch: 8 rejections (Toronto, hospitality group, PA, carpet, personal profiles)"
-  },
-  {
-   "id": "wave10-b2",
-   "finished_at": "2026-10-04T10:25:28Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "tier-2: beauty business + UK care company rejections; 5 high-confidence matches"
   }
  ],
  "scaling_log": [
@@ -169,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 240,
+   "done": 252,
    "total": 2181
   },
   "tier3_name_only": {
@@ -181,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:24:42Z",
+ "updated_at": "2026-10-04T12:25:30Z",
  "verified_target": 4144,
- "verified_total": 692,
- "workers_active": 4,
+ "verified_total": 704,
+ "workers_active": 3,
  "workers_target": 6,
  "running_ads": 7
 }
