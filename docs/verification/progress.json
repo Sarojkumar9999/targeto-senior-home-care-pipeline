@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 46,
+ "disagreements": 47,
  "error_rate": 0.0,
- "last_commit": "7f91b00b7a5492bb2f3d9e320fc3b1a3718baf3c",
+ "last_commit": "d78c6273572fa9c322f80c8d4a083dd4e7461ef4",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Final tier-1 wave 8 running: 2 workers (12 + 9 agencies). Wave 7 complete: 431 verified, 46 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Final tier-1 wave 8 running: 1/2 workers active. 440/452 tier-1 verified (97%), 47 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave8-b2",
+   "finished_at": "2026-10-04T10:06:43Z",
+   "agencies": 9,
+   "verified": 9,
+   "disagreements": 1,
+   "note": "Malaysia cross-country lookalike rejected"
+  },
   {
    "id": "wave7-b1",
    "finished_at": "2026-10-04T09:59:28Z",
@@ -80,13 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "found correct Mesa-market BrightStar page; 2 wrong-business rejections"
-  },
-  {
-   "id": "wave6-b3",
-   "finished_at": "2026-10-04T09:10:12Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3
   }
  ],
  "scaling_log": [
@@ -146,7 +147,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 431,
+   "done": 440,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -162,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:59:51Z",
+ "updated_at": "2026-10-04T10:06:51Z",
  "verified_target": 4144,
- "verified_total": 431,
- "workers_active": 2,
+ "verified_total": 440,
+ "workers_active": 1,
  "workers_target": 2,
  "running_ads": 3
 }
