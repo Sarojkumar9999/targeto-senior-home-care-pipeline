@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "d6d64b6b4e5a85eff78542efec5ec9219b74dc66",
+ "last_commit": "50cc47fd3723e580fcd79eec0a27b4b580b78da4",
  "last_commit_at": null,
  "mode": "auto",
  "note": "EXPERIMENT: 10 workers x 12 agencies (wave 21), started 2026-10-04T14:44:45Z. Wave 20 nearly complete: 1304 verified (tier1 452/452; tier2 852/2181). 0 blocks.",
