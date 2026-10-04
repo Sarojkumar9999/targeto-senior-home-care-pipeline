@@ -228,6 +228,12 @@
    "from": 15,
    "to": 0,
    "reason": "Wave 22 closed at 15 workers (180/180, 7.55/min full-window incl. one browser-task failure/retry; 0 CAPTCHA/block). Campaign paused: tier2 1164/2181 verified."
+  },
+  {
+   "at": "2026-10-04T15:49:39Z",
+   "from": 0,
+   "to": 20,
+   "reason": "Saroj requested 20-worker parallel run for wave 23 (240 agencies, 20x12) to measure indexing speed."
   }
  ],
  "status": "running",
@@ -259,9 +265,10 @@
  "updated_at": "2026-10-04T15:12:54Z",
  "verified_target": 4144,
  "verified_total": 1616,
- "workers_active": 0,
+ "workers_active": 20,
  "workers_target": 15,
  "running_ads": 16,
  "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch).",
- "wave22_started_at": "2026-10-04T15:12:54Z"
+ "wave22_started_at": "2026-10-04T15:12:54Z",
+ "wave23_launch_at": "2026-10-04T15:49:39Z"
 }
