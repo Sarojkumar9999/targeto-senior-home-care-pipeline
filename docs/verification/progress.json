@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 10,
  "error_rate": 0.0,
- "last_commit": "8f6e50c7d5a11702a1e51c7d82e298df3d30feed",
+ "last_commit": "3c041ad7900f4d26f1bebbc6c718fac9cad43e63",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 3 fully complete: 143/143 tier-1 verified (incl. cleanups), 10 page mismatches, 0 blocks. Generating wave 4.",
+ "note": "Wave 4 running: 6 workers x 12 agencies (tier 1). Wave 3 complete: 143 verified, 10 page mismatches, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -103,6 +103,12 @@
    "from": 4,
    "to": 6,
    "reason": "Wave 2 clean at 4 workers (48/48, 0% errors). Scaling 4->6."
+  },
+  {
+   "at": "2026-10-04T08:46:05Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 3 complete at 6 workers (72/72 incl. cleanups, 0% errors). Holding at 6 for wave 4."
   }
  ],
  "status": "running",
@@ -128,9 +134,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:45:45Z",
+ "updated_at": "2026-10-04T08:46:05Z",
  "verified_target": 4144,
  "verified_total": 143,
- "workers_active": 0,
+ "workers_active": 6,
  "workers_target": 6
 }
