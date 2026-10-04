@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 185,
+ "disagreements": 190,
  "error_rate": 0.0,
- "last_commit": "97aaa622976eeacf15fba0dc146c190b39cf9fde",
+ "last_commit": "582c6bb34230c3281a438efaf4698553f855cfb9",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 3/6 workers active (batch 2 relaunched after worker timeout). 788 total verified (tier 1: 452/452; tier 2: 336/2181). 185 page mismatches, 9 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 13 running: 2/6 workers active. 800 total verified (tier 1: 452/452; tier 2: 348/2181). 190 page mismatches, 9 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave13-b2r",
+   "finished_at": "2026-10-04T12:47:04Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2 relaunched batch: 5 rejections (PA, clothing brand, Lakewood Ranch, travel, personal profile); all page IDs resolved via meta tags"
+  },
   {
    "id": "wave13-b4",
    "finished_at": "2026-10-04T12:44:44Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 7,
    "note": "tier-2 rough batch: 7 rejections (Oregon, Iowa, PA, GA, TX, dental shop, auto parts)"
-  },
-  {
-   "id": "wave12-b6",
-   "finished_at": "2026-10-04T12:24:16Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 5,
-   "note": "tier-2: 5 wrong-business rejections (FL business vs Orlando, Vermont, software co, medical society, SW-FL concierge); 6 unverifiable personal profiles"
   }
  ],
  "scaling_log": [
@@ -175,7 +175,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 336,
+   "done": 348,
    "total": 2181
   },
   "tier3_name_only": {
@@ -187,10 +187,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:44:58Z",
+ "updated_at": "2026-10-04T12:47:12Z",
  "verified_target": 4144,
- "verified_total": 788,
- "workers_active": 3,
+ "verified_total": 800,
+ "workers_active": 2,
  "workers_target": 6,
  "running_ads": 9
 }
