@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 44,
+ "disagreements": 46,
  "error_rate": 0.0,
- "last_commit": "d06accd2cdc3d0e79682316b5b837f67e783aaec",
+ "last_commit": "96b919fde0495441bc6dfe5c7c0bf1017c4b65d6",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 7 running: 1/6 workers active. 419/452 tier-1 verified (93%), 44 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 7 complete: 431/452 tier-1 verified (95%), 46 page mismatches, 3 RUNNING ads, 0 blocks. Final tier-1 wave 8: 21 agencies.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave7-b1",
+   "finished_at": "2026-10-04T09:59:28Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "2 MORE RUNNING ADS: Butterfly Effects ABA (4 active), Apria Healthcare (2 active ad groups)"
+  },
   {
    "id": "wave7-b4",
    "finished_at": "2026-10-04T09:58:43Z",
@@ -79,14 +87,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 3
-  },
-  {
-   "id": "wave6-b4",
-   "finished_at": "2026-10-04T09:09:35Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 6,
-   "note": "rough batch: 6 wrong/cross-state mappings rejected"
   }
  ],
  "scaling_log": [
@@ -131,6 +131,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 6 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 7."
+  },
+  {
+   "at": "2026-10-04T09:59:37Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 7 complete at 6 workers (72/72, 0% errors). Holding at 6 for final tier-1 wave 8 (21 agencies)."
   }
  ],
  "status": "running",
@@ -140,7 +146,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 419,
+   "done": 431,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -156,10 +162,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:58:49Z",
+ "updated_at": "2026-10-04T09:59:37Z",
  "verified_target": 4144,
- "verified_total": 419,
- "workers_active": 1,
+ "verified_total": 431,
+ "workers_active": 0,
  "workers_target": 6,
- "running_ads": 1
+ "running_ads": 3
 }
