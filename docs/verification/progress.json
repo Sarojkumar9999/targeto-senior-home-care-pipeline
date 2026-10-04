@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 113,
+ "disagreements": 117,
  "error_rate": 0.0,
- "last_commit": "1eab317f923b372067e1f0f591bd23d1f6d8d66f",
+ "last_commit": "e1ca417bbe39d7022b07e406615cfde38a97aebb",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 4/6 workers active. 620 total verified (tier 1: 452/452; tier 2: 168/2181). 113 page mismatches, 5 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 11 running: 3/6 workers active. 632 total verified (tier 1: 452/452; tier 2: 180/2181). 117 page mismatches, 5 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b1",
+   "finished_at": "2026-10-04T10:34:10Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 4,
+   "note": "tier-2: 4 rejections (national brand, Mexico City, Ohio, HVAC); 2 RAN_BEFORE (past advertisers)"
+  },
   {
    "id": "wave11-b6",
    "finished_at": "2026-10-04T10:34:04Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 1,
    "note": "4TH RUNNING AD: Adoration Home Health (Dallas TX), 2 active caregiver-recruitment campaigns"
-  },
-  {
-   "id": "wave9-b4",
-   "finished_at": "2026-10-04T10:15:19Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3,
-   "note": "tier-2: Norton/Advocate/Altercare lookalikes rejected; Indeed ads correctly not attributed"
   }
  ],
  "scaling_log": [
@@ -163,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 168,
+   "done": 180,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:34:15Z",
+ "updated_at": "2026-10-04T10:34:27Z",
  "verified_target": 4144,
- "verified_total": 620,
- "workers_active": 4,
+ "verified_total": 632,
+ "workers_active": 3,
  "workers_target": 6,
  "running_ads": 5
 }
