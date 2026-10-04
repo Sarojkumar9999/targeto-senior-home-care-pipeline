@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 16,
+ "disagreements": 18,
  "error_rate": 0.0,
- "last_commit": "ac68eebb1e6c0bbb2da661a939b8bb74db29415b",
+ "last_commit": "49099302abed4aa53db9e16554fec0378b06305a",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 4: 4/6 batches done (191 verified, 16 page mismatches, 0 blocks). 2 workers still running.",
+ "note": "Wave 4: 5/6 batches done (203 verified, 18 page mismatches, 0 blocks). 1 worker still running.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave4-b2",
+   "finished_at": "2026-10-04T08:54:40Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "1376757203: pipeline page was SC lookalike, correct AZ page found"
+  },
   {
    "id": "wave4-b4",
    "finished_at": "2026-10-04T08:52:16Z",
@@ -74,14 +82,6 @@
    "verified": 10,
    "disagreements": 0,
    "note": "2 dupes skipped (1629334636, 1073934691 also in wave3-b6); 2 dropped agencies (1174556302, 1164428702) queued as cleanup"
-  },
-  {
-   "id": "wave3-cleanup",
-   "finished_at": "2026-10-04T08:39:32Z",
-   "agencies": 1,
-   "verified": 1,
-   "disagreements": 1,
-   "note": "dropped agency 1700926110 re-verified: cross-state lookalike rejected, UNRESOLVED"
   }
  ],
  "scaling_log": [
@@ -117,7 +117,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 191,
+   "done": 203,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -133,9 +133,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:52:20Z",
+ "updated_at": "2026-10-04T08:54:47Z",
  "verified_target": 4144,
- "verified_total": 191,
- "workers_active": 2,
+ "verified_total": 203,
+ "workers_active": 1,
  "workers_target": 6
 }
