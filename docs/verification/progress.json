@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 54,
+ "disagreements": 62,
  "error_rate": 0.0,
- "last_commit": "6ce9335ac71e248cf81c5bb1a7269cfa7843cd65",
+ "last_commit": "5285c1de5f28c6c4282b8be53306b80a89ff0b4f",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 9 running: 5/6 workers active. 464 total verified (tier 1 complete 452/452; tier 2: 12/2181). 54 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 9 running: 4/6 workers active. 476 total verified (tier 1 complete 452/452; tier 2: 24/2181). 62 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b6",
+   "finished_at": "2026-10-04T10:11:15Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 8,
+   "note": "tier-2: 8 wrong-business/cross-state rejections; 2 confirmed matches (Aker Kasten, Advanced Nursing Concepts)"
+  },
   {
    "id": "wave9-b5",
    "finished_at": "2026-10-04T10:10:59Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 3,
    "note": "3 cross-state lookalikes rejected (NJ, IL, CA)"
-  },
-  {
-   "id": "wave6-b2",
-   "finished_at": "2026-10-04T09:49:35Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "A Helping Hand page is a childcare service, not senior home care"
   }
  ],
  "scaling_log": [
@@ -151,7 +151,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 12,
+   "done": 24,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:11:09Z",
+ "updated_at": "2026-10-04T10:11:22Z",
  "verified_target": 4144,
- "verified_total": 464,
- "workers_active": 5,
+ "verified_total": 476,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 3
 }
