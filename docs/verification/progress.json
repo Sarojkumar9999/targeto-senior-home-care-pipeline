@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "208ec0c415883942c2ab776a4b3ef779cb3286d4",
+ "last_commit": "8baff8c8e50700b93f8d16aef189056f46449309",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Tier 2 wave 15 running: 6 workers x 12 agencies. Wave 14 complete: 884 total verified (tier 1: 452/452; tier 2: 432/2181). 10 RUNNING ads incl. Instant Care of Arizona (4 caregiver-recruitment ads). 0 blocks.",
