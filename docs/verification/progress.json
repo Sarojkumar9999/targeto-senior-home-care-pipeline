@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 127,
+ "disagreements": 132,
  "error_rate": 0.0,
- "last_commit": "07ca751d06f7c5aaaad63912e7a0ebfdc9fe1935",
+ "last_commit": "039cc58460e0734504e8dcd2830aa78173567acf",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 12 running: 6 workers x 12 agencies. Wave 11 complete: 668 total verified (tier 1: 452/452; tier 2: 216/2181). 127 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 12 running: 5/6 workers active. 680 total verified (tier 1: 452/452; tier 2: 228/2181). 132 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave12-b6",
+   "finished_at": "2026-10-04T12:24:16Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2: 5 wrong-business rejections (FL business vs Orlando, Vermont, software co, medical society, SW-FL concierge); 6 unverifiable personal profiles"
+  },
   {
    "id": "wave11-b2",
    "finished_at": "2026-10-04T12:19:36Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "tier-2: 2 personal-profile URLs rejected (not business pages)"
-  },
-  {
-   "id": "wave10-b6",
-   "finished_at": "2026-10-04T10:24:21Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 5,
-   "note": "tier-2: 5 wrong-business rejections (GA, NYC, band, podcast, personal profile)"
   }
  ],
  "scaling_log": [
@@ -169,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 216,
+   "done": 228,
    "total": 2181
   },
   "tier3_name_only": {
@@ -181,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:20:13Z",
+ "updated_at": "2026-10-04T12:24:26Z",
  "verified_target": 4144,
- "verified_total": 668,
- "workers_active": 6,
+ "verified_total": 680,
+ "workers_active": 5,
  "workers_target": 6,
  "running_ads": 7
 }
