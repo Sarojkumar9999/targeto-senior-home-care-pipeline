@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 49,
  "error_rate": 0.0,
- "last_commit": "c25c98d674d94d8237482db0a9be9ef0b29c1cf1",
+ "last_commit": "d5147fea7bdf97d61f2deb67752bd7afd7a38405",
  "last_commit_at": null,
  "mode": "auto",
- "note": "TIER 1 COMPLETE: 452/452 verified, 49 page mismatches (~11%), 3 RUNNING ads, 0 blocks. Starting tier 2 (2,181 URL-only agencies).",
+ "note": "TIER 1 COMPLETE: 452/452 verified (385 NO_ADS, 35 NO_FB_PAGE, 29 UNRESOLVED, 3 RUNNING), 49 page mismatches (~11%), 0 blocks. Tier 2 wave 9 running: 6 workers x 12 agencies (URL-only, resolving page IDs).",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:07:20Z",
+ "updated_at": "2026-10-04T10:07:44Z",
  "verified_target": 4144,
  "verified_total": 452,
- "workers_active": 0,
+ "workers_active": 6,
  "workers_target": 6,
  "running_ads": 3
 }
