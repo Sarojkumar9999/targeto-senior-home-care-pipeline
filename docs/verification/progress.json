@@ -5,7 +5,7 @@
  "last_commit": "41b59922c910ee5468eb5409f2f1a5992a35d0b7",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 21 (10-worker experiment) CLOSED: 120 agencies, 1,436 verified total (tier1 452/452; tier2 984/2181). 0 blocks.",
+ "note": "Dashboard counter bug fixed: totals now recalculated from the CSV on every commit. 1,436 verified (tier1 452/452; tier2 984/2181).",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -221,7 +221,9 @@
  "status": "running",
  "throughput_by_workers": {
   "2": 5.0,
-  "4": 6.5
+  "4": 6.5,
+  "6": 4.3,
+  "10": 6.4
  },
  "tiers": {
   "tier1_exact_id": {
@@ -229,7 +231,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 828,
+   "done": 984,
    "total": 2181
   },
   "tier3_name_only": {
@@ -241,10 +243,11 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T15:09:53Z",
+ "updated_at": "2026-10-04T15:11:37Z",
  "verified_target": 4144,
- "verified_total": 1280,
+ "verified_total": 1436,
  "workers_active": 0,
  "workers_target": 10,
- "running_ads": 9
+ "running_ads": 15,
+ "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch)."
 }
