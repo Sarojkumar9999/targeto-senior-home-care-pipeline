@@ -66,6 +66,7 @@
     <div class="kpi"><div class="v" id="k-rate">0</div><div class="l">indexed per minute <small id="k-perworker"></small></div></div>
     <div class="kpi"><div class="v" id="k-eta">—</div><div class="l">ETA at current rate</div></div>
     <div class="kpi"><div class="v" id="k-errors">0%</div><div class="l">check error rate</div></div>
+    <div class="kpi"><div class="v" id="k-disagree">0</div><div class="l">⚠️ pipeline URL mismatches</div></div>
   </div>
 
   <div class="card">
@@ -178,6 +179,7 @@ function render(p) {
   const er = document.getElementById("k-errors");
   er.textContent = `${((p.error_rate || 0) * 100).toFixed(1)}%`;
   er.style.color = p.error_rate > 0.1 ? "var(--red)" : p.error_rate > 0.05 ? "var(--amber)" : "";
+  document.getElementById("k-disagree").textContent = (p.disagreements || 0).toLocaleString();
 
   // throughput by worker count
   const tp = document.getElementById("tput");
