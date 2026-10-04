@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 39,
+ "disagreements": 42,
  "error_rate": 0.0,
- "last_commit": "15aba0ee9016a36232a8b009b2d13d9797f486fc",
+ "last_commit": "bd255bf3d963823464163b94533d6769b726349c",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 7 running: 6 workers x 12 agencies (tier 1). Wave 6 complete: 359 verified, 39 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 7 running: 5/6 workers active. 371/452 tier-1 verified (82%), 42 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave7-b5",
+   "finished_at": "2026-10-04T09:53:16Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "3 cross-state lookalikes rejected (NJ, IL, CA)"
+  },
   {
    "id": "wave6-b2",
    "finished_at": "2026-10-04T09:49:35Z",
@@ -77,14 +85,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "6 UNRESOLVED (uncertain matches), 2 wrong-business rejections"
-  },
-  {
-   "id": "wave5-b1",
-   "finished_at": "2026-10-04T09:01:55Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "1477129682: pipeline page was a Philippines charity, rejected"
   }
  ],
  "scaling_log": [
@@ -138,7 +138,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 359,
+   "done": 371,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -154,10 +154,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:50:06Z",
+ "updated_at": "2026-10-04T09:53:23Z",
  "verified_target": 4144,
- "verified_total": 359,
- "workers_active": 6,
+ "verified_total": 371,
+ "workers_active": 5,
  "workers_target": 6,
  "running_ads": 1
 }
