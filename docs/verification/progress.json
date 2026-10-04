@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "91c27e4f1ae2525200f24529eb4d7f883fa88f80",
+ "last_commit": "b4761707568a3e7cec01c373c43f9db8c89ff81a",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 19 running: 6 workers x 12 agencies. Wave 18 complete: 1172 total verified (tier 1: 452/452; tier 2: 720/2181). 11 RUNNING ads incl. Angels Instead (4 client-acquisition ads, Spring TX). 0 blocks.",
+ "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. Wave 19 complete: 1244 total verified (tier 1: 452/452; tier 2: 792/2181). RUNNING advertisers incl. Home Helpers (~10 ads, franchisor page) and CenterWell Careers (~170 recruitment ads). 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -198,6 +198,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 18 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 19."
+  },
+  {
+   "at": "2026-10-04T14:33:01Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 19 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 20."
   }
  ],
  "status": "running",
@@ -223,7 +229,7 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T14:18:34Z",
+ "updated_at": "2026-10-04T14:33:01Z",
  "verified_target": 4144,
  "verified_total": 812,
  "workers_active": 6,
