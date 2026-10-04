@@ -2,13 +2,20 @@
  "desired_workers": 6,
  "disagreements": 18,
  "error_rate": 0.0,
- "last_commit": "49099302abed4aa53db9e16554fec0378b06305a",
+ "last_commit": "ca3d219ec6d434ec924226d3de9dddf7f6ac9aaf",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 4: 5/6 batches done (203 verified, 18 page mismatches, 0 blocks). 1 worker still running.",
+ "note": "Wave 4 complete: 215/215 tier-1 verified, 18 page mismatches, 0 blocks. Generating wave 5.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave4-b1",
+   "finished_at": "2026-10-04T08:55:06Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0
+  },
   {
    "id": "wave4-b2",
    "finished_at": "2026-10-04T08:54:40Z",
@@ -74,14 +81,6 @@
    "verified": 12,
    "disagreements": 0,
    "note": "2 brief agencies (1457891814, 1962732685) missed in worker assignment; redirected cleanup task to them"
-  },
-  {
-   "id": "wave3-b5",
-   "finished_at": "2026-10-04T08:41:52Z",
-   "agencies": 12,
-   "verified": 10,
-   "disagreements": 0,
-   "note": "2 dupes skipped (1629334636, 1073934691 also in wave3-b6); 2 dropped agencies (1174556302, 1164428702) queued as cleanup"
   }
  ],
  "scaling_log": [
@@ -108,6 +107,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 3 complete at 6 workers (72/72 incl. cleanups, 0% errors). Holding at 6 for wave 4."
+  },
+  {
+   "at": "2026-10-04T08:55:13Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 4 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 5."
   }
  ],
  "status": "running",
@@ -117,7 +122,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 203,
+   "done": 215,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -133,9 +138,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:54:47Z",
+ "updated_at": "2026-10-04T08:55:13Z",
  "verified_target": 4144,
- "verified_total": 203,
- "workers_active": 1,
+ "verified_total": 215,
+ "workers_active": 0,
  "workers_target": 6
 }
