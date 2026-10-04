@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 161,
+ "disagreements": 172,
  "error_rate": 0.0,
- "last_commit": "6381b6792155cb9775113f60a4d65f78c5af0eca",
+ "last_commit": "79cdbfac6bfed4d1d0121c036db56101896a01a6",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 13 running: 6 workers x 12 agencies. Wave 12 complete: 740 total verified (tier 1: 452/452; tier 2: 288/2181). 161 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 13 running: 5/6 workers active. 752 total verified (tier 1: 452/452; tier 2: 300/2181). 172 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave13-b1",
+   "finished_at": "2026-10-04T12:38:14Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 11,
+   "note": "tier-2: 11 rejections (TX, MO, LA x2, OH, CO, CA, real-estate, 3 personal profiles) - worst data-quality batch yet"
+  },
   {
    "id": "wave12-b5",
    "finished_at": "2026-10-04T12:34:33Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 3,
    "note": "tier-2: 3 rejections (real-estate, furniture, wrong-city page); NEW live advertiser: ACME Home Care LLC (client-acquisition ad since 2026-01-01)"
-  },
-  {
-   "id": "wave11-b1",
-   "finished_at": "2026-10-04T10:34:10Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 4,
-   "note": "tier-2: 4 rejections (national brand, Mexico City, Ohio, HVAC); 2 RAN_BEFORE (past advertisers)"
   }
  ],
  "scaling_log": [
@@ -175,7 +175,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 288,
+   "done": 300,
    "total": 2181
   },
   "tier3_name_only": {
@@ -187,10 +187,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:35:06Z",
+ "updated_at": "2026-10-04T12:41:18Z",
  "verified_target": 4144,
- "verified_total": 740,
- "workers_active": 6,
+ "verified_total": 752,
+ "workers_active": 5,
  "workers_target": 6,
  "running_ads": 7
 }
