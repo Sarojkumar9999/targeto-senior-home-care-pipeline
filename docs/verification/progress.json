@@ -5,7 +5,7 @@
  "last_commit": "d6d64b6b4e5a85eff78542efec5ec9219b74dc66",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. 1280 total verified (tier 1: 452/452; tier 2: 828/2181). RUNNING advertisers incl. Greenstaff (~10 ads), CenterWell (~170 ads), Home Helpers (~10 ads). 0 blocks.",
+ "note": "EXPERIMENT: 10 workers x 12 agencies (wave 21), started 2026-10-04T14:44:45Z. Wave 20 nearly complete: 1304 verified (tier1 452/452; tier2 852/2181). 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -204,6 +204,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 19 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 20."
+  },
+  {
+   "at": "2026-10-04T14:44:45Z",
+   "from": 6,
+   "to": 10,
+   "reason": "Saroj requested 10-worker speed experiment for wave 21 (120 agencies)."
   }
  ],
  "status": "running",
@@ -229,10 +235,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T14:41:23Z",
+ "updated_at": "2026-10-04T14:44:45Z",
  "verified_target": 4144,
  "verified_total": 1280,
- "workers_active": 6,
- "workers_target": 6,
+ "workers_active": 10,
+ "workers_target": 10,
  "running_ads": 9
 }
