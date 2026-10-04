@@ -2,13 +2,21 @@
  "desired_workers": 6,
  "disagreements": 9,
  "error_rate": 0.0,
- "last_commit": "179a3458fc440917f2518bfc77bd5a88e02f5153",
+ "last_commit": "6d758621bf3e5387a0ad94e9e492fa7c83c35c51",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 3: 3/6 batches + cleanup done (108 verified, 9 page mismatches, 0 blocks). 3 workers still running.",
+ "note": "Wave 3: 4/6 batches + cleanup done (118 verified, 9 page mismatches, 0 blocks). 2 wave-3 workers + 1 cleanup (2 agencies) running.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave3-b5",
+   "finished_at": "2026-10-04T08:41:52Z",
+   "agencies": 12,
+   "verified": 10,
+   "disagreements": 0,
+   "note": "2 dupes skipped (1629334636, 1073934691 also in wave3-b6); 2 dropped agencies (1174556302, 1164428702) queued as cleanup"
+  },
   {
    "id": "wave3-cleanup",
    "finished_at": "2026-10-04T08:39:32Z",
@@ -73,13 +81,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 2
-  },
-  {
-   "id": "pilot-b2",
-   "finished_at": "2026-10-04T08:21:28Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0
   }
  ],
  "scaling_log": [
@@ -109,7 +110,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 108,
+   "done": 118,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -125,9 +126,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:39:36Z",
+ "updated_at": "2026-10-04T08:42:00Z",
  "verified_target": 4144,
- "verified_total": 108,
+ "verified_total": 118,
  "workers_active": 3,
  "workers_target": 6
 }
