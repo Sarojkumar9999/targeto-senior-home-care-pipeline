@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 69,
+ "disagreements": 71,
  "error_rate": 0.0,
- "last_commit": "1928f528498dcf8ae090557e394f70797bcec9e8",
+ "last_commit": "c0ca4e775d70263cc0a1af1648f4b150b45e9459",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 9 running: 3/6 workers active. 488 total verified (tier 1 complete 452/452; tier 2: 36/2181). 69 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 9 running: 2/6 workers active. 500 total verified (tier 1 complete 452/452; tier 2: 48/2181). 71 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b2",
+   "finished_at": "2026-10-04T10:12:37Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "tier-2: Bangalore (India) + Winston-Salem NC lookalikes rejected"
+  },
   {
    "id": "wave9-b3",
    "finished_at": "2026-10-04T10:11:54Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 0,
    "note": "1 confirmed real page (Great Thinkers, Mesa AZ); 10 unofficial pages reclassified NO_FB_PAGE->NO_ADS per rubric consistency; 2 UNRESOLVED"
-  },
-  {
-   "id": "wave7-b2",
-   "finished_at": "2026-10-04T09:54:42Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "PA cross-state lookalike rejected; 3 UNRESOLVED identity cases"
   }
  ],
  "scaling_log": [
@@ -151,7 +151,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 36,
+   "done": 48,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:11:59Z",
+ "updated_at": "2026-10-04T10:12:42Z",
  "verified_target": 4144,
- "verified_total": 488,
- "workers_active": 3,
+ "verified_total": 500,
+ "workers_active": 2,
  "workers_target": 6,
  "running_ads": 3
 }
