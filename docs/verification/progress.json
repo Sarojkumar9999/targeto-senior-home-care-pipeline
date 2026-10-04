@@ -2,15 +2,15 @@
  "desired_workers": 6,
  "disagreements": 0,
  "error_rate": 0.0,
- "last_commit": "35b5bca65344c37f2b10804e2d69ae15d6a6e876",
+ "last_commit": "5ae5aeb6fd0842b2b540a4b4605ac57a51f70ace",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Coordinator online. Pilot briefs ready (2x12 tier-1 agencies) \u2014 browser-task launch pending parent delegation: coordinator subagents cannot spawn browser tasks directly.",
+ "note": "Pilot running: 2x12 tier-1 agencies, calibrating pace and Meta tolerance.",
  "per_minute": 0.0,
  "per_worker_per_minute": 0.0,
  "recent_batches": [],
  "scaling_log": [],
- "status": "idle",
+ "status": "running",
  "throughput_by_workers": {},
  "tiers": {
   "tier1_exact_id": {
@@ -30,9 +30,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:16:59Z",
+ "updated_at": "2026-10-04T08:17:46Z",
  "verified_target": 4144,
  "verified_total": 0,
- "workers_active": 0,
- "workers_target": 6
+ "workers_active": 2,
+ "workers_target": 2
 }
