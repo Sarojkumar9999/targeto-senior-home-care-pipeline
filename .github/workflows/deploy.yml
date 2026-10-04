@@ -1,7 +1,8 @@
 name: Deploy to Oracle VM
 
-# Push to main → the VM pulls, rebuilds ONLY the dashboard container,
-# and health-checks it. Postgres and its data volume are never touched.
+# Push to main → the VM pulls, applies DB migrations, rebuilds ONLY the
+# dashboard container, imports Muse verifications, and health-checks it.
+# Postgres and its data volume are never touched.
 on:
   push:
     branches: [main]
@@ -20,10 +21,28 @@ jobs:
           git reset --hard origin/main
           git log --oneline -1
 
+      - name: Apply DB migrations
+        run: |
+          cd ~/targeto
+          for f in db/migrations/*.sql; do
+            [ -e "$f" ] || continue
+            echo "== applying $f"
+            sudo docker exec -i targeto-postgres psql -U targeto -d targeto -v ON_ERROR_STOP=1 -q < "$f"
+          done
+
       - name: Rebuild dashboard only (database untouched)
         run: |
           cd ~/targeto
           sudo docker compose -f deploy/docker-compose.yml up -d --build dashboard
+
+      - name: Import Muse verifications
+        run: |
+          cd ~/targeto
+          if [ -f data/muse_verifications.csv ]; then
+            sudo docker compose -f deploy/docker-compose.yml run --rm dashboard python -m pipeline.muse_import
+          else
+            echo "no data/muse_verifications.csv yet, skipping"
+          fi
 
       - name: Health check
         run: |
