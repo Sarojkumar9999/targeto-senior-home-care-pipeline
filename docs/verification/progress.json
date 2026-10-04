@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 94,
+ "disagreements": 102,
  "error_rate": 0.0,
- "last_commit": "b4a9176dadc6e956e28315bb52dbeb3f28ad46d1",
+ "last_commit": "100a433a752effed660c4572ceb186d093e917e2",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 10 running: 1/6 workers active. 584 total verified (tier 1: 452/452; tier 2: 132/2181). 94 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Wave 10 (tier 2) complete: 596 total verified (tier 1: 452/452; tier 2: 144/2181). 102 page mismatches, 4 RUNNING ads, 0 blocks. Generating wave 11.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave10-b3",
+   "finished_at": "2026-10-04T10:25:50Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 8,
+   "note": "tier-2 rough batch: 8 rejections (Toronto, hospitality group, PA, carpet, personal profiles)"
+  },
   {
    "id": "wave10-b2",
    "finished_at": "2026-10-04T10:25:28Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 7,
    "note": "tier-2: 7 wrong-business/cross-state rejections; 1 strong match (Alivia Care, Jacksonville FL)"
-  },
-  {
-   "id": "wave9-b6",
-   "finished_at": "2026-10-04T10:11:15Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 8,
-   "note": "tier-2: 8 wrong-business/cross-state rejections; 2 confirmed matches (Aker Kasten, Advanced Nursing Concepts)"
   }
  ],
  "scaling_log": [
@@ -144,6 +144,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 9 (tier 2) complete at 6 workers (72/72, 0% errors, 4th RUNNING ad found). Tier-2 quality good; holding at 6 for wave 10."
+  },
+  {
+   "at": "2026-10-04T10:25:57Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 10 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 11."
   }
  ],
  "status": "running",
@@ -157,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 132,
+   "done": 144,
    "total": 2181
   },
   "tier3_name_only": {
@@ -169,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:25:38Z",
+ "updated_at": "2026-10-04T10:25:57Z",
  "verified_target": 4144,
- "verified_total": 584,
- "workers_active": 1,
+ "verified_total": 596,
+ "workers_active": 0,
  "workers_target": 6,
  "running_ads": 4
 }
