@@ -1,14 +1,21 @@
 {
  "desired_workers": 6,
- "disagreements": 21,
+ "disagreements": 22,
  "error_rate": 0.0,
- "last_commit": "d375d5d870ceb1c83796f95d4ceb49bb734a9b94",
+ "last_commit": "59d8d9955219a9928b52cc81a382197f3360f5fb",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 5: 5/6 batches done (275 verified, 21 page mismatches, 0 blocks). FIRST RUNNING AD: Ms Phyllis Homecare LLC (Montverde FL). 1 worker still running.",
+ "note": "Wave 5 complete: 287/452 tier-1 verified (63%), 22 page mismatches, 1 RUNNING ad, 0 blocks. Generating wave 6.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave5-b3",
+   "finished_at": "2026-10-04T09:06:11Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 1
+  },
   {
    "id": "wave5-b2",
    "finished_at": "2026-10-04T09:05:02Z",
@@ -76,13 +83,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 1
-  },
-  {
-   "id": "wave4-b6",
-   "finished_at": "2026-10-04T08:50:01Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2
   }
  ],
  "scaling_log": [
@@ -115,6 +115,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 4 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 5."
+  },
+  {
+   "at": "2026-10-04T09:06:16Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 5 complete at 6 workers (72/72, 0% errors, 1st RUNNING ad found). Holding at 6 for wave 6."
   }
  ],
  "status": "running",
@@ -124,7 +130,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 275,
+   "done": 287,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -140,10 +146,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:05:09Z",
+ "updated_at": "2026-10-04T09:06:16Z",
  "verified_target": 4144,
- "verified_total": 275,
- "workers_active": 1,
+ "verified_total": 287,
+ "workers_active": 0,
  "workers_target": 6,
  "running_ads": 1
 }
