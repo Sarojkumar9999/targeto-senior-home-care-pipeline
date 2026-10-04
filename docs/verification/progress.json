@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "0c76dfb17f4dac005bd83ef6761169f942f3de04",
+ "last_commit": "11febfe8572f7e0a38da17fa2d8cb91dc48d93d2",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 15 running: 6 workers x 12 agencies. Wave 14 complete: 884 total verified (tier 1: 452/452; tier 2: 432/2181). 10 RUNNING ads incl. Instant Care of Arizona (4 caregiver-recruitment ads). 0 blocks.",
+ "note": "Tier 2 wave 16 running: 6 workers x 12 agencies. Wave 15 complete: 956 total verified (tier 1: 452/452; tier 2: 504/2181). 10 RUNNING ads incl. Instant Care of Arizona (4 caregiver-recruitment ads). 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -174,6 +174,12 @@
    "from": 6,
    "to": 6,
    "reason": "Wave 14 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 15."
+  },
+  {
+   "at": "2026-10-04T13:31:46Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 15 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 16."
   }
  ],
  "status": "running",
@@ -199,7 +205,7 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T13:21:46Z",
+ "updated_at": "2026-10-04T13:31:46Z",
  "verified_target": 4144,
  "verified_total": 812,
  "workers_active": 6,
