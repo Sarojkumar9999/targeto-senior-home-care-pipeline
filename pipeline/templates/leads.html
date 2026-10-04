@@ -11,6 +11,7 @@
      href="/leads?tab={{ tab }}&has=fb{% if fb_query %}&{{ fb_query }}{% endif %}">✅ Has FB ({{ fb_counts.has_fb }})</a>
   <a class="tab {{ 'active' if sel.get('has')=='nofb' }}"
      href="/leads?tab={{ tab }}&has=nofb{% if fb_query %}&{{ fb_query }}{% endif %}">📞 No FB ({{ fb_counts.no_fb }})</a>
+  <span class="note" style="align-self:center;margin-left:8px" title="Independent live browser verification by Muse">🤖 {{ muse_counts.verified }} verified{% if muse_counts.disagree %} · ⚠️ {{ muse_counts.disagree }} disagree{% endif %}</span>
 </div>
 
 <div class="tabs">
@@ -55,6 +56,12 @@
   <select name="dnc">
     <option value="">Exclude DNC</option>
     <option {{ 'selected' if sel.get('dnc')=='only' }} value="only">Show DNC only</option>
+  </select>
+  <select name="muse" title="Filter by Muse's independent live verification">
+    <option value="">Muse: any</option>
+    <option {{ 'selected' if sel.get('muse')=='verified' }} value="verified">🤖 Muse verified</option>
+    <option {{ 'selected' if sel.get('muse')=='disagree' }} value="disagree">⚠️ Muse disagrees</option>
+    <option {{ 'selected' if sel.get('muse')=='unchecked' }} value="unchecked">❓ Not Muse-checked</option>
   </select>
   <select name="per">
     {% for p in page_sizes %}<option {{ 'selected' if per == p }} value="{{ p }}">{{ p }} / page</option>{% endfor %}
@@ -136,6 +143,10 @@
         <span class="pill won" title="FB page discovered — {{ r.fb_page }}">FB ✓</span>
       {% else %}
         <span class="pill not" title="Searched — no FB page found (cold-call target)">no FB</span>
+      {% endif %}
+      {% if r.muse_ad_checked_at %}
+        <span class="pill {{ {'RUNNING':'progress','NO_ADS':'not','RAN_BEFORE':'new','NO_FB_PAGE':'new','UNRESOLVED':'new'}[r.muse_ad_status] }}" style="margin-top:3px;display:inline-block" title="Muse live check {{ r.muse_ad_checked_at.strftime('%Y-%m-%d') }}{% if r.muse_ad_notes %} — {{ r.muse_ad_notes }}{% endif %}">🤖 {{ r.muse_ad_status }}</span>
+        {% if r.muse_ad_status != r.ad_status %}<span title="Pipeline says {{ r.ad_status }}, Muse says {{ r.muse_ad_status }}">⚠️</span>{% endif %}
       {% endif %}
     </td>
     <td>
