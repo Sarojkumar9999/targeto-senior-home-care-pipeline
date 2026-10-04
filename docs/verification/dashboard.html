@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Targeto · Muse Verification Campaign</title>
+<style>
+  :root { --bg:#0e1116; --card:#171c24; --line:#2a3140; --text:#e8ecf1; --mut:#9aa4b5;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --blue:#58a6ff; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,"Segoe UI",Roboto,sans-serif;
+         margin:0; padding:24px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:13px; margin-bottom:20px; }
+  .pill { display:inline-block; padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+  .pill.running { background:#12351c; color:var(--green); border:1px solid #2a5a34; }
+  .pill.paused  { background:#3a2c10; color:var(--amber); border:1px solid #6b541e; }
+  .pill.idle    { background:#1c2330; color:var(--mut);  border:1px solid var(--line); }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:16px 0; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }
+  .kpi .v { font-size:26px; font-weight:700; }
+  .kpi .l { color:var(--mut); font-size:12px; margin-top:4px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
+  .card h2 { font-size:15px; margin:0 0 12px; }
+  .tier { margin-bottom:10px; }
+  .tier .row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
+  .bar { height:8px; background:#0a0d12; border-radius:4px; overflow:hidden; }
+  .bar > div { height:100%; background:var(--blue); border-radius:4px; transition:width .5s; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
+  th { color:var(--mut); font-weight:600; }
+  .note { color:var(--mut); font-size:12px; }
+  .btn { display:inline-block; background:#1f6feb; color:#fff; border:none; border-radius:8px;
+         padding:10px 18px; font-size:14px; cursor:pointer; text-decoration:none; }
+  .btn:hover { background:#388bfd; }
+  code { background:#0a0d12; padding:2px 6px; border-radius:4px; font-size:12px; }
+  .foot { color:var(--mut); font-size:12px; margin-top:16px; text-align:center; }
+  .warn { color:var(--amber); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🤖 Muse Verification Campaign</h1>
+  <div class="sub">Independent FB-page + ad-status checks for all 4,144 agencies · updates every 30s</div>
+
+  <div><span id="status-pill" class="pill idle">IDLE</span>
+       <span class="note" id="updated-ago" style="margin-left:10px"></span></div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v" id="k-workers">0</div><div class="l">workers active</div></div>
+    <div class="kpi"><div class="v" id="k-verified">0</div><div class="l">agencies verified / 4,144</div></div>
+    <div class="kpi"><div class="v" id="k-rate">0</div><div class="l">indexed per minute</div></div>
+    <div class="kpi"><div class="v" id="k-eta">—</div><div class="l">ETA at current rate</div></div>
+    <div class="kpi"><div class="v" id="k-disagree">0</div><div class="l">⚠️ disagreements vs pipeline</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Tier progress</h2>
+    <div id="tiers"></div>
+  </div>
+
+  <div class="card">
+    <h2>Recent batches</h2>
+    <table><thead><tr><th>Batch</th><th>Finished</th><th>Agencies</th><th>Verified</th><th>⚠️ Disagree</th></tr></thead>
+    <tbody id="batches"><tr><td colspan="5" class="note">No batches yet.</td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>💾 Persistence</h2>
+    <div id="persist" class="note">Every finished batch is committed to GitHub immediately — if anything crashes, all verified rows survive.</div>
+  </div>
+
+  <div class="card">
+    <h2>🎛️ Manager control</h2>
+    <div class="note" style="margin-bottom:10px">
+      Workers read <code>worker_config.json</code> every few minutes. To speed up or slow down,
+      edit <code>desired_workers</code> (1–8) or flip <code>paused</code> — the change takes effect
+      within minutes, no redeploy needed.
+    </div>
+    <div class="note" style="margin-bottom:12px">Current target: <b id="cfg-workers">–</b> workers ·
+      <span id="cfg-paused">–</span></div>
+    <a class="btn" id="edit-config" target="_blank" href="#">Edit worker config on GitHub</a>
+  </div>
+
+  <div class="foot">Live campaign dashboard · Targeto</div>
+</div>
+
+<script>
+const REPO = "Sarojkumar9999/targeto-senior-home-care-pipeline";
+document.getElementById("edit-config").href =
+  `https://github.com/${REPO}/edit/main/docs/verification/worker_config.json`;
+
+const TIER_LABELS = {
+  tier1_exact_id: "Tier 1 · exact FB page ID",
+  tier2_url_no_id: "Tier 2 · FB URL, no ID",
+  tier3_name_only: "Tier 3 · page name only",
+  tier4_no_fb: "Tier 4 · no FB trace"
+};
+
+function ago(iso) {
+  if (!iso) return "";
+  const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+  if (s < 60) return `updated ${Math.floor(s)}s ago`;
+  if (s < 3600) return `updated ${Math.floor(s/60)}m ago`;
+  return `updated ${Math.floor(s/3600)}h ago`;
+}
+function fmtEta(mins) {
+  if (!isFinite(mins) || mins <= 0) return "—";
+  if (mins < 60) return `${Math.round(mins)}m`;
+  if (mins < 60*48) return `${(mins/60).toFixed(1)}h`;
+  return `${(mins/60/24).toFixed(1)}d`;
+}
+
+async function load() {
+  try {
+    const r = await fetch("progress.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    render(await r.json());
+  } catch (e) { /* keep last state on blip */ }
+}
+
+function render(p) {
+  const pill = document.getElementById("status-pill");
+  const st = (p.status || "idle").toUpperCase();
+  pill.textContent = st;
+  pill.className = "pill " + (p.status === "running" ? "running" : p.status === "paused" ? "paused" : "idle");
+  document.getElementById("updated-ago").textContent = ago(p.updated_at);
+
+  document.getElementById("k-workers").textContent = `${p.workers_active || 0} / ${p.desired_workers || 0}`;
+  document.getElementById("k-verified").textContent = (p.verified_total || 0).toLocaleString();
+  document.getElementById("k-rate").textContent = (p.per_minute || 0).toFixed(1);
+  const remaining = (p.verified_target || 4144) - (p.verified_total || 0);
+  document.getElementById("k-eta").textContent =
+    (p.per_minute > 0 && remaining > 0) ? fmtEta(remaining / p.per_minute) : "—";
+  document.getElementById("k-disagree").textContent = (p.disagreements || 0).toLocaleString();
+
+  const tc = document.getElementById("tiers");
+  tc.innerHTML = "";
+  for (const [key, t] of Object.entries(p.tiers || {})) {
+    const pct = t.total ? Math.round(100 * t.done / t.total) : 0;
+    const div = document.createElement("div");
+    div.className = "tier";
+    div.innerHTML = `<div class="row"><span>${TIER_LABELS[key] || key}</span>
+      <span>${t.done.toLocaleString()} / ${t.total.toLocaleString()} (${pct}%)</span></div>
+      <div class="bar"><div style="width:${pct}%"></div></div>`;
+    tc.appendChild(div);
+  }
+
+  const tb = document.getElementById("batches");
+  if (p.recent_batches && p.recent_batches.length) {
+    tb.innerHTML = p.recent_batches.slice(0, 10).map(b =>
+      `<tr><td>${b.id}</td><td>${b.finished_at ? new Date(b.finished_at).toLocaleString() : "—"}</td>
+       <td>${b.agencies}</td><td>${b.verified}</td><td>${b.disagreements || 0}</td></tr>`).join("");
+  }
+
+  if (p.last_commit_at) {
+    document.getElementById("persist").innerHTML =
+      `💾 Last persisted: <b>${ago(p.last_commit_at)}</b> · commit <code>${(p.last_commit || "").slice(0,7)}</code> — ` +
+      `every batch is pushed before the next starts, so verified rows are never lost.`;
+  }
+  document.getElementById("cfg-workers").textContent = p.desired_workers ?? "–";
+  document.getElementById("cfg-paused").textContent = p.status === "paused" ? "⏸ paused" : "▶ active";
+  if (p.note) {
+    const n = document.createElement("div");
+    n.className = "note warn"; n.style.marginTop = "8px"; n.textContent = p.note;
+    document.querySelector(".wrap").appendChild(n);
+  }
+}
+
+load();
+setInterval(load, 30000);
+</script>
+</body>
+</html>
