@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 132,
+ "disagreements": 139,
  "error_rate": 0.0,
- "last_commit": "039cc58460e0734504e8dcd2830aa78173567acf",
+ "last_commit": "60618f9aea625c7dfa39ca059283e0618f1d7349",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 12 running: 5/6 workers active. 680 total verified (tier 1: 452/452; tier 2: 228/2181). 132 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 12 running: 4/6 workers active. 692 total verified (tier 1: 452/452; tier 2: 240/2181). 139 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave12-b4",
+   "finished_at": "2026-10-04T12:24:22Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 7,
+   "note": "tier-2 rough batch: 7 rejections (Oregon, Iowa, PA, GA, TX, dental shop, auto parts)"
+  },
   {
    "id": "wave12-b6",
    "finished_at": "2026-10-04T12:24:16Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "tier-2: beauty business + UK care company rejections; 5 high-confidence matches"
-  },
-  {
-   "id": "wave10-b1",
-   "finished_at": "2026-10-04T10:24:31Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "tier-2: 2 personal-profile URLs rejected (not business pages)"
   }
  ],
  "scaling_log": [
@@ -169,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 228,
+   "done": 240,
    "total": 2181
   },
   "tier3_name_only": {
@@ -181,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:24:26Z",
+ "updated_at": "2026-10-04T12:24:42Z",
  "verified_target": 4144,
- "verified_total": 680,
- "workers_active": 5,
+ "verified_total": 692,
+ "workers_active": 4,
  "workers_target": 6,
  "running_ads": 7
 }
