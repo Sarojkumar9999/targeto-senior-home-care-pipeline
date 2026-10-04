@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "c2061abbb09377adcd340ab170be18d774fbed96",
+ "last_commit": "d6d64b6b4e5a85eff78542efec5ec9219b74dc66",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. 1280 total verified (tier 1: 452/452; tier 2: 828/2181). RUNNING advertisers incl. Greenstaff (~10 ads), CenterWell (~170 ads), Home Helpers (~10 ads). 0 blocks.",
