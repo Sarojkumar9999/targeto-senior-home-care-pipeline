@@ -1,14 +1,21 @@
 {
  "desired_workers": 6,
- "disagreements": 0,
+ "disagreements": 2,
  "error_rate": 0.0,
- "last_commit": "a1bce8763fb326ec37cc2ab3511d804c62121e2b",
+ "last_commit": "2112b09cf302e2f0768afc2d7ddb5b1bb8cbdf67",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Pilot: batch 2/2 done (12 verified, all NO_ADS, zero blocks). Batch 1/2 still running.",
- "per_minute": 3.2,
- "per_worker_per_minute": 3.2,
+ "note": "Pilot complete: 24/24 verified, 0 blocks. 2 pipeline page mismatches caught (IL lookalike, PH business). Scaling to 4 workers.",
+ "per_minute": 5.0,
+ "per_worker_per_minute": 2.5,
  "recent_batches": [
+  {
+   "id": "pilot-b1",
+   "finished_at": "2026-10-04T08:24:20Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2
+  },
   {
    "id": "pilot-b2",
    "finished_at": "2026-10-04T08:21:28Z",
@@ -23,15 +30,21 @@
    "from": 0,
    "to": 2,
    "reason": "Pilot launch: 2 workers, 12-agency micro-batches"
+  },
+  {
+   "at": "2026-10-04T08:24:43Z",
+   "from": 2,
+   "to": 4,
+   "reason": "Pilot clean: 24/24 verified, 0% errors, 2.5/min/worker. Scaling 2->4 workers."
   }
  ],
  "status": "running",
  "throughput_by_workers": {
-  "2": 3.2
+  "2": 5.0
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 12,
+   "done": 24,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -47,9 +60,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:21:56Z",
+ "updated_at": "2026-10-04T08:24:43Z",
  "verified_target": 4144,
- "verified_total": 12,
- "workers_active": 1,
- "workers_target": 2
+ "verified_total": 24,
+ "workers_active": 0,
+ "workers_target": 4
 }
