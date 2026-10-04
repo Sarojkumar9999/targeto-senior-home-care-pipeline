@@ -2,7 +2,7 @@
  "desired_workers": 15,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "82a0190033d8c0e84e0831f041f6e1c157aebd20",
+ "last_commit": "8adda7cba8035282f1eed1eaae7dcfc4cd1a94e0",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Wave 24: 15 workers x 12 agencies (777 total, 65 batches), started 2026-10-04T16:54:04Z. Running to full tier-2 completion.",
@@ -268,7 +268,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 1968,
+   "done": 1980,
    "total": 2181
   },
   "tier3_name_only": {
@@ -282,10 +282,10 @@
  },
  "updated_at": "2026-10-04T15:12:54Z",
  "verified_target": 4144,
- "verified_total": 2420,
+ "verified_total": 2432,
  "workers_active": 15,
  "workers_target": 15,
- "running_ads": 40,
+ "running_ads": 41,
  "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch).",
  "wave22_started_at": "2026-10-04T15:12:54Z",
  "wave23_launch_at": "2026-10-04T15:49:39Z",
