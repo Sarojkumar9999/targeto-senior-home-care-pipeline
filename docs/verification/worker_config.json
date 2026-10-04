@@ -1,1 +1,1 @@
-{"_howto":"MANAGER CONTROL: edit desired_workers (1-8) or paused (true/false), then Commit. The coordinator checks this file every few minutes and adjusts the worker pool. No redeploy needed.","desired_workers":6,"max_workers":8,"paused":true}
+{"_howto":"AUTO-SCALER (default): leave mode=auto. The coordinator measures throughput and adjusts workers itself. EMERGENCY ONLY: paused=true stops everything within minutes; mode=manual + desired_workers pins a fixed pool.","desired_workers":6,"max_workers":8,"mode":"auto","paused":false}
