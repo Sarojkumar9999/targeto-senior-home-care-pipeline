@@ -2,13 +2,21 @@
  "desired_workers": 6,
  "disagreements": 43,
  "error_rate": 0.0,
- "last_commit": "373d871c726829ad3028b175a2705e539af00ea6",
+ "last_commit": "4408d74baed8ff1ee65ceedec93c835955589880",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 7 running: 3/6 workers active. 395/452 tier-1 verified (87%), 43 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 7 running: 2/6 workers active. 407/452 tier-1 verified (90%), 43 page mismatches, 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave7-b6",
+   "finished_at": "2026-10-04T09:55:49Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0,
+   "note": "all unofficial pages, 0 ads; 1 high-confidence Houston match"
+  },
   {
    "id": "wave7-b3",
    "finished_at": "2026-10-04T09:55:47Z",
@@ -78,13 +86,6 @@
    "agencies": 12,
    "verified": 12,
    "disagreements": 1
-  },
-  {
-   "id": "wave5-b3",
-   "finished_at": "2026-10-04T09:06:11Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1
   }
  ],
  "scaling_log": [
@@ -138,7 +139,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 395,
+   "done": 407,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -154,10 +155,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:55:59Z",
+ "updated_at": "2026-10-04T09:56:16Z",
  "verified_target": 4144,
- "verified_total": 395,
- "workers_active": 3,
+ "verified_total": 407,
+ "workers_active": 2,
  "workers_target": 6,
  "running_ads": 1
 }
