@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 49,
+ "disagreements": 54,
  "error_rate": 0.0,
- "last_commit": "d5147fea7bdf97d61f2deb67752bd7afd7a38405",
+ "last_commit": "6ce9335ac71e248cf81c5bb1a7269cfa7843cd65",
  "last_commit_at": null,
  "mode": "auto",
- "note": "TIER 1 COMPLETE: 452/452 verified (385 NO_ADS, 35 NO_FB_PAGE, 29 UNRESOLVED, 3 RUNNING), 49 page mismatches (~11%), 0 blocks. Tier 2 wave 9 running: 6 workers x 12 agencies (URL-only, resolving page IDs).",
+ "note": "Tier 2 wave 9 running: 5/6 workers active. 464 total verified (tier 1 complete 452/452; tier 2: 12/2181). 54 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b5",
+   "finished_at": "2026-10-04T10:10:59Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 5,
+   "note": "tier-2: 5 wrong-business/stale URL rejections (kids party, Aetna x2, embroidery, dead page)"
+  },
   {
    "id": "wave8-b1",
    "finished_at": "2026-10-04T10:07:10Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 1,
    "note": "A Helping Hand page is a childcare service, not senior home care"
-  },
-  {
-   "id": "wave6-b5",
-   "finished_at": "2026-10-04T09:11:05Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 3,
-   "note": "3 city-mismatch lookalikes with specific conflicting addresses"
   }
  ],
  "scaling_log": [
@@ -151,7 +151,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 0,
+   "done": 12,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:07:44Z",
+ "updated_at": "2026-10-04T10:11:09Z",
  "verified_target": 4144,
- "verified_total": 452,
- "workers_active": 6,
+ "verified_total": 464,
+ "workers_active": 5,
  "workers_target": 6,
  "running_ads": 3
 }
