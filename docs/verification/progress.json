@@ -5,7 +5,7 @@
  "last_commit": "cf7d2bead3860e104576f4878961f2737fe9f48a",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. Wave 19 complete: 1244 total verified (tier 1: 452/452; tier 2: 792/2181). RUNNING advertisers incl. Home Helpers (~10 ads, franchisor page) and CenterWell Careers (~170 recruitment ads). 0 blocks.",
+ "note": "Tier 2 wave 20 running: 6 workers x 12 agencies. 1280 total verified (tier 1: 452/452; tier 2: 828/2181). RUNNING advertisers incl. Greenstaff (~10 ads), CenterWell (~170 ads), Home Helpers (~10 ads). 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -217,7 +217,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 360,
+   "done": 828,
    "total": 2181
   },
   "tier3_name_only": {
@@ -229,9 +229,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T14:33:01Z",
+ "updated_at": "2026-10-04T14:41:23Z",
  "verified_target": 4144,
- "verified_total": 812,
+ "verified_total": 1280,
  "workers_active": 6,
  "workers_target": 6,
  "running_ads": 9
