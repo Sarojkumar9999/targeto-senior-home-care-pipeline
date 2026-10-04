@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 47,
+ "disagreements": 49,
  "error_rate": 0.0,
- "last_commit": "d78c6273572fa9c322f80c8d4a083dd4e7461ef4",
+ "last_commit": "c25c98d674d94d8237482db0a9be9ef0b29c1cf1",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Final tier-1 wave 8 running: 1/2 workers active. 440/452 tier-1 verified (97%), 47 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "TIER 1 COMPLETE: 452/452 verified, 49 page mismatches (~11%), 3 RUNNING ads, 0 blocks. Starting tier 2 (2,181 URL-only agencies).",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave8-b1",
+   "finished_at": "2026-10-04T10:07:10Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "TIER 1 COMPLETE 452/452; Kamkade real page found (Harmony HRC, Flowood MS)"
+  },
   {
    "id": "wave8-b2",
    "finished_at": "2026-10-04T10:06:43Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 3,
    "note": "3 city-mismatch lookalikes with specific conflicting addresses"
-  },
-  {
-   "id": "wave6-b6",
-   "finished_at": "2026-10-04T09:10:35Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 2,
-   "note": "found correct Mesa-market BrightStar page; 2 wrong-business rejections"
   }
  ],
  "scaling_log": [
@@ -147,7 +147,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 440,
+   "done": 452,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:06:51Z",
+ "updated_at": "2026-10-04T10:07:20Z",
  "verified_target": 4144,
- "verified_total": 440,
- "workers_active": 1,
- "workers_target": 2,
+ "verified_total": 452,
+ "workers_active": 0,
+ "workers_target": 6,
  "running_ads": 3
 }
