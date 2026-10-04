@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 102,
+ "disagreements": 108,
  "error_rate": 0.0,
- "last_commit": "998c7fb35a293237b3faac9102ee2106494971cd",
+ "last_commit": "3724972d1df204ee1b6b1b7d6734aafa4d5bdc6b",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 6 workers x 12 agencies. Wave 10 complete: 596 total verified (tier 1: 452/452; tier 2: 144/2181). 102 page mismatches, 4 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 11 running: 5/6 workers active. 608 total verified (tier 1: 452/452; tier 2: 156/2181). 108 page mismatches, 5 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b3",
+   "finished_at": "2026-10-04T10:30:33Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 6,
+   "note": "tier-2: 6 rejections; NEW live advertiser: Absolute Health Professionals (South Daytona FL, client-acquisition ad since 2026-09-24)"
+  },
   {
    "id": "wave10-b3",
    "finished_at": "2026-10-04T10:25:50Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 2,
    "note": "tier-2: Bangalore (India) + Winston-Salem NC lookalikes rejected"
-  },
-  {
-   "id": "wave9-b3",
-   "finished_at": "2026-10-04T10:11:54Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 7,
-   "note": "tier-2: 7 wrong-business/cross-state rejections; 1 strong match (Alivia Care, Jacksonville FL)"
   }
  ],
  "scaling_log": [
@@ -163,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 144,
+   "done": 156,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:26:17Z",
+ "updated_at": "2026-10-04T10:30:42Z",
  "verified_target": 4144,
- "verified_total": 596,
- "workers_active": 6,
+ "verified_total": 608,
+ "workers_active": 5,
  "workers_target": 6,
- "running_ads": 4
+ "running_ads": 5
 }
