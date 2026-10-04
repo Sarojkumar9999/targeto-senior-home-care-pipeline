@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 10,
  "error_rate": 0.0,
- "last_commit": "0810452958502bc3468e71abb7144942c6c89a1e",
+ "last_commit": "8c20f31a75f3effc100d07a97bc353d266e094f8",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 3: 6/6 batches done (143 verified, 10 page mismatches, 0 blocks). 1 cleanup (1497831440) running.",
+ "note": "Wave 3: 6/6 batches done (142 verified - corrected after CSV audit, 10 page mismatches, 0 blocks). 1 cleanup (1497831440) running.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -112,7 +112,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 143,
+   "done": 142,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -128,9 +128,9 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:44:31Z",
+ "updated_at": "2026-10-04T08:44:55Z",
  "verified_target": 4144,
- "verified_total": 143,
+ "verified_total": 142,
  "workers_active": 1,
  "workers_target": 6
 }
