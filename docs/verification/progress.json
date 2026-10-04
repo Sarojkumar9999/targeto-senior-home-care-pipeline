@@ -1,293 +1,294 @@
 {
-  "desired_workers": 15,
-  "error_rate": 0.0,
-  "last_commit": "318a53baacc7c313984080d4a55671e15ef200b3",
-  "last_commit_at": null,
-  "mode": "auto",
-  "note": "Wave 24: 15 workers x 12 agencies (777 total, 65 batches), started 2026-10-04T16:54:04Z. Running to full tier-2 completion.",
-  "per_minute": 6.5,
-  "per_worker_per_minute": 2.8,
-  "recent_batches": [
-    {
-      "id": "wave22-b13",
-      "finished_at": "2026-10-04T15:36:44Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 10,
-      "note": "browser crashed mid-batch; retried clean. 10 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
-    },
-    {
-      "id": "wave22-b14",
-      "finished_at": "2026-10-04T15:36:13Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 6,
-      "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
-    },
-    {
-      "id": "wave22-b15",
-      "finished_at": "2026-10-04T15:35:37Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 1,
-      "note": "1 false RUNNING->NO_ADS; Hospice of East Texas RUNNING (5 active client-acq ads)"
-    },
-    {
-      "id": "wave22-b11",
-      "finished_at": "2026-10-04T15:33:15Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 6,
-      "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
-    },
-    {
-      "id": "wave22-b4",
-      "finished_at": "2026-10-04T15:30:16Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 4,
-      "note": "4 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
-    },
-    {
-      "id": "wave22-b7",
-      "finished_at": "2026-10-04T15:28:25Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 0,
-      "note": "clean; 1 UNRESOLVED (similar-name advertiser w/ 2 active ads, unattributable)"
-    },
-    {
-      "id": "wave22-b2",
-      "finished_at": "2026-10-04T15:27:54Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 2,
-      "note": "2 worker UNRESOLVED->NO_FB_PAGE reclasses (cross-state/personal)"
-    },
-    {
-      "id": "wave22-b1",
-      "finished_at": "2026-10-04T15:27:41Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 11,
-      "note": "11 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
-    },
-    {
-      "id": "wave22-b9",
-      "finished_at": "2026-10-04T15:27:08Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 2,
-      "note": "2 worker NO_ADS->UNRESOLVED (page identity uncertain)"
-    },
-    {
-      "id": "wave22-b10",
-      "finished_at": "2026-10-04T15:25:56Z",
-      "agencies": 12,
-      "verified": 12,
-      "disagreements": 0,
-      "note": "clean; 11 login-walled URLs -> UNRESOLVED"
-    }
-  ],
-  "scaling_log": [
-    {
-      "at": "2026-10-04T08:21:56Z",
-      "from": 0,
-      "to": 2,
-      "reason": "Pilot launch: 2 workers, 12-agency micro-batches"
-    },
-    {
-      "at": "2026-10-04T08:24:43Z",
-      "from": 2,
-      "to": 4,
-      "reason": "Pilot clean: 24/24 verified, 0% errors, 2.5/min/worker. Scaling 2->4 workers."
-    },
-    {
-      "at": "2026-10-04T08:34:08Z",
-      "from": 4,
-      "to": 6,
-      "reason": "Wave 2 clean at 4 workers (48/48, 0% errors). Scaling 4->6."
-    },
-    {
-      "at": "2026-10-04T08:46:05Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 3 complete at 6 workers (72/72 incl. cleanups, 0% errors). Holding at 6 for wave 4."
-    },
-    {
-      "at": "2026-10-04T08:55:13Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 4 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 5."
-    },
-    {
-      "at": "2026-10-04T09:06:16Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 5 complete at 6 workers (72/72, 0% errors, 1st RUNNING ad found). Holding at 6 for wave 6."
-    },
-    {
-      "at": "2026-10-04T09:49:44Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 6 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 7."
-    },
-    {
-      "at": "2026-10-04T09:59:37Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 7 complete at 6 workers (72/72, 0% errors). Holding at 6 for final tier-1 wave 8 (21 agencies)."
-    },
-    {
-      "at": "2026-10-04T10:16:11Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 9 (tier 2) complete at 6 workers (72/72, 0% errors, 4th RUNNING ad found). Tier-2 quality good; holding at 6 for wave 10."
-    },
-    {
-      "at": "2026-10-04T10:25:57Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 10 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 11."
-    },
-    {
-      "at": "2026-10-04T12:19:47Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 11 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 12."
-    },
-    {
-      "at": "2026-10-04T12:34:41Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 12 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 13."
-    },
-    {
-      "at": "2026-10-04T13:10:09Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 13 (tier 2) complete at 6 workers (72/72 incl. 1 relaunched batch, 0% errors). Holding at 6 for wave 14."
-    },
-    {
-      "at": "2026-10-04T13:21:46Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 14 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 15."
-    },
-    {
-      "at": "2026-10-04T13:31:46Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 15 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 16."
-    },
-    {
-      "at": "2026-10-04T13:48:26Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 16 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 17."
-    },
-    {
-      "at": "2026-10-04T14:05:02Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 17 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 18."
-    },
-    {
-      "at": "2026-10-04T14:18:34Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 18 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 19."
-    },
-    {
-      "at": "2026-10-04T14:33:01Z",
-      "from": 6,
-      "to": 6,
-      "reason": "Wave 19 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 20."
-    },
-    {
-      "at": "2026-10-04T14:44:45Z",
-      "from": 6,
-      "to": 10,
-      "reason": "Saroj requested 10-worker speed experiment for wave 21 (120 agencies)."
-    },
-    {
-      "at": "2026-10-04T15:09:53Z",
-      "from": 10,
-      "to": 0,
-      "reason": "Wave 21 closed: 120/120 agencies verified. Verdict: ~2.4x landing throughput vs 6-worker wave 20, 0 blocks/CAPTCHAs, worker quality unchanged."
-    },
-    {
-      "at": "2026-10-04T15:12:54Z",
-      "from": 0,
-      "to": 15,
-      "reason": "Saroj requested 15-worker parallel run for wave 22 (180 agencies, 15x12)."
-    },
-    {
-      "at": "2026-10-04T15:36:47Z",
-      "from": 15,
-      "to": 0,
-      "reason": "Wave 22 closed at 15 workers (180/180, 7.55/min full-window incl. one browser-task failure/retry; 0 CAPTCHA/block). Campaign paused: tier2 1164/2181 verified."
-    },
-    {
-      "at": "2026-10-04T15:49:39Z",
-      "from": 0,
-      "to": 20,
-      "reason": "Saroj requested 20-worker parallel run for wave 23 (240 agencies, 20x12) to measure indexing speed."
-    },
-    {
-      "at": "2026-10-04T16:28:06Z",
-      "from": 20,
-      "to": 0,
-      "reason": "CORRECTED: premature close (batch 20 was still running). True close logged separately."
-    },
-    {
-      "at": "2026-10-04T16:29:56Z",
-      "from": 20,
-      "to": 0,
-      "reason": "Wave 23 truly closed at 20 workers (240/240, 5.96/min full-window). Slower than 15 workers (7.55/min); login wall hit mid-wave, resolved via Saroj's FB login."
-    },
-    {
-      "at": "2026-10-04T16:54:04Z",
-      "from": 0,
-      "to": 15,
-      "reason": "Wave 24 launch: final 777 tier-2 agencies (65 batches of 12/9) at 15 workers \u2014 the measured sweet spot (7.55/min vs 5.96 at 20). Campaign runs to full tier-2 completion."
-    }
-  ],
-  "status": "running",
-  "throughput_by_workers": {
-    "2": 5.0,
-    "4": 6.5,
-    "6": 4.3,
-    "10": 6.4,
-    "15": 7.55
+ "desired_workers": 15,
+ "disagreements": 193,
+ "error_rate": 0.0,
+ "last_commit": "70c6bd3e33631f7bb53e9d9abb2b077bf374956d",
+ "last_commit_at": null,
+ "mode": "auto",
+ "note": "Wave 24: 15 workers x 12 agencies (777 total, 65 batches), started 2026-10-04T16:54:04Z. Running to full tier-2 completion.",
+ "per_minute": 6.5,
+ "per_worker_per_minute": 2.8,
+ "recent_batches": [
+  {
+   "id": "wave22-b13",
+   "finished_at": "2026-10-04T15:36:44Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 10,
+   "note": "browser crashed mid-batch; retried clean. 10 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
   },
-  "tiers": {
-    "tier1_exact_id": {
-      "done": 452,
-      "total": 452
-    },
-    "tier2_url_no_id": {
-      "done": 1896,
-      "total": 2181
-    },
-    "tier3_name_only": {
-      "done": 0,
-      "total": 192
-    },
-    "tier4_no_fb": {
-      "done": 0,
-      "total": 1319
-    }
+  {
+   "id": "wave22-b14",
+   "finished_at": "2026-10-04T15:36:13Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 6,
+   "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
   },
-  "updated_at": "2026-10-04T15:12:54Z",
-  "verified_target": 4144,
-  "verified_total": 2348,
-  "workers_active": 15,
-  "workers_target": 15,
-  "running_ads": 39,
-  "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch).",
-  "wave22_started_at": "2026-10-04T15:12:54Z",
-  "wave23_launch_at": "2026-10-04T15:49:39Z",
-  "wave23_close_at": "2026-10-04T16:29:56Z",
-  "wave23_rate": 5.96
+  {
+   "id": "wave22-b15",
+   "finished_at": "2026-10-04T15:35:37Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 1,
+   "note": "1 false RUNNING->NO_ADS; Hospice of East Texas RUNNING (5 active client-acq ads)"
+  },
+  {
+   "id": "wave22-b11",
+   "finished_at": "2026-10-04T15:33:15Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 6,
+   "note": "6 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state/personal)"
+  },
+  {
+   "id": "wave22-b4",
+   "finished_at": "2026-10-04T15:30:16Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 4,
+   "note": "4 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
+  },
+  {
+   "id": "wave22-b7",
+   "finished_at": "2026-10-04T15:28:25Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0,
+   "note": "clean; 1 UNRESOLVED (similar-name advertiser w/ 2 active ads, unattributable)"
+  },
+  {
+   "id": "wave22-b2",
+   "finished_at": "2026-10-04T15:27:54Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "2 worker UNRESOLVED->NO_FB_PAGE reclasses (cross-state/personal)"
+  },
+  {
+   "id": "wave22-b1",
+   "finished_at": "2026-10-04T15:27:41Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 11,
+   "note": "11 worker UNRESOLVED->NO_FB_PAGE reclasses (wrong-biz/cross-state)"
+  },
+  {
+   "id": "wave22-b9",
+   "finished_at": "2026-10-04T15:27:08Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 2,
+   "note": "2 worker NO_ADS->UNRESOLVED (page identity uncertain)"
+  },
+  {
+   "id": "wave22-b10",
+   "finished_at": "2026-10-04T15:25:56Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 0,
+   "note": "clean; 11 login-walled URLs -> UNRESOLVED"
+  }
+ ],
+ "scaling_log": [
+  {
+   "at": "2026-10-04T08:21:56Z",
+   "from": 0,
+   "to": 2,
+   "reason": "Pilot launch: 2 workers, 12-agency micro-batches"
+  },
+  {
+   "at": "2026-10-04T08:24:43Z",
+   "from": 2,
+   "to": 4,
+   "reason": "Pilot clean: 24/24 verified, 0% errors, 2.5/min/worker. Scaling 2->4 workers."
+  },
+  {
+   "at": "2026-10-04T08:34:08Z",
+   "from": 4,
+   "to": 6,
+   "reason": "Wave 2 clean at 4 workers (48/48, 0% errors). Scaling 4->6."
+  },
+  {
+   "at": "2026-10-04T08:46:05Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 3 complete at 6 workers (72/72 incl. cleanups, 0% errors). Holding at 6 for wave 4."
+  },
+  {
+   "at": "2026-10-04T08:55:13Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 4 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 5."
+  },
+  {
+   "at": "2026-10-04T09:06:16Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 5 complete at 6 workers (72/72, 0% errors, 1st RUNNING ad found). Holding at 6 for wave 6."
+  },
+  {
+   "at": "2026-10-04T09:49:44Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 6 complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 7."
+  },
+  {
+   "at": "2026-10-04T09:59:37Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 7 complete at 6 workers (72/72, 0% errors). Holding at 6 for final tier-1 wave 8 (21 agencies)."
+  },
+  {
+   "at": "2026-10-04T10:16:11Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 9 (tier 2) complete at 6 workers (72/72, 0% errors, 4th RUNNING ad found). Tier-2 quality good; holding at 6 for wave 10."
+  },
+  {
+   "at": "2026-10-04T10:25:57Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 10 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 11."
+  },
+  {
+   "at": "2026-10-04T12:19:47Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 11 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 12."
+  },
+  {
+   "at": "2026-10-04T12:34:41Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 12 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 13."
+  },
+  {
+   "at": "2026-10-04T13:10:09Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 13 (tier 2) complete at 6 workers (72/72 incl. 1 relaunched batch, 0% errors). Holding at 6 for wave 14."
+  },
+  {
+   "at": "2026-10-04T13:21:46Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 14 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 15."
+  },
+  {
+   "at": "2026-10-04T13:31:46Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 15 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 16."
+  },
+  {
+   "at": "2026-10-04T13:48:26Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 16 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 17."
+  },
+  {
+   "at": "2026-10-04T14:05:02Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 17 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 18."
+  },
+  {
+   "at": "2026-10-04T14:18:34Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 18 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 19."
+  },
+  {
+   "at": "2026-10-04T14:33:01Z",
+   "from": 6,
+   "to": 6,
+   "reason": "Wave 19 (tier 2) complete at 6 workers (72/72, 0% errors). Holding at 6 for wave 20."
+  },
+  {
+   "at": "2026-10-04T14:44:45Z",
+   "from": 6,
+   "to": 10,
+   "reason": "Saroj requested 10-worker speed experiment for wave 21 (120 agencies)."
+  },
+  {
+   "at": "2026-10-04T15:09:53Z",
+   "from": 10,
+   "to": 0,
+   "reason": "Wave 21 closed: 120/120 agencies verified. Verdict: ~2.4x landing throughput vs 6-worker wave 20, 0 blocks/CAPTCHAs, worker quality unchanged."
+  },
+  {
+   "at": "2026-10-04T15:12:54Z",
+   "from": 0,
+   "to": 15,
+   "reason": "Saroj requested 15-worker parallel run for wave 22 (180 agencies, 15x12)."
+  },
+  {
+   "at": "2026-10-04T15:36:47Z",
+   "from": 15,
+   "to": 0,
+   "reason": "Wave 22 closed at 15 workers (180/180, 7.55/min full-window incl. one browser-task failure/retry; 0 CAPTCHA/block). Campaign paused: tier2 1164/2181 verified."
+  },
+  {
+   "at": "2026-10-04T15:49:39Z",
+   "from": 0,
+   "to": 20,
+   "reason": "Saroj requested 20-worker parallel run for wave 23 (240 agencies, 20x12) to measure indexing speed."
+  },
+  {
+   "at": "2026-10-04T16:28:06Z",
+   "from": 20,
+   "to": 0,
+   "reason": "CORRECTED: premature close (batch 20 was still running). True close logged separately."
+  },
+  {
+   "at": "2026-10-04T16:29:56Z",
+   "from": 20,
+   "to": 0,
+   "reason": "Wave 23 truly closed at 20 workers (240/240, 5.96/min full-window). Slower than 15 workers (7.55/min); login wall hit mid-wave, resolved via Saroj's FB login."
+  },
+  {
+   "at": "2026-10-04T16:54:04Z",
+   "from": 0,
+   "to": 15,
+   "reason": "Wave 24 launch: final 777 tier-2 agencies (65 batches of 12/9) at 15 workers \u2014 the measured sweet spot (7.55/min vs 5.96 at 20). Campaign runs to full tier-2 completion."
+  }
+ ],
+ "status": "running",
+ "throughput_by_workers": {
+  "2": 5.0,
+  "4": 6.5,
+  "6": 4.3,
+  "10": 6.4,
+  "15": 7.55
+ },
+ "tiers": {
+  "tier1_exact_id": {
+   "done": 452,
+   "total": 452
+  },
+  "tier2_url_no_id": {
+   "done": 1908,
+   "total": 2181
+  },
+  "tier3_name_only": {
+   "done": 0,
+   "total": 192
+  },
+  "tier4_no_fb": {
+   "done": 0,
+   "total": 1319
+  }
+ },
+ "updated_at": "2026-10-04T15:12:54Z",
+ "verified_target": 4144,
+ "verified_total": 2360,
+ "workers_active": 15,
+ "workers_target": 15,
+ "running_ads": 40,
+ "throughput_method": "agencies/min measured as repo-commit landing windows (includes manual commit processing between batches). 2/4 by auto-scaler probes; 6 from wave 20 (72 agencies, 14:37-14:54 UTC); 10 from wave 21 (120 agencies, 14:51-15:10 UTC, incl. one regenerated batch).",
+ "wave22_started_at": "2026-10-04T15:12:54Z",
+ "wave23_launch_at": "2026-10-04T15:49:39Z",
+ "wave23_close_at": "2026-10-04T16:29:56Z",
+ "wave23_rate": 5.96
 }
