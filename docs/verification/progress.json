@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 34,
+ "disagreements": 38,
  "error_rate": 0.0,
- "last_commit": "2be22354bbf9f08f8c9efcff254c71153b56a1cc",
+ "last_commit": "276aff0347089320ad331db4cefda468cbc6e12d",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 6 running: 2/6 workers active. 335/452 tier-1 verified (74%), 34 page mismatches, 1 RUNNING ad, 0 blocks.",
+ "note": "Wave 6 running: 1/6 workers active. 347/452 tier-1 verified (77%), 38 page mismatches (~11%), 1 RUNNING ad, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave6-b5",
+   "finished_at": "2026-10-04T09:11:05Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "3 city-mismatch lookalikes with specific conflicting addresses"
+  },
   {
    "id": "wave6-b6",
    "finished_at": "2026-10-04T09:10:35Z",
@@ -77,13 +85,6 @@
    "verified": 12,
    "disagreements": 0,
    "note": "2 low-confidence name mismatches flagged in notes"
-  },
-  {
-   "id": "wave5-b5",
-   "finished_at": "2026-10-04T08:58:43Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0
   }
  ],
  "scaling_log": [
@@ -131,7 +132,7 @@
  },
  "tiers": {
   "tier1_exact_id": {
-   "done": 335,
+   "done": 347,
    "total": 452
   },
   "tier2_url_no_id": {
@@ -147,10 +148,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T09:10:40Z",
+ "updated_at": "2026-10-04T09:11:17Z",
  "verified_target": 4144,
- "verified_total": 335,
- "workers_active": 2,
+ "verified_total": 347,
+ "workers_active": 1,
  "workers_target": 6,
  "running_ads": 1
 }
