@@ -6,7 +6,7 @@
 <title>Targeto · Muse Verification Campaign</title>
 <style>
   :root { --bg:#0e1116; --card:#171c24; --line:#2a3140; --text:#e8ecf1; --mut:#9aa4b5;
-          --green:#3fb950; --amber:#d29922; --red:#f85149; --blue:#58a6ff; }
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --blue:#58a6ff; --purple:#bc8cff; }
   * { box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:-apple-system,"Segoe UI",Roboto,sans-serif;
          margin:0; padding:24px; }
@@ -17,9 +17,12 @@
   .pill.running { background:#12351c; color:var(--green); border:1px solid #2a5a34; }
   .pill.paused  { background:#3a2c10; color:var(--amber); border:1px solid #6b541e; }
   .pill.idle    { background:#1c2330; color:var(--mut);  border:1px solid var(--line); }
+  .pill.auto    { background:#1a2340; color:var(--blue);  border:1px solid #2c3f6f; }
+  .pill.manual  { background:#331a2e; color:var(--purple); border:1px solid #5c2f52; }
   .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:16px 0; }
   .kpi { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }
   .kpi .v { font-size:26px; font-weight:700; }
+  .kpi .v small { font-size:13px; color:var(--mut); font-weight:400; }
   .kpi .l { color:var(--mut); font-size:12px; margin-top:4px; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
   .card h2 { font-size:15px; margin:0 0 12px; }
@@ -27,6 +30,10 @@
   .tier .row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
   .bar { height:8px; background:#0a0d12; border-radius:4px; overflow:hidden; }
   .bar > div { height:100%; background:var(--blue); border-radius:4px; transition:width .5s; }
+  .tput { margin-bottom:8px; }
+  .tput .row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
+  .tput .bar > div { background:var(--green); }
+  .tput .bar > div.peak { background:var(--amber); }
   table { width:100%; border-collapse:collapse; font-size:13px; }
   th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
   th { color:var(--mut); font-weight:600; }
@@ -34,30 +41,49 @@
   .btn { display:inline-block; background:#1f6feb; color:#fff; border:none; border-radius:8px;
          padding:10px 18px; font-size:14px; cursor:pointer; text-decoration:none; }
   .btn:hover { background:#388bfd; }
+  .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--text); }
   code { background:#0a0d12; padding:2px 6px; border-radius:4px; font-size:12px; }
   .foot { color:var(--mut); font-size:12px; margin-top:16px; text-align:center; }
   .warn { color:var(--amber); }
+  .log { font-size:13px; }
+  .log .entry { padding:8px 0; border-bottom:1px solid var(--line); }
+  .log .t { color:var(--mut); font-size:12px; }
+  .up { color:var(--green); } .down { color:var(--red); } .hold { color:var(--amber); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>🤖 Muse Verification Campaign</h1>
-  <div class="sub">Independent FB-page + ad-status checks for all 4,144 agencies · updates every 30s</div>
+  <div class="sub">Independent FB-page + ad-status checks for all 4,144 agencies · auto-scaling workers · updates every 30s</div>
 
   <div><span id="status-pill" class="pill idle">IDLE</span>
+       <span id="mode-pill" class="pill auto" style="margin-left:6px">AUTO</span>
        <span class="note" id="updated-ago" style="margin-left:10px"></span></div>
 
   <div class="kpis">
     <div class="kpi"><div class="v" id="k-workers">0</div><div class="l">workers active</div></div>
     <div class="kpi"><div class="v" id="k-verified">0</div><div class="l">agencies verified / 4,144</div></div>
-    <div class="kpi"><div class="v" id="k-rate">0</div><div class="l">indexed per minute</div></div>
+    <div class="kpi"><div class="v" id="k-rate">0</div><div class="l">indexed per minute <small id="k-perworker"></small></div></div>
     <div class="kpi"><div class="v" id="k-eta">—</div><div class="l">ETA at current rate</div></div>
+    <div class="kpi"><div class="v" id="k-errors">0%</div><div class="l">check error rate</div></div>
     <div class="kpi"><div class="v" id="k-disagree">0</div><div class="l">⚠️ disagreements vs pipeline</div></div>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Auto-scaler — throughput by worker count</h2>
+    <div class="note" style="margin-bottom:10px">Measured agencies/minute at each pool size. The scaler probes upward while
+      throughput climbs and backs off at the first sign of throttling or diminishing returns.</div>
+    <div id="tput"></div>
   </div>
 
   <div class="card">
     <h2>Tier progress</h2>
     <div id="tiers"></div>
+  </div>
+
+  <div class="card">
+    <h2>📜 Scaling log <span class="note">why the pool is the size it is</span></h2>
+    <div class="log" id="scaling-log"><div class="note">No scaling decisions yet.</div></div>
   </div>
 
   <div class="card">
@@ -72,15 +98,16 @@
   </div>
 
   <div class="card">
-    <h2>🎛️ Manager control</h2>
+    <h2>🎛️ Manager</h2>
     <div class="note" style="margin-bottom:10px">
-      Workers read <code>worker_config.json</code> every few minutes. To speed up or slow down,
-      edit <code>desired_workers</code> (1–8) or flip <code>paused</code> — the change takes effect
-      within minutes, no redeploy needed.
+      The auto-scaler manages the worker pool on its own — you just watch. It scales up while
+      throughput climbs, holds when flat, and backs off the moment error rates rise (Meta throttling).
+      Manual override is for emergencies only: edit <code>worker_config.json</code>
+      (<code>paused: true</code> stops everything; <code>mode: "manual"</code> + <code>desired_workers</code>
+      pins a fixed pool). Changes take effect within minutes.
     </div>
-    <div class="note" style="margin-bottom:12px">Current target: <b id="cfg-workers">–</b> workers ·
-      <span id="cfg-paused">–</span></div>
-    <a class="btn" id="edit-config" target="_blank" href="#">Edit worker config on GitHub</a>
+    <a class="btn ghost" id="edit-config" target="_blank" href="#">Emergency override on GitHub</a>
+    <a class="btn ghost" id="view-protocol" target="_blank" href="#" style="margin-left:8px">Scaling protocol</a>
   </div>
 
   <div class="foot">Live campaign dashboard · Targeto</div>
@@ -90,6 +117,8 @@
 const REPO = "Sarojkumar9999/targeto-senior-home-care-pipeline";
 document.getElementById("edit-config").href =
   `https://github.com/${REPO}/edit/main/docs/verification/worker_config.json`;
+document.getElementById("view-protocol").href =
+  `https://github.com/${REPO}/blob/main/docs/verification/COORDINATOR.md`;
 
 const TIER_LABELS = {
   tier1_exact_id: "Tier 1 · exact FB page ID",
@@ -101,15 +130,20 @@ const TIER_LABELS = {
 function ago(iso) {
   if (!iso) return "";
   const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
-  if (s < 60) return `updated ${Math.floor(s)}s ago`;
-  if (s < 3600) return `updated ${Math.floor(s/60)}m ago`;
-  return `updated ${Math.floor(s/3600)}h ago`;
+  if (s < 60) return `${Math.floor(s)}s ago`;
+  if (s < 3600) return `${Math.floor(s/60)}m ago`;
+  return `${Math.floor(s/3600)}h ago`;
 }
 function fmtEta(mins) {
   if (!isFinite(mins) || mins <= 0) return "—";
   if (mins < 60) return `${Math.round(mins)}m`;
   if (mins < 60*48) return `${(mins/60).toFixed(1)}h`;
   return `${(mins/60/24).toFixed(1)}d`;
+}
+function fmtTime(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleDateString() + " " + d.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
 }
 
 async function load() {
@@ -125,16 +159,46 @@ function render(p) {
   const st = (p.status || "idle").toUpperCase();
   pill.textContent = st;
   pill.className = "pill " + (p.status === "running" ? "running" : p.status === "paused" ? "paused" : "idle");
-  document.getElementById("updated-ago").textContent = ago(p.updated_at);
+  const mode = document.getElementById("mode-pill");
+  const m = (p.mode || "auto").toUpperCase();
+  mode.textContent = m;
+  mode.className = "pill " + (m === "AUTO" ? "auto" : "manual");
+  document.getElementById("updated-ago").textContent = "updated " + ago(p.updated_at);
 
-  document.getElementById("k-workers").textContent = `${p.workers_active || 0} / ${p.desired_workers || 0}`;
+  const target = p.workers_target && p.workers_target !== p.workers_active
+    ? ` → ${p.workers_target}` : "";
+  document.getElementById("k-workers").textContent = `${p.workers_active || 0}${target} / ${p.desired_workers || 0}`;
   document.getElementById("k-verified").textContent = (p.verified_total || 0).toLocaleString();
-  document.getElementById("k-rate").textContent = (p.per_minute || 0).toFixed(1);
+  document.getElementById("k-rate").innerHTML =
+    `${(p.per_minute || 0).toFixed(1)}<small> /min</small>`;
+  document.getElementById("k-perworker").textContent =
+    p.workers_active ? `(${(p.per_worker_per_minute || 0).toFixed(2)}/worker)` : "";
   const remaining = (p.verified_target || 4144) - (p.verified_total || 0);
   document.getElementById("k-eta").textContent =
     (p.per_minute > 0 && remaining > 0) ? fmtEta(remaining / p.per_minute) : "—";
+  const er = document.getElementById("k-errors");
+  er.textContent = `${((p.error_rate || 0) * 100).toFixed(1)}%`;
+  er.style.color = p.error_rate > 0.1 ? "var(--red)" : p.error_rate > 0.05 ? "var(--amber)" : "";
   document.getElementById("k-disagree").textContent = (p.disagreements || 0).toLocaleString();
 
+  // throughput by worker count
+  const tp = document.getElementById("tput");
+  const tbw = p.throughput_by_workers || {};
+  const keys = Object.keys(tbw).map(Number).sort((a,b) => a-b);
+  if (!keys.length) {
+    tp.innerHTML = `<div class="note">No measurements yet — the scaler records throughput at each pool size as it probes.</div>`;
+  } else {
+    const max = Math.max(...keys.map(k => tbw[k]));
+    tp.innerHTML = keys.map(k => {
+      const v = tbw[k], pct = max ? Math.round(100 * v / max) : 0;
+      const peak = v === max ? "peak" : "";
+      return `<div class="tput"><div class="row"><span>${k} worker${k>1?"s":""} ${v===max?"⭐":""}</span>
+        <span>${v.toFixed(2)}/min</span></div>
+        <div class="bar"><div class="${peak}" style="width:${pct}%"></div></div></div>`;
+    }).join("");
+  }
+
+  // tiers
   const tc = document.getElementById("tiers");
   tc.innerHTML = "";
   for (const [key, t] of Object.entries(p.tiers || {})) {
@@ -147,10 +211,23 @@ function render(p) {
     tc.appendChild(div);
   }
 
+  // scaling log
+  const sl = document.getElementById("scaling-log");
+  if (p.scaling_log && p.scaling_log.length) {
+    sl.innerHTML = p.scaling_log.slice(0, 12).map(e => {
+      const cls = e.to > e.from ? "up" : e.to < e.from ? "down" : "hold";
+      const arrow = e.to > e.from ? "↗" : e.to < e.from ? "↘" : "→";
+      return `<div class="entry"><span class="t">${fmtTime(e.at)}</span> ·
+        <b class="${cls}">${arrow} ${e.from} → ${e.to} workers</b><br>
+        <span class="note">${e.reason || ""}</span></div>`;
+    }).join("");
+  }
+
+  // batches
   const tb = document.getElementById("batches");
   if (p.recent_batches && p.recent_batches.length) {
     tb.innerHTML = p.recent_batches.slice(0, 10).map(b =>
-      `<tr><td>${b.id}</td><td>${b.finished_at ? new Date(b.finished_at).toLocaleString() : "—"}</td>
+      `<tr><td>${b.id}</td><td>${fmtTime(b.finished_at)}</td>
        <td>${b.agencies}</td><td>${b.verified}</td><td>${b.disagreements || 0}</td></tr>`).join("");
   }
 
@@ -158,13 +235,6 @@ function render(p) {
     document.getElementById("persist").innerHTML =
       `💾 Last persisted: <b>${ago(p.last_commit_at)}</b> · commit <code>${(p.last_commit || "").slice(0,7)}</code> — ` +
       `every batch is pushed before the next starts, so verified rows are never lost.`;
-  }
-  document.getElementById("cfg-workers").textContent = p.desired_workers ?? "–";
-  document.getElementById("cfg-paused").textContent = p.status === "paused" ? "⏸ paused" : "▶ active";
-  if (p.note) {
-    const n = document.createElement("div");
-    n.className = "note warn"; n.style.marginTop = "8px"; n.textContent = p.note;
-    document.querySelector(".wrap").appendChild(n);
   }
 }
 
