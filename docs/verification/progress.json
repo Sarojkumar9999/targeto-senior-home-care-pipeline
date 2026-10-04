@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 117,
+ "disagreements": 120,
  "error_rate": 0.0,
- "last_commit": "e1ca417bbe39d7022b07e406615cfde38a97aebb",
+ "last_commit": "56a4484fb148959bb780063aa22751b2474ecfc4",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 11 running: 3/6 workers active. 632 total verified (tier 1: 452/452; tier 2: 180/2181). 117 page mismatches, 5 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 11 running: 2/6 workers active. 644 total verified (tier 1: 452/452; tier 2: 192/2181). 120 page mismatches, 6 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave11-b5",
+   "finished_at": "2026-10-04T10:35:10Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "tier-2: 3 rejections (real-estate, furniture, wrong-city page); NEW live advertiser: ACME Home Care LLC (client-acquisition ad since 2026-01-01)"
+  },
   {
    "id": "wave11-b1",
    "finished_at": "2026-10-04T10:34:10Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 9,
    "note": "tier-2 rough batch: 9 wrong-business/cross-state rejections; 2 confirmed matches"
-  },
-  {
-   "id": "wave9-b1",
-   "finished_at": "2026-10-04T10:16:04Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 1,
-   "note": "4TH RUNNING AD: Adoration Home Health (Dallas TX), 2 active caregiver-recruitment campaigns"
   }
  ],
  "scaling_log": [
@@ -163,7 +163,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 180,
+   "done": 192,
    "total": 2181
   },
   "tier3_name_only": {
@@ -175,10 +175,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:34:27Z",
+ "updated_at": "2026-10-04T10:35:16Z",
  "verified_target": 4144,
- "verified_total": 632,
- "workers_active": 3,
+ "verified_total": 644,
+ "workers_active": 2,
  "workers_target": 6,
- "running_ads": 5
+ "running_ads": 6
 }
