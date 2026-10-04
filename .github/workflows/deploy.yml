@@ -1,0 +1,39 @@
+name: Deploy to Oracle VM
+
+# Push to main → the VM pulls, rebuilds ONLY the dashboard container,
+# and health-checks it. Postgres and its data volume are never touched.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "backups/**"
+      - "**.md"
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, targeto-vm]
+    steps:
+      - name: Pull latest code
+        run: |
+          cd ~/targeto
+          git fetch origin
+          git reset --hard origin/main
+          git log --oneline -1
+
+      - name: Rebuild dashboard only (database untouched)
+        run: |
+          cd ~/targeto
+          sudo docker compose -f deploy/docker-compose.yml up -d --build dashboard
+
+      - name: Health check
+        run: |
+          for i in $(seq 1 12); do
+            if curl -sf http://localhost:8010/login -o /dev/null; then
+              echo "dashboard OK"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "dashboard did NOT come up" >&2
+          sudo docker logs targeto-dashboard --tail 30 >&2 || true
+          exit 1
