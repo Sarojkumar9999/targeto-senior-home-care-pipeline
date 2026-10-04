@@ -2,10 +2,10 @@
  "desired_workers": 6,
  "disagreements": 9,
  "error_rate": 0.0,
- "last_commit": "6d758621bf3e5387a0ad94e9e492fa7c83c35c51",
+ "last_commit": "9785d7f19b6213ced0519bb02f496602fc824061",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Wave 3: 4/6 batches + cleanup done (118 verified, 9 page mismatches, 0 blocks). 2 wave-3 workers + 1 cleanup (2 agencies) running.",
+ "note": "Wave 3: 4/6 batches done (118 verified, 9 page mismatches, 0 blocks). 2 wave-3 workers + 1 cleanup (2 agencies) running.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
@@ -126,7 +126,7 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T08:42:00Z",
+ "updated_at": "2026-10-04T08:42:11Z",
  "verified_target": 4144,
  "verified_total": 118,
  "workers_active": 3,
