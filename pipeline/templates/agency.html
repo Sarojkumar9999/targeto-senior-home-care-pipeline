@@ -102,6 +102,27 @@
         <div class="kv" style="margin-top:8px">📢 {{ (cr.body or '')[:140] }} <span class="note">CTA: {{ cr.cta or '—' }}</span></div>
       {% endfor %}
     </div>
+
+    <div class="card" style="border-color:#2c4a6f">
+      <h2 style="margin-top:0">🤖 Muse verification <span class="note">independent live browser check</span></h2>
+      {% if a.muse_ad_checked_at or a.muse_fb_checked_at %}
+        <div class="kv"><b>FB page</b>
+          {% if a.muse_fb_page_url %}<a href="{{ a.muse_fb_page_url }}" target="_blank">{{ a.muse_fb_page or 'link ↗' }}</a>{% else %}{{ a.muse_fb_page or '—' }}{% endif %}
+          {% if a.muse_fb_page and a.fb_page and (a.muse_fb_page|lower == a.fb_page|lower) %}<span title="Matches the pipeline's find">✅</span>
+          {% elif a.muse_fb_page %}<span title="Pipeline found: {{ a.fb_page or 'nothing' }}">⚠️ differs</span>{% endif %}
+          <span class="note">{{ a.muse_fb_confidence or '' }}{% if a.muse_fb_checked_at %} · {{ a.muse_fb_checked_at.strftime('%Y-%m-%d') }}{% endif %}</span>
+        </div>
+        <div class="kv"><b>Ads</b>
+          <span class="pill {{ {'RUNNING':'progress','NO_ADS':'not'}[a.muse_ad_status] if a.muse_ad_status in ('RUNNING','NO_ADS') else 'new' }}">{{ a.muse_ad_status }}</span>
+          {% if a.muse_ad_status == a.ad_status %}<span title="Matches the pipeline">✅</span>
+          {% else %}<span title="Pipeline says {{ a.ad_status }}">⚠️ pipeline: {{ a.ad_status }}</span>{% endif %}
+          <span class="note">{% if a.muse_ad_checked_at %}{{ a.muse_ad_checked_at.strftime('%Y-%m-%d') }}{% endif %}</span>
+        </div>
+        {% if a.muse_ad_notes %}<div class="kv"><span class="note">{{ a.muse_ad_notes }}</span></div>{% endif %}
+      {% else %}
+        <span class="note">Not yet live-checked by Muse — queue it for a browser verification batch.</span>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
