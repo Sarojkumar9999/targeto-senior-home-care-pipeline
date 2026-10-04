@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 71,
+ "disagreements": 74,
  "error_rate": 0.0,
- "last_commit": "c0ca4e775d70263cc0a1af1648f4b150b45e9459",
+ "last_commit": "e77898b3f38b1014129a913cfcf41307b4a4894f",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 9 running: 2/6 workers active. 500 total verified (tier 1 complete 452/452; tier 2: 48/2181). 71 page mismatches, 3 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 9 running: 1/6 workers active. 512 total verified (tier 1 complete 452/452; tier 2: 60/2181). 74 page mismatches, 3 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave9-b4",
+   "finished_at": "2026-10-04T10:15:19Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 3,
+   "note": "tier-2: Norton/Advocate/Altercare lookalikes rejected; Indeed ads correctly not attributed"
+  },
   {
    "id": "wave9-b2",
    "finished_at": "2026-10-04T10:12:37Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 0,
    "note": "all unofficial pages, 0 ads; 1 high-confidence Houston match"
-  },
-  {
-   "id": "wave7-b3",
-   "finished_at": "2026-10-04T09:55:47Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 0,
-   "note": "1 confirmed real page (Great Thinkers, Mesa AZ); 10 unofficial pages reclassified NO_FB_PAGE->NO_ADS per rubric consistency; 2 UNRESOLVED"
   }
  ],
  "scaling_log": [
@@ -151,7 +151,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 48,
+   "done": 60,
    "total": 2181
   },
   "tier3_name_only": {
@@ -163,10 +163,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T10:12:42Z",
+ "updated_at": "2026-10-04T10:15:26Z",
  "verified_target": 4144,
- "verified_total": 500,
- "workers_active": 2,
+ "verified_total": 512,
+ "workers_active": 1,
  "workers_target": 6,
  "running_ads": 3
 }
