@@ -1,14 +1,22 @@
 {
  "desired_workers": 6,
- "disagreements": 155,
+ "disagreements": 159,
  "error_rate": 0.0,
- "last_commit": "a279892e883ddb930e771f7901ea9f60e7684c87",
+ "last_commit": "40839a0e4569bc36b913040c7d99d3670ceddce5",
  "last_commit_at": null,
  "mode": "auto",
- "note": "Tier 2 wave 12 running: 2/6 workers active. 716 total verified (tier 1: 452/452; tier 2: 264/2181). 155 page mismatches, 7 RUNNING ads, 0 blocks.",
+ "note": "Tier 2 wave 12 running: 1/6 workers active. 728 total verified (tier 1: 452/452; tier 2: 276/2181). 159 page mismatches, 7 RUNNING ads, 0 blocks.",
  "per_minute": 6.5,
  "per_worker_per_minute": 2.8,
  "recent_batches": [
+  {
+   "id": "wave12-b1",
+   "finished_at": "2026-10-04T12:27:31Z",
+   "agencies": 12,
+   "verified": 12,
+   "disagreements": 4,
+   "note": "tier-2: 4 rejections (Missouri company x2, 2 construction companies)"
+  },
   {
    "id": "wave12-b3",
    "finished_at": "2026-10-04T12:25:38Z",
@@ -80,14 +88,6 @@
    "verified": 12,
    "disagreements": 5,
    "note": "tier-2: 5 wrong-business rejections (wrestling federation, concessions, consulting agency, baby goods, feminine care)"
-  },
-  {
-   "id": "wave11-b3",
-   "finished_at": "2026-10-04T10:30:33Z",
-   "agencies": 12,
-   "verified": 12,
-   "disagreements": 6,
-   "note": "tier-2: 6 rejections; NEW live advertiser: Absolute Health Professionals (South Daytona FL, client-acquisition ad since 2026-09-24)"
   }
  ],
  "scaling_log": [
@@ -169,7 +169,7 @@
    "total": 452
   },
   "tier2_url_no_id": {
-   "done": 264,
+   "done": 276,
    "total": 2181
   },
   "tier3_name_only": {
@@ -181,10 +181,10 @@
    "total": 1319
   }
  },
- "updated_at": "2026-10-04T12:25:45Z",
+ "updated_at": "2026-10-04T12:27:38Z",
  "verified_target": 4144,
- "verified_total": 716,
- "workers_active": 2,
+ "verified_total": 728,
+ "workers_active": 1,
  "workers_target": 6,
  "running_ads": 7
 }
