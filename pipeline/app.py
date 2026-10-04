@@ -225,6 +225,13 @@ def build_filters(args):
         where.append("dnc IS TRUE")
     else:
         where.append("dnc IS NOT TRUE")  # DNC leads are hidden from every normal view
+    # Muse live-verification filter (independent of the pipeline's own detection)
+    if args.get("muse") == "verified":
+        where.append("muse_ad_checked_at IS NOT NULL")
+    elif args.get("muse") == "disagree":
+        where.append("muse_ad_checked_at IS NOT NULL AND muse_ad_status IS DISTINCT FROM ad_status")
+    elif args.get("muse") == "unchecked":
+        where.append("muse_ad_checked_at IS NULL")
     if args.get("has") == "phone":
         where.append("coalesce(phone, owner_phone) IS NOT NULL")
     elif args.get("has") == "website":
@@ -762,7 +769,8 @@ def leads():
         f"""SELECT id, npi, org_name, city, state, postal_code, phone, owner_phone,
                    owner_first_name, owner_last_name, owner_title, website, fb_page,
                    fb_page_url, fb_page_id, ad_status, outreach_status, review_needed,
-                   enumeration_date, updated_at, dnc, follow_up_at, email, email_source
+                   enumeration_date, updated_at, dnc, follow_up_at, email, email_source,
+                   muse_fb_page, muse_fb_page_url, muse_ad_status, muse_ad_checked_at, muse_ad_notes
             FROM agencies WHERE {where}
             ORDER BY review_needed DESC, {sort}, org_name
             LIMIT %s OFFSET %s""",
@@ -785,6 +793,11 @@ def leads():
                              count(*) FILTER (WHERE fb_page_url IS NOT NULL) AS has_fb,
                              count(*) FILTER (WHERE fb_page_url IS NULL) AS no_fb
                       FROM agencies WHERE {where_fb}""", params_fb, one=True)
+    # Muse verification counts — same filters as the list
+    muse_counts = q(f"""SELECT count(*) FILTER (WHERE muse_ad_checked_at IS NOT NULL) AS verified,
+                               count(*) FILTER (WHERE muse_ad_checked_at IS NOT NULL
+                                                 AND muse_ad_status IS DISTINCT FROM ad_status) AS disagree
+                        FROM agencies WHERE {where_fb}""", params_fb, one=True)
     live_states = q("SELECT DISTINCT state FROM agencies WHERE state IN ('FL','TX','AZ')")
     local_time = {r[0]: us_time_parts(r[0]) for r in live_states if us_time_parts(r[0])}
     tpls = q("SELECT id, name, kind, is_default FROM email_templates ORDER BY is_default DESC, name")
@@ -804,6 +817,7 @@ def leads():
         tab=tab, ad_tabs=AD_TABS, statuses=STATUSES, cmap=cmap,
         sel=args, PAGE_SIZES=PAGE_SIZES, page_sizes=PAGE_SIZES, saved_views=saved_views,
         base_query=base_query, adlib_urls=adlib_urls, fb_counts=fb_counts,
+        muse_counts=muse_counts,
         fb_query=fb_query, phone_e164=phone_e164, owner_urls=owner_urls,
         generic_ids=generic_ids, personal_ids=personal_set,
         local_time=local_time, us_time=us_time_parts, now=datetime.now(timezone.utc),
@@ -1203,7 +1217,8 @@ def export_csv():
     rows = q(
         f"""SELECT org_name, city, state, postal_code, phone, owner_phone,
                    owner_first_name, owner_last_name, owner_title,
-                   website, fb_page, fb_page_url, ad_status, outreach_status, notes, npi
+                   website, fb_page, fb_page_url, ad_status, outreach_status, notes, npi,
+                   muse_ad_status, muse_ad_notes
             FROM agencies WHERE {where} ORDER BY state, city, org_name""",
         params,
     )
@@ -1211,7 +1226,8 @@ def export_csv():
     w = csv.writer(buf)
     w.writerow(["Agency", "City", "State", "ZIP", "Phone", "Owner Phone",
                 "Owner First", "Owner Last", "Owner Title",
-                "Website", "FB Page", "FB Page URL", "Ad Status", "Outreach Status", "Notes", "NPI"])
+                "Website", "FB Page", "FB Page URL", "Ad Status", "Outreach Status", "Notes", "NPI",
+                "Muse Ad Status", "Muse Notes"])
     w.writerows(rows)
     return Response(buf.getvalue(), mimetype="text/csv",
                     headers={"Content-Disposition": "attachment; filename=targeto_call_sheet.csv"})
