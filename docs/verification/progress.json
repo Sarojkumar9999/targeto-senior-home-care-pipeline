@@ -2,7 +2,7 @@
  "desired_workers": 6,
  "disagreements": 193,
  "error_rate": 0.0,
- "last_commit": "9622c9790d96cf332b3593fcbf2fb98bd668101e",
+ "last_commit": "f6dff5744c117058ad6c6b54a01ba984dadb35c1",
  "last_commit_at": null,
  "mode": "auto",
  "note": "Tier 2 wave 14 running: 6 workers x 12 agencies. Wave 13 complete: 812 total verified (tier 1: 452/452; tier 2: 360/2181). 193 page mismatches, 9 RUNNING ads, 0 blocks.",
