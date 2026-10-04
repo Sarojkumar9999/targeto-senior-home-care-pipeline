@@ -1,1 +1,38 @@
-{"desired_workers":6,"disagreements":0,"error_rate":0.0,"last_commit":null,"last_commit_at":null,"mode":"auto","note":"Campaign not started yet — workers launch after your go-ahead.","per_minute":0.0,"per_worker_per_minute":0.0,"recent_batches":[],"scaling_log":[],"status":"idle","throughput_by_workers":{},"tiers":{"tier1_exact_id":{"done":0,"total":452},"tier2_url_no_id":{"done":0,"total":2181},"tier3_name_only":{"done":0,"total":192},"tier4_no_fb":{"done":0,"total":1319}},"updated_at":"2026-10-04T08:10:00Z","verified_target":4144,"verified_total":0,"workers_active":0,"workers_target":6}
+{
+ "desired_workers": 6,
+ "disagreements": 0,
+ "error_rate": 0.0,
+ "last_commit": "35b5bca65344c37f2b10804e2d69ae15d6a6e876",
+ "last_commit_at": null,
+ "mode": "auto",
+ "note": "Coordinator online. Pilot briefs ready (2x12 tier-1 agencies) \u2014 browser-task launch pending parent delegation: coordinator subagents cannot spawn browser tasks directly.",
+ "per_minute": 0.0,
+ "per_worker_per_minute": 0.0,
+ "recent_batches": [],
+ "scaling_log": [],
+ "status": "idle",
+ "throughput_by_workers": {},
+ "tiers": {
+  "tier1_exact_id": {
+   "done": 0,
+   "total": 452
+  },
+  "tier2_url_no_id": {
+   "done": 0,
+   "total": 2181
+  },
+  "tier3_name_only": {
+   "done": 0,
+   "total": 192
+  },
+  "tier4_no_fb": {
+   "done": 0,
+   "total": 1319
+  }
+ },
+ "updated_at": "2026-10-04T08:16:59Z",
+ "verified_target": 4144,
+ "verified_total": 0,
+ "workers_active": 0,
+ "workers_target": 6
+}
