@@ -232,6 +232,8 @@ def build_filters(args):
         where.append("muse_ad_checked_at IS NOT NULL AND muse_ad_status IS DISTINCT FROM ad_status")
     elif args.get("muse") == "unchecked":
         where.append("muse_ad_checked_at IS NULL")
+    elif args.get("muse") == "review-queue":
+        where.append("manual_review_needed IS TRUE")
     if args.get("has") == "phone":
         where.append("coalesce(phone, owner_phone) IS NOT NULL")
     elif args.get("has") == "website":
@@ -770,7 +772,8 @@ def leads():
                    owner_first_name, owner_last_name, owner_title, website, fb_page,
                    fb_page_url, fb_page_id, ad_status, outreach_status, review_needed,
                    enumeration_date, updated_at, dnc, follow_up_at, email, email_source,
-                   muse_fb_page, muse_fb_page_url, muse_ad_status, muse_ad_checked_at, muse_ad_notes
+                   muse_fb_page, muse_fb_page_url, muse_ad_status, muse_ad_checked_at, muse_ad_notes,
+                   manual_review_needed, review_task
             FROM agencies WHERE {where}
             ORDER BY review_needed DESC, {sort}, org_name
             LIMIT %s OFFSET %s""",
@@ -796,7 +799,8 @@ def leads():
     # Muse verification counts — same filters as the list
     muse_counts = q(f"""SELECT count(*) FILTER (WHERE muse_ad_checked_at IS NOT NULL) AS verified,
                                count(*) FILTER (WHERE muse_ad_checked_at IS NOT NULL
-                                                 AND muse_ad_status IS DISTINCT FROM ad_status) AS disagree
+                                                 AND muse_ad_status IS DISTINCT FROM ad_status) AS disagree,
+                               count(*) FILTER (WHERE manual_review_needed IS TRUE) AS review_queue
                         FROM agencies WHERE {where_fb}""", params_fb, one=True)
     live_states = q("SELECT DISTINCT state FROM agencies WHERE state IN ('FL','TX','AZ')")
     local_time = {r[0]: us_time_parts(r[0]) for r in live_states if us_time_parts(r[0])}

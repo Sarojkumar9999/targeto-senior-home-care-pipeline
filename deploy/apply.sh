@@ -8,7 +8,8 @@
 #      into a git checkout; a backup is left at ~/targeto.bak).
 #   2. Applies db/migrations/*.sql to Postgres (new columns etc.).
 #   3. Rebuilds ONLY the dashboard container.
-#   4. Imports data/muse_verifications.csv into the muse_* columns.
+#   4. Imports data/fb_page_corrections.csv (corrected pages, verified
+#      statuses, manual review queue) into the muse_* columns.
 #   5. Health-checks the dashboard.
 #
 # Postgres and its data volume are NEVER wiped or recreated.
@@ -38,11 +39,13 @@ done
 echo "== 3/5 rebuilding dashboard (database untouched)"
 sudo docker compose -f deploy/docker-compose.yml up -d --build dashboard
 
-echo "== 4/5 importing Muse verifications"
-if [ -f data/muse_verifications.csv ]; then
-  sudo docker compose -f deploy/docker-compose.yml run --rm dashboard python -m pipeline.muse_import
+echo "== 4/5 importing Muse verifications (corrected pages + manual review queue)"
+if [ -f data/fb_page_corrections.csv ]; then
+  sudo docker compose -f deploy/docker-compose.yml run --rm dashboard python -m pipeline.muse_import data/fb_page_corrections.csv
+elif [ -f data/muse_verifications.csv ]; then
+  sudo docker compose -f deploy/docker-compose.yml run --rm dashboard python -m pipeline.muse_import data/muse_verifications.csv
 else
-  echo "no data/muse_verifications.csv yet, skipping"
+  echo "no corrections csv yet, skipping"
 fi
 
 echo "== 5/5 health check"
