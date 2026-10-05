@@ -10,15 +10,35 @@ Corrections CSV header (exact):
   review_task,pipeline_stored_url_was_wrong,verifier_notes
 
 Mapping (this is the import Saroj asked for):
-- verified_ad_status  -> muse_ad_status  ("import this as the answer, it
-  replaces your manual check" — the campaign already did the Ad Library
-  work for ~3,800 of 4,144 agencies)
+- verified_ad_status  -> muse_ad_status  (audit) AND -> ad_status (PRIMARY
+  answer). Saroj 2026-10-06: "in has fb page, update with your muse filter
+  and not old one, same goes to ads status and other filters as well - u
+  have more accurate data than the previous stale db". PENDING (not a
+  pipeline tab value) stays muse-only; it does not occur in the final export.
 - verified_fb_page*   -> muse_fb_page / muse_fb_page_id / muse_fb_page_url /
-  muse_fb_confidence (the CORRECTED page data; the pipeline's own stored
-  URL was wrong for ~495 rows)
+  muse_fb_confidence (audit) AND, when verifier-confirmed, -> fb_page /
+  fb_page_id / fb_page_url (PRIMARY). Rules:
+    * NO_FB_PAGE          -> clear primary fb_page/fb_page_id/fb_page_url.
+      verified_fb_page may hold a low-confidence REJECTED candidate here
+      (personal profile etc.) - never promoted.
+    * verified page name  -> write fb_page (+ fb_page_url / fb_page_id when
+      known; the id is NULLed only when the URL is replaced, so a stale id
+      is never left attached to a new URL)
+    * was_wrong=yes and no verified replacement -> clear primary fb_*
+      (the stored URL is the wrong business)
+    * UNRESOLVED with a carried-over URL but no verified page name -> clear
+      as well (verifier_notes document it as the wrong business)
+    * otherwise -> don't touch the primary fb columns
 - manual_review_needed (yes/no) -> manual_review_needed boolean
 - review_task         -> review_task ('check_ad_library' | 'recheck_page_search')
 - verifier_notes      -> muse_ad_notes
+
+Primary promotion applies to the corrections CSV only; the legacy
+muse_verifications.csv fallback keeps the old muse_*-only behavior.
+
+Re-running the import re-applies the verified values to the primary columns,
+so manual ad_status/page edits made in the UI after an import would be reset
+by a later re-import. The muse_* columns stay the untouched audit trail.
 
 Only manual_review_needed=TRUE rows (319 at campaign close) need Saroj's
 manual Ad Library check — everything else is settled by the import.
@@ -43,6 +63,8 @@ import sys
 from . import get_conn
 
 AD_STATUSES = {"RUNNING", "RAN_BEFORE", "NO_ADS", "NO_FB_PAGE", "UNRESOLVED", "PENDING"}
+# pipeline ad_status tab values (AD_TABS in app.py) - the verified values map 1:1
+PIPELINE_AD_STATUSES = {"RUNNING", "RAN_BEFORE", "NO_ADS", "NO_FB_PAGE", "UNRESOLVED"}
 REVIEW_TASKS = {"check_ad_library", "recheck_page_search"}
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -89,7 +111,7 @@ def main() -> int:
     print(f"importing {path}")
     conn = get_conn()
     cur = conn.cursor()
-    updated_fb = updated_ads = updated_q = skipped = 0
+    updated_fb = updated_ads = updated_q = skipped = prim_promoted = prim_cleared = prim_ads = 0
     with open(path, newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         cols = set(reader.fieldnames or [])
@@ -138,6 +160,43 @@ def main() -> int:
                     queue_vals["review_task"] = rt
                 elif yn in ("yes", "true", "1", "y"):
                     queue_vals["review_task"] = None  # unknown task, still queued
+            # ---- promote verified data to the PRIMARY answer columns ----
+            prim_sets, prim_params = [], []
+            if is_new and vals is not None:
+                ad = (row.get("verified_ad_status") or "").strip().upper()
+                vpage = (row.get("verified_fb_page") or "").strip()
+                vid = (row.get("verified_fb_page_id") or "").strip()
+                vurl = (row.get("verified_fb_page_url") or "").strip()
+                was_wrong = (row.get("pipeline_stored_url_was_wrong") or "").strip().lower() in (
+                    "yes", "true", "1", "y")
+                if ad in PIPELINE_AD_STATUSES:
+                    prim_sets.append("ad_status = %s")
+                    prim_params.append(ad)
+                    prim_ads += 1
+                if ad == "NO_FB_PAGE":
+                    # verified: no FB page. verified_fb_page may hold a rejected
+                    # low-confidence candidate - never promote it.
+                    prim_sets += ["fb_page = NULL", "fb_page_id = NULL", "fb_page_url = NULL"]
+                    prim_cleared += 1
+                elif vpage:
+                    # verifier-confirmed page
+                    prim_sets.append("fb_page = %s")
+                    prim_params.append(vpage)
+                    if vurl:
+                        prim_sets.append("fb_page_url = %s")
+                        prim_params.append(vurl)
+                        # id NULLed only with a URL replacement: never leave a
+                        # stale id attached to a new URL
+                        prim_sets.append("fb_page_id = %s")
+                        prim_params.append(vid or None)
+                    prim_promoted += 1
+                elif was_wrong or (ad == "UNRESOLVED" and vurl):
+                    # no verified replacement, but the stored URL is the wrong
+                    # business (flagged, or documented in verifier_notes for
+                    # UNRESOLVED rows whose carried-over URL resolves elsewhere)
+                    prim_sets += ["fb_page = NULL", "fb_page_id = NULL", "fb_page_url = NULL"]
+                    prim_cleared += 1
+                # else: nothing verified about the page - don't touch primary fb columns
             cur.execute("SELECT id FROM agencies WHERE npi = %s", (npi,))
             hit = cur.fetchone()
             if not hit:
@@ -160,6 +219,9 @@ def main() -> int:
                     params.append(v)
                 if queue_vals.get("manual_review_needed"):
                     updated_q += 1
+            if prim_sets:
+                sets.extend(prim_sets)
+                params.extend(prim_params)
             if sets:
                 sets.append("updated_at = now()")
                 cur.execute(
@@ -169,6 +231,15 @@ def main() -> int:
     conn.commit()
     print(f"done: {updated_fb} fb verifications, {updated_ads} ad verifications, "
           f"{updated_q} queued for manual review, {skipped} skipped")
+    print(f"primary: {prim_ads} ad_status promoted, {prim_promoted} fb pages promoted, "
+          f"{prim_cleared} fb pages cleared")
+    try:
+        cur.execute("SELECT ad_status, count(*) FROM agencies GROUP BY 1 ORDER BY 1")
+        print("primary ad_status now:", dict(cur.fetchall()))
+        cur.execute("SELECT count(*) FROM agencies WHERE fb_page_url IS NOT NULL")
+        print("primary has-fb-page count:", cur.fetchone()[0])
+    except Exception as e:
+        print("post-import count check failed:", e)
     cur.close()
     conn.close()
     return 0
