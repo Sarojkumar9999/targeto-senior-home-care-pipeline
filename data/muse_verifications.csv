@@ -3542,3 +3542,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1326829201,,,,,NO_FB_PAGE,"Futureworks LLC dba 'Acti-Kare Responsive In-Home Care of Surprise' (confirmed via NPI directory slug), Surprise AZ. The only matching page, facebook.com/akofsurpriseaz ('Acti-Kare Responsive In-Home Care of Surprise, AZ'), is now unavailable/deleted, and the local actikare.com/az-surprise/ page redirects to the national site — the franchise appears closed. No attributable live page; classified NO_FB_PAGE rather than a dead match."
 1699363663,,,,,NO_FB_PAGE,"Galewind Group, Maricopa AZ. No official website or Facebook page; only NPI directory listings."
 1255183604,,,,,NO_FB_PAGE,"Golden Sun Healthcare Services, LLC, 19734 W Buchanan St, Buckeye AZ. No official website or Facebook page; only NPI directory listings."
+1689947129,,,,low,NO_FB_PAGE,"Agency exists (6751 N Sunset Blvd, Glendale AZ 85305, 623-322-8201) but no attributable Facebook page found; unrelated lookalikes rejected."
+1851332555,,,,low,NO_FB_PAGE,"267 Halcyon Pl, San Antonio TX 78209, (210) 425-6135. No Facebook page found."
+1518498591,A Beyond Shelter LLC,100068637183259,https://www.facebook.com/100068637183259,medium,NO_ADS,"Verified page (Houston TX, TX HCS/TxHmL disability services; Katy is Houston metro). Ad Library page-ID search: 0 ads (US, active + inactive)."
+1316434483,,,,low,NO_FB_PAGE,Only an auto-generated 'Unofficial Page' and an unrelated Wisconsin CPR-training business found; neither attributable to the Peoria AZ agency.
+1881292183,Always At Your Side Home Care,101054291794179,https://www.facebook.com/AlwaysAtYourSideHomeCare/,high,NO_ADS,"Verified page: 147 followers, 13965 NW 67 Ave, Miami Lakes FL 33014, alwaysatyoursidehomecare.com. Ad Library page-ID search: 0 ads (US, active + inactive)."
+1285140418,,,,low,NO_FB_PAGE,No Facebook page or Ad Library advertiser found for this Buckeye AZ agency.
+1134753197,"Angel Care Provider Services, LLC",61565965896758,https://www.facebook.com/p/Angel-Care-Provider-Services-LLC-61565965896758,high,NO_ADS,"Verified page: 170 followers, 1423 Ocampo Dr, Laredo TX 78046, (956) 516-7275. Ad Library page-ID search: 0 ads (US, active + inactive)."
+1588587422,,,,low,NO_FB_PAGE,"No Facebook page found. NPI taxonomy indicates a mobile lab (Flashxpress Mobile Labs), not home care."
+1497618946,,,,low,NO_FB_PAGE,No Facebook page found for this Palestine TX agency.
+1932815297,,,,low,NO_FB_PAGE,No Facebook page found for this Maricopa AZ agency.
+1255662458,,,,low,NO_FB_PAGE,No attributable Facebook page; felicityhomehealth.com belongs to a NJ-based 'Felicity Home Health' and was not attributed to this Mesa AZ agency.
+1538807052,,,,low,NO_FB_PAGE,"Agency exists in Mesa AZ (546 S Country Club Dr, 85210, (623) 206-2205) but no attributable Facebook page found; 'Forever Loved Pet Sanctuary' is a different business."
