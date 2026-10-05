@@ -3410,3 +3410,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1477422996,,,,low,NO_FB_PAGE,"No Facebook page found for AbethCare LLC, Phoenix AZ. Official website abethcare.com ('Now Servicing Clients in Maricopa County') shows no Facebook link. Ad Library exact-phrase search 'AbethCare' (all ads, US): 0 results."
 1053964593,Eight Angels Home Health LLC.,100063856790190,https://www.facebook.com/p/Eight-Angels-Home-Health-LLC-100063856790190,high,NO_ADS,"Page verified with high confidence: name 'Eight Angels Home Health LLC.', Mesa AZ, address 1930 S Alma School Rd, Mesa AZ 85210-3034, phone (480) 590-0239, Medicare Certified / ACHC Accredited, 141 followers. Ad Library page-ID search (ID 100063856790190, active_status=all, US): 'This advertiser isn't running ads in the selected country and ad category at this time' — page exists but has never advertised."
 1356235964,,,,low,NO_FB_PAGE,"No Facebook page found for Home Health Caregiving Services LLC., 2631 N Champlain Ave, Tempe AZ (confirmed via NPI directories). Ad Library exact-phrase search (all ads, US): 0 results."
+1831427913,,,,high,NO_FB_PAGE,"Only Facebook page found was a Florida lookalike (A&I Home Care Services, aihomecarefl.com); no Richmond TX page exists."
+1003791948,,,,high,NO_FB_PAGE,Official site kindredcarehhs.com (Houston TX) found; its Facebook link is a dead placeholder; no attributable page.
+1568079572,Quiet Waters Maternity Spa & Wellness Center,,https://www.facebook.com/QWMSWellness/,high,NO_ADS,"Page exists (Tucson AZ presence confirmed via posts, site qwmspllc.com, phone 520-367-7268) but has never advertised: 0 active ads in Ad Library (US); advertiser dropdown offers no page suggestion."
+1558796961,,,,high,NO_FB_PAGE,Only NPI directory listings; no attributable Facebook page.
+1851973069,,,,high,NO_FB_PAGE,Only directory listings; NPI record appears associated with 'MINDFIT 360' (Peoria AZ); no attributable Facebook page.
+1548932395,,,,high,NO_FB_PAGE,Only NPI directory listings; no attributable Facebook page.
+1831365022,,,,high,NO_FB_PAGE,"Only out-of-state lookalikes (DE, FL); no Denton TX page."
+1801961867,,,,medium,NO_FB_PAGE,"DBA Home Instead Senior Care (Gilbert AZ); no Gilbert AZ franchise page found; other AZ franchise pages are different territories, not attributable."
+1386333433,,,,high,NO_FB_PAGE,"Only an auto-generated 'Unofficial Page' stub (0 followers, not claimed); not attributable to the agency."
+1861628653,,,,high,NO_FB_PAGE,'Valentine's Home Health Care' page found but belongs to an Illinois business (Lemont IL); rejected as cross-state lookalike.
+1194730564,,,,high,NO_FB_PAGE,Facebook page search: 'We didn't find any results'.
+1730814039,,,,high,NO_FB_PAGE,Official site acahomehealth.com (Miramar FL) found; only Facebook results were Portsmouth VA lookalikes; no attributable page.
