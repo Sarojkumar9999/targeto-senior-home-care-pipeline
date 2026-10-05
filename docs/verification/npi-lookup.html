@@ -155,6 +155,10 @@ function lookup() {
         '<div class="k">Page ID</div><div class="v">' + (r.pageId ? '<code>' + esc(r.pageId) + '</code>' : '<span class="note">—</span>') + '</div>' +
       '</div>' +
       (r.notes ? '<div class="note" style="margin-bottom:4px">Verifier notes</div><div class="notes">' + esc(r.notes) + '</div>' : '') +
+      (r.adStatus === "UNRESOLVED"
+        ? '<div class="notes" style="border-color:var(--purple);margin-bottom:8px">⚠️ <b>Needs your manual check</b> — we could not determine the ad status. ' +
+          (r.pageUrl ? 'Open the page in the Ad Library yourself and set the final status.' : 'Try the page search again yourself.') + '</div>'
+        : '') +
       '<div class="actions">' +
         (adLib ? '<a class="btn ghost" href="' + adLib + '" target="_blank" rel="noopener">Open in Ad Library ↗</a>' : '') +
         (r.pageUrl ? '<a class="btn ghost" href="' + esc(r.pageUrl) + '" target="_blank" rel="noopener">Open Facebook page ↗</a>' : '') +
