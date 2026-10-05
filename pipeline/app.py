@@ -751,6 +751,10 @@ def leads():
     # otherwise switching buttons would stack contradictory has= params
     fb_query = urlencode({k: v for k, v in args.items()
                           if k not in ("tab", "page", "ad_status", "has")})
+    # Muse-stat pills need the current filters WITHOUT the previous muse= value,
+    # otherwise clicking a stat would stack contradictory muse= params
+    muse_query = urlencode({k: v for k, v in args.items()
+                            if k not in ("tab", "page", "ad_status", "muse")})
     if ad_status:
         args["ad_status"] = ad_status
     where, params = build_filters(args)
@@ -822,7 +826,7 @@ def leads():
         sel=args, PAGE_SIZES=PAGE_SIZES, page_sizes=PAGE_SIZES, saved_views=saved_views,
         base_query=base_query, adlib_urls=adlib_urls, fb_counts=fb_counts,
         muse_counts=muse_counts,
-        fb_query=fb_query, phone_e164=phone_e164, owner_urls=owner_urls,
+        fb_query=fb_query, muse_query=muse_query, phone_e164=phone_e164, owner_urls=owner_urls,
         generic_ids=generic_ids, personal_ids=personal_set,
         local_time=local_time, us_time=us_time_parts, now=datetime.now(timezone.utc),
         tpl_json=tpl_json, email_counts=email_counts, tpl_list=tpls,

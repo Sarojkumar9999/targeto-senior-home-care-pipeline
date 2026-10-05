@@ -11,7 +11,7 @@
      href="/leads?tab={{ tab }}&has=fb{% if fb_query %}&{{ fb_query }}{% endif %}">✅ Has FB ({{ fb_counts.has_fb }})</a>
   <a class="tab {{ 'active' if sel.get('has')=='nofb' }}"
      href="/leads?tab={{ tab }}&has=nofb{% if fb_query %}&{{ fb_query }}{% endif %}">📞 No FB ({{ fb_counts.no_fb }})</a>
-  <span class="note" style="align-self:center;margin-left:8px" title="Independent live browser verification by Muse">🤖 {{ muse_counts.verified }} verified{% if muse_counts.disagree %} · ⚠️ {{ muse_counts.disagree }} disagree{% endif %}{% if muse_counts.review_queue %} · 📋 {{ muse_counts.review_queue }} need my review{% endif %}</span>
+  <span class="note" style="align-self:center;margin-left:8px" title="Independent live browser verification by Muse — click a stat to filter">🤖 <a class="tab {{ 'active' if sel.get('muse')=='verified' }}" href="/leads?tab={{ tab }}{% if sel.get('muse') != 'verified' %}&muse=verified{% endif %}{% if muse_query %}&{{ muse_query }}{% endif %}">{{ muse_counts.verified }} verified</a>{% if muse_counts.disagree %} · <a class="tab {{ 'active' if sel.get('muse')=='disagree' }}" href="/leads?tab={{ tab }}{% if sel.get('muse') != 'disagree' %}&muse=disagree{% endif %}{% if muse_query %}&{{ muse_query }}{% endif %}">⚠️ {{ muse_counts.disagree }} disagree</a>{% endif %}{% if muse_counts.review_queue %} · <a class="tab {{ 'active' if sel.get('muse')=='review-queue' }}" href="/leads?tab={{ tab }}{% if sel.get('muse') != 'review-queue' %}&muse=review-queue{% endif %}{% if muse_query %}&{{ muse_query }}{% endif %}">📋 {{ muse_counts.review_queue }} need my review</a>{% endif %}</span>
 </div>
 
 <div class="tabs">
