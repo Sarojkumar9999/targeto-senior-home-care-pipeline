@@ -133,13 +133,12 @@
     {% endif %}</td>
     <td>
       <span class="pill {{ {'RUNNING':'progress','NO_ADS':'not','RAN_BEFORE':'new','NO_FB_PAGE':'new','UNRESOLVED':'new'}[r.ad_status] }}">{{ r.ad_status }}</span>
-      {% if r.ad_status in ('UNRESOLVED', 'PENDING') %}
+      
         <a class="note" style="display:block;margin-top:2px" target="_blank" title="Open Ad Library on this exact FB page"
            href="{{ adlib_urls[r.id] }}">🔍 ads</a>
         {% if r.fb_page_url %}
           <a class="note" style="display:block" target="_blank" href="{{ r.fb_page_url }}">FB page</a>
         {% endif %}
-      {% endif %}
       {% if r.fb_page_url %}
         <span class="pill won" title="FB page discovered — {{ r.fb_page }}">FB ✓</span>
       {% else %}
