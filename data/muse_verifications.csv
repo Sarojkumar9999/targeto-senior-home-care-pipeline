@@ -4119,3 +4119,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1912760919,,,,high,NO_FB_PAGE,"Ally Home Care LLC, Rochester MN (3261 19th St NW, 55901). All 'Ally Home Care' FB candidates rejected with evidence (Raleigh NC agency, personal profile, Ramsey MN, Santa Clara CA). allyhomecare.com unreachable. No page attributable."
 1932071313,,,,high,NO_FB_PAGE,"Caring Hands Touch of Care, Bolton MS: zero web presence; only lookalikes found (e.g. Lumberton NC). Ad Library exact-phrase search: 0 ads. No page attributable."
 1669529707,,,,high,NO_FB_PAGE,"A Presidential Health Care, Inc., Oakland Park FL: zero web presence; only unrelated businesses found. Ad Library exact-phrase search: 0 ads. No page attributable."
+1619675501,,,,low,NO_FB_PAGE,Carried forward: no attributable Facebook page found.
+1720060304,Intrepid USA,,,medium,NO_ADS,"Carried forward: page found, never advertised."
+1023858008,Millennial Home Care Services,,,medium,NO_ADS,"Carried forward: page found, never advertised."
+1376679365,,,,low,NO_FB_PAGE,Carried forward: no attributable Facebook page found.
+1750111944,,,,low,NO_FB_PAGE,Carried forward: no attributable Facebook page found.
+1326862830,Aidaly,,https://www.facebook.com/aidalysupport/,high,RAN_BEFORE,"Ad Library (US): 0 ACTIVE ads for 'Aidaly'/'Aidaly Care'. Exactly 1 INACTIVE ad: advertiser 'Aidaly', Library ID 463115219715766, ran Nov 21-22 2024 (~8 hrs), <100 impressions, <$100 spent. 'About the advertiser' confirms page @aidalysupport (32 followers, aidaly.com). No active ads now; page advertised before."
+1932491024,,,,low,NO_FB_PAGE,"A Unity Health Management Group, Silver Spring MD (8555 16th St #A10; 301-562-6136). No Facebook page found via Google, Bing, or Facebook page search. No website either."
+1326986720,Together We Sprout LLC,61591750463201,https://www.facebook.com/profile.php?id=61591750463201,high,NO_ADS,"Page found via Facebook search; name matches, Home Health Care Service, Polk County FL (Lakeland), 4 followers; owner's profile references the business page. Ad Library by page ID: 0 active and 0 inactive ads."
+1275259087,,,,low,NO_FB_PAGE,"AccentCare Home Health of West Tennessee, Memphis TN. No Memphis/West-Tennessee-specific AccentCare page found; national AccentCare page not attributed to the Memphis agency."
+1194246868,,,,low,NO_FB_PAGE,"Accredited Health Services, Inc., Passaic NJ. Only 'Accredited Health Services' pages found belong to a different NPI (1992837173, Paterson NJ, Elara Caring legacy) — rejected as wrong business. No page attributable to the Passaic agency."
+1184181158,,,,low,NO_FB_PAGE,"Ultimate Healing Nurse Registry, Tampa FL (4507 N Habana Ave, 33614; (813) 523-6385). No Facebook page found; Florida records show the LLC is now inactive."
+1710679436,Banner Home Care,100090726046115,https://www.facebook.com/profile.php?id=100090726046115,medium,NO_ADS,"Page 'Banner Home Care' (Home Health Care Service, bannerhealth.com, 9 followers), 2001 70th Avenue Ste 110, 80634 (Greeley CO, neighboring Loveland). Medium confidence: Greeley-vs-Loveland city mismatch. Ad Library by page ID: 0 active and 0 inactive ads."
