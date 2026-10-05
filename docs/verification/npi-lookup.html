@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Targeto · NPI Lookup — verified FB pages &amp; ad status</title>
+<style>
+  :root { --bg:#0e1116; --card:#171c24; --line:#2a3140; --text:#e8ecf1; --mut:#9aa4b5;
+          --green:#3fb950; --amber:#d29922; --red:#f85149; --blue:#58a6ff; --purple:#bc8cff; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,"Segoe UI",Roboto,sans-serif;
+         margin:0; padding:24px; }
+  .wrap { max-width:760px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:13px; margin-bottom:20px; }
+  .sub a { color:var(--blue); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
+  .searchrow { display:flex; gap:8px; }
+  input[type=text] { flex:1; background:#0a0d12; border:1px solid var(--line); color:var(--text);
+      border-radius:8px; padding:12px 14px; font-size:16px; }
+  input[type=text]:focus { outline:none; border-color:var(--blue); }
+  .btn { display:inline-block; background:#1f6feb; color:#fff; border:none; border-radius:8px;
+         padding:12px 20px; font-size:15px; cursor:pointer; text-decoration:none; white-space:nowrap; }
+  .btn:hover { background:#388bfd; }
+  .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--text); padding:8px 14px; font-size:13px; }
+  .note { color:var(--mut); font-size:12px; }
+  .pill { display:inline-block; padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+  .pill.RUNNING { background:#12351c; color:var(--green); border:1px solid #2a5a34; }
+  .pill.RAN_BEFORE { background:#3a2c10; color:var(--amber); border:1px solid #6b541e; }
+  .pill.NO_ADS { background:#33161a; color:var(--red); border:1px solid #5c2f36; }
+  .pill.NO_FB_PAGE { background:#1c2330; color:var(--mut); border:1px solid var(--line); }
+  .pill.UNRESOLVED { background:#331a2e; color:var(--purple); border:1px solid #5c2f52; }
+  .pill.high { background:#12351c; color:var(--green); border:1px solid #2a5a34; }
+  .pill.medium { background:#3a2c10; color:var(--amber); border:1px solid #6b541e; }
+  .pill.low { background:#33161a; color:var(--red); border:1px solid #5c2f36; }
+  .kv { display:grid; grid-template-columns:130px 1fr; gap:8px 12px; font-size:14px; margin:12px 0; }
+  .kv .k { color:var(--mut); }
+  .kv .v a { color:var(--blue); word-break:break-all; }
+  .notes { background:#0a0d12; border:1px solid var(--line); border-radius:8px; padding:12px;
+           font-size:13px; color:var(--text); white-space:pre-wrap; margin-top:8px; }
+  #status { margin-top:12px; font-size:13px; color:var(--mut); }
+  .err { color:var(--red); }
+  .actions { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  .legend { font-size:12px; color:var(--mut); line-height:2.1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔍 NPI Lookup</h1>
+  <div class="sub">Verified Facebook page + Meta ad status per agency, from <code>data/muse_verifications.csv</code> (the campaign's source of truth). <a href="dashboard.html">← back to campaign dashboard</a></div>
+
+  <div class="card">
+    <div class="searchrow">
+      <input type="text" id="q" inputmode="numeric" placeholder="Paste a 10-digit NPI, e.g. 1417279183" maxlength="10">
+      <button class="btn" id="go">Look up</button>
+    </div>
+    <div id="status" class="note">Loading verified data…</div>
+  </div>
+
+  <div id="result"></div>
+
+  <div class="card">
+    <div class="legend">
+      <b>Status meanings:</b><br>
+      <span class="pill RUNNING">RUNNING</span> — page has active Meta ads right now<br>
+      <span class="pill RAN_BEFORE">RAN_BEFORE</span> — advertised before, nothing active now<br>
+      <span class="pill NO_ADS">NO_ADS</span> — page found, never advertised<br>
+      <span class="pill NO_FB_PAGE">NO_FB_PAGE</span> — no Facebook page we can attribute to this agency<br>
+      <span class="pill UNRESOLVED">UNRESOLVED</span> — page/advertiser identity genuinely uncertain — never guess from this<br><br>
+      <span class="note">Note: your pipeline's own stored Facebook URL can differ from this — about 495 pipeline URLs were found pointing at the wrong business (cross-state lookalikes, unrelated companies). This lookup shows the independently verified page.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const CSV_URL = "https://raw.githubusercontent.com/Sarojkumar9999/targeto-senior-home-care-pipeline/main/data/muse_verifications.csv";
+let byNpi = null;
+
+function parseCSV(text) {
+  const rows = []; let row = [], field = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') { if (text[i+1] === '"') { field += '"'; i++; } else inQ = false; }
+      else field += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ',') { row.push(field); field = ""; }
+    else if (c === '\n' || c === '\r') {
+      if (field !== "" || row.length) { row.push(field); rows.push(row); row = []; field = ""; }
+      if (c === '\r' && text[i+1] === '\n') i++;
+    } else field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+async function load() {
+  const st = document.getElementById("status");
+  try {
+    const r = await fetch(CSV_URL + "?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const text = await r.text();
+    const rows = parseCSV(text);
+    const head = rows[0].map(h => h.trim());
+    const idx = n => head.indexOf(n);
+    byNpi = {};
+    for (let i = 1; i < rows.length; i++) {
+      const npi = (rows[i][idx("npi")] || "").trim();
+      if (/^\d{10}$/.test(npi)) byNpi[npi] = {
+        page: (rows[i][idx("muse_fb_page")] || "").trim(),
+        pageId: (rows[i][idx("muse_fb_page_id")] || "").trim(),
+        pageUrl: (rows[i][idx("muse_fb_page_url")] || "").trim(),
+        conf: (rows[i][idx("muse_fb_confidence")] || "").trim(),
+        adStatus: (rows[i][idx("muse_ad_status")] || "").trim(),
+        notes: (rows[i][idx("muse_ad_notes")] || "").trim()
+      };
+    }
+    const n = Object.keys(byNpi).length;
+    st.textContent = n.toLocaleString() + " verified agencies loaded. Paste an NPI above.";
+    const pre = new URLSearchParams(location.search).get("npi");
+    if (pre) { document.getElementById("q").value = pre; lookup(); }
+  } catch (e) {
+    st.innerHTML = '<span class="err">Could not load the CSV: ' + e.message + '. Try reloading.</span>';
+  }
+}
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function lookup() {
+  const box = document.getElementById("result");
+  const q = document.getElementById("q").value.replace(/\D/g, "").slice(0, 10);
+  document.getElementById("q").value = q;
+  if (!byNpi) { box.innerHTML = ""; return; }
+  if (q.length !== 10) {
+    box.innerHTML = '<div class="card note">Enter a full 10-digit NPI.</div>';
+    return;
+  }
+  const r = byNpi[q];
+  if (!r) {
+    box.innerHTML = '<div class="card"><span class="pill UNRESOLVED">NOT FOUND</span><div class="note" style="margin-top:8px">NPI ' + esc(q) + ' is not in the verified CSV yet — the campaign may not have reached it.</div></div>';
+    return;
+  }
+  const adLib = r.pageId
+    ? "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&view_all_page_id=" + encodeURIComponent(r.pageId) + "&search_type=page&media_type=all"
+    : null;
+  box.innerHTML =
+    '<div class="card">' +
+      '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
+        '<span style="font-size:18px;font-weight:700">NPI ' + esc(q) + '</span>' +
+        '<span class="pill ' + esc(r.adStatus) + '">' + esc(r.adStatus || "—") + '</span>' +
+        (r.conf ? '<span class="note">page match: </span><span class="pill ' + esc(r.conf) + '">' + esc(r.conf) + '</span>' : '') +
+      '</div>' +
+      '<div class="kv">' +
+        '<div class="k">Facebook page</div><div class="v">' + (r.pageUrl ? '<a href="' + esc(r.pageUrl) + '" target="_blank" rel="noopener">' + esc(r.page || r.pageUrl) + '</a>' : (r.page ? esc(r.page) : '<span class="note">— none found —</span>')) + '</div>' +
+        '<div class="k">Page ID</div><div class="v">' + (r.pageId ? '<code>' + esc(r.pageId) + '</code>' : '<span class="note">—</span>') + '</div>' +
+      '</div>' +
+      (r.notes ? '<div class="note" style="margin-bottom:4px">Verifier notes</div><div class="notes">' + esc(r.notes) + '</div>' : '') +
+      '<div class="actions">' +
+        (adLib ? '<a class="btn ghost" href="' + adLib + '" target="_blank" rel="noopener">Open in Ad Library ↗</a>' : '') +
+        (r.pageUrl ? '<a class="btn ghost" href="' + esc(r.pageUrl) + '" target="_blank" rel="noopener">Open Facebook page ↗</a>' : '') +
+      '</div>' +
+    '</div>';
+}
+
+document.getElementById("go").addEventListener("click", lookup);
+document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") lookup(); });
+load();
+</script>
+</body>
+</html>
