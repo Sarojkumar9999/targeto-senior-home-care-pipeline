@@ -3866,3 +3866,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1285394650,,,,low,NO_FB_PAGE,"Access Health Source LLC, Richmond TX (2122 Ridgeworth Ln, Richmond TX 77469). No Facebook page found; only cross-state/cross-country lookalikes (Richmond VIC Australia, Richmond CA, Richmond VA, generic 'HealthSource' pages) — all rejected."
 1639021892,,,,low,NO_FB_PAGE,"Agency Maison LLC, West Lake Hills TX (3939 Bee Caves Rd, West Lake Hills TX 78746; agencymaison.com — boutique domestic staffing, also does home care support). The official site's footer links LinkedIn, Instagram and podcast but no Facebook. Facebook page search found only 'Maison Agency Inc' (New York NY — wrong business/city) and a French real-estate page. No attributable page; classified NO_FB_PAGE."
 1528861135,,,,low,NO_FB_PAGE,"Adore Home Healthcare LLC, Katy TX (2819 Oakdale Landing Ct, Katy TX 77494; adorehomehealthcarellc.com). Official site has no Facebook link. The exact-name Facebook page 'Adore Home Healthcare LLC' is in St. Louis MO ((314) 281-3991) — cross-state lookalike rejected; another match is in Ridgeland MS — rejected; a third ('Adore Home Health Care', 87 followers) has a dead website link and no verifiable Katy TX tie. Cannot confidently attribute any page; classified NO_FB_PAGE."
+1659115533,,,,high,NO_FB_PAGE,"Official website uzondaliving.com (residential care home, Cypress TX) has no Facebook link; no Facebook page found in Bing/DuckDuckGo searches."
+1033006895,,,,high,NO_FB_PAGE,"No website or Facebook page found; only NPI registry/directory listings (NPI assigned 2025, Missouri City TX)."
+1538008099,,,,high,NO_FB_PAGE,No website or Facebook page found; only NPI directories (San Antonio TX).
+1477127082,,,,high,NO_FB_PAGE,No official website or Facebook page; only directories (Dallas TX).
+1568733129,,,,low,NO_FB_PAGE,"Page name matches the NPI DBA 'Cj Primary Home Care' (Arlington TX), but the only match is an UNOFFICIAL auto-generated Facebook stub (ID 1571902272869250, 0 followers, no posts, no verified address/phone) — unattributable per verification rules. Ad Library (US, all ads) shows no advertiser named 'CJ Primary Home Care'. No genuine page for this agency; classified NO_FB_PAGE."
+1285245456,,,,high,NO_FB_PAGE,"Personal care provider, Grand Prairie TX; no website or Facebook page found in multiple searches."
+1144720392,,,,high,NO_FB_PAGE,"Non-emergency medical transport org, Pantego TX; no website or Facebook page found."
+1265443212,,,,high,NO_FB_PAGE,"Home health, Hialeah FL; only NPI directory listings, no Facebook page."
+1023977188,,,,high,NO_FB_PAGE,Bartow FL; no website or Facebook page found.
+1629236179,,,,high,NO_FB_PAGE,"Home health agency, 1452 Bruton Blvd Orlando FL 32805, 407-532-7703; no official website or Facebook page found."
+1821944075,,,,high,NO_FB_PAGE,"Official website auraadvanced.org (2105 W Bethany Home Rd, Phoenix AZ) has only a generic facebook.com placeholder link; no real Facebook page found."
+1154129732,,,,high,NO_FB_PAGE,"Home health aide org incorporated Feb 26, 2025, Phoenix AZ; no website or Facebook page."
