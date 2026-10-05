@@ -4022,3 +4022,15 @@ npi,muse_fb_page,muse_fb_page_id,muse_fb_page_url,muse_fb_confidence,muse_ad_sta
 1588344022,,,,medium,NO_FB_PAGE,"No official website or FB page found (1812 NW 24th Ave, Ocala FL); searches returned only unrelated churches."
 1639082324,,,,medium,NO_FB_PAGE,No official website or FB page found (Glendale AZ); only NPI/directory listings.
 1942784285,,,,medium,NO_FB_PAGE,"No official website or FB page found (8709 S 47th Ln, Laveen AZ, 602-368-3949); only directory listings."
+1386598233,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1679439996,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1679276844,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1669110318,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1063388510,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1184764961,Right at Home West Phoenix and West Valley,,,medium,NO_ADS,Carried forward from prior run: official page verified; NO_ADS with medium-low ad-check confidence (page-ID lookup unavailable).
+1437742343,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1164311163,,,,low,NO_FB_PAGE,Carried forward from prior run: no attributable Facebook page found.
+1104674811,Preferred Care At Home East Valley,,https://www.facebook.com/PreferredCareAtHomeEastValley,high,UNRESOLVED,"Page verified (franchise site/address matched: 3707 E Southern Ave #1011, Mesa AZ). Ad Library advertiser lookup could not be completed — Facebook blocked mid-run (blank pages); keyword search returned only unrelated noise, which is not evidence of NO_ADS."
+1801673264,Preferred Care At Home of Tucson,,https://www.facebook.com/pcahtucson,high,UNRESOLVED,"Page found: facebook.com/pcahtucson (285 followers); identity verified via exact address/phone match (2910 N Swan Rd Ste 203, Tucson AZ 85712; 520-333-4933). Ad check UNRESOLVED — Ad Library inaccessible due to Facebook block mid-run."
+1811645344,,,,medium,NO_FB_PAGE,"Official website found (foryourfamily1st.com, Flagstaff); site links only to Instagram, no Facebook. No attributable FB page found."
+1184575334,,,,medium,NO_FB_PAGE,Official website found (bjhgentlehandshomecare.net); NPI details match. Only generic 'Gentle Hands' FB result used a different phone — rejected as lookalike. No attributable FB page found.
