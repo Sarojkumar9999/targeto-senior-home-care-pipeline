@@ -197,6 +197,11 @@ def build_filters(args):
         )
         digits = "".join(c for c in args["q"] if c.isdigit())
         params += [like, like, like, f"%{digits}%" if digits else "\x00none\x00"]
+    # Bug 4: dedicated business-name filter (searches org_name only, unlike q
+    # which also matches owner names and phone digits).
+    if args.get("business"):
+        where.append("org_name ILIKE %s")
+        params.append(f"%{args['business'].strip()}%")
     if args.get("state"):
         where.append("state = %s"); params.append(args["state"].upper())
     if args.get("city"):
@@ -757,6 +762,10 @@ def leads():
                             if k not in ("tab", "page", "ad_status", "muse")})
     if ad_status:
         args["ad_status"] = ad_status
+    # Pagination links must NOT include the current page (or the derived
+    # ad_status) — otherwise url_for('leads', page=N, **sel) raises
+    # "got multiple values for keyword argument 'page'" → 500 on page 2+.
+    page_args = {k: v for k, v in args.items() if k not in ("page", "ad_status")}
     where, params = build_filters(args)
     sort = SORTS.get(request.args.get("sort", "org"), "org_name")
     try:
@@ -820,10 +829,19 @@ def leads():
                                count(*) AS total
                         FROM agencies WHERE dnc IS NOT TRUE""",
                     (list(GENERIC_LOCAL),), one=True)
+    # Bug 3 fix: fetch manually-added contacts for the agencies on this page
+    # so all of them are visible in the leads table (not just the agency row).
+    contact_map = {}
+    if rows:
+        for c in q("""SELECT agency_id, first_name, last_name, role, phone, email
+                      FROM contacts WHERE agency_id = ANY(%s)
+                      ORDER BY updated_at DESC""", ([r.id for r in rows],)):
+            contact_map.setdefault(c.agency_id, []).append(c)
     return render_template(
         "leads.html", rows=rows, total=total, page=page, pages=pages, per=per,
         tab=tab, ad_tabs=AD_TABS, statuses=STATUSES, cmap=cmap,
-        sel=args, PAGE_SIZES=PAGE_SIZES, page_sizes=PAGE_SIZES, saved_views=saved_views,
+        sel=args, page_args=page_args, contact_map=contact_map,
+        PAGE_SIZES=PAGE_SIZES, page_sizes=PAGE_SIZES, saved_views=saved_views,
         base_query=base_query, adlib_urls=adlib_urls, fb_counts=fb_counts,
         muse_counts=muse_counts,
         fb_query=fb_query, muse_query=muse_query, phone_e164=phone_e164, owner_urls=owner_urls,

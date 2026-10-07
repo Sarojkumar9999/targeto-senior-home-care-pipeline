@@ -25,6 +25,7 @@
 <form method="get" action="/leads" class="filterbar">
   <input type="hidden" name="tab" value="{{ tab }}">
   <input class="q" name="q" placeholder="Search name / owner / phone" value="{{ sel.get('q','') }}">
+  <input name="business" placeholder="Business name" value="{{ sel.get('business','') }}" style="width:140px" title="Search business name only">
   <select name="state"><option value="">State</option>
     {% for st in ['FL','TX','AZ','CA','NY','GA','NC','PA','OH','IL'] %}<option {{ 'selected' if sel.get('state')==st }} value="{{ st }}">{{ st }}</option>{% endfor %}
   </select>
@@ -122,6 +123,13 @@
         <div class="note">{{ r.owner_title or '' }}</div>
         {% if owner_urls[r.id] %}<a class="note" style="color:#7ab8ff" target="_blank" title="Find {{ r.owner_first_name }} on LinkedIn — get the PERSONAL email (Apollo extension / contact info)" href="{{ owner_urls[r.id].linkedin }}">🔎 LinkedIn ↗</a>{% endif %}
       {% else %}<span class="note">—</span>{% endif %}
+      {% if contact_map.get(r.id) %}
+        <div class="note" style="margin-top:4px;border-top:1px dashed var(--line);padding-top:3px">
+          {% for c in contact_map[r.id] %}
+            <div>👤 <b>{{ c.first_name }} {{ c.last_name or '' }}</b>{% if c.role %} <span class="note">({{ c.role }})</span>{% endif %}{% if c.phone %}<br><span class="copybtn" data-copy="{{ c.phone }}" title="Copy {{ c.phone }}" style="cursor:pointer">{{ c.phone }} 📋</span>{% endif %}{% if c.email %}<br><span class="note">{{ c.email }}</span>{% endif %}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </td>
     <td>
       {% if phone_e164[r.id] %}
@@ -186,8 +194,8 @@
 
 <div class="pager">
   Page {{ page }} / {{ pages }}
-  {% if page > 1 %}<a class="btn secondary" href="{{ url_for('leads', page=page-1, **sel) }}">← Prev</a>{% endif %}
-  {% if page < pages %}<a class="btn secondary" href="{{ url_for('leads', page=page+1, **sel) }}">Next →</a>{% endif %}
+  {% if page > 1 %}<a class="btn secondary" href="{{ url_for('leads', page=page-1, **page_args) }}">← Prev</a>{% endif %}
+  {% if page < pages %}<a class="btn secondary" href="{{ url_for('leads', page=page+1, **page_args) }}">Next →</a>{% endif %}
 </div>
 {% endblock %}
 
@@ -196,9 +204,29 @@
 const CSRF = '';
 document.querySelectorAll('.copybtn').forEach(el => {
   el.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(el.dataset.copy); } catch(e) {}
+    const text = el.dataset.copy;
+    let ok = false;
+    try {
+      // Modern API — only available in secure contexts (https/localhost)
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } else {
+        throw new Error('clipboard API unavailable (http)');
+      }
+    } catch (e) {
+      // Fallback for http:// — temp textarea + execCommand works everywhere
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+      document.body.removeChild(ta);
+    }
     const old = el.textContent;
-    el.textContent = '✓ copied';
+    el.textContent = ok ? '✓ copied' : '✗ copy failed';
     setTimeout(() => { el.textContent = old; }, 1200);
   });
 });
